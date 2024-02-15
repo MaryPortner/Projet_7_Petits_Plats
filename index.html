@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <title>Les petits plats</title>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Aller au contenu principal</a>
+
+  <header role="banner">
+    <a class="banner-link" href="http://127.0.0.1:5500/index.html" title="home page">
+      <img  class="banner-logo" src="assets/img/Logo.png" class="logo" alt="Logo les petits plats">
+    </a>
+
+    <h1 class="center">Cherchez parmi plus de 1500 recettes du quotidien, simples et délicieuses</h1>
+  
+    <div id="header_search" class="header_search">
+      <form id="search" class="search-menu" methode="post" role="search">
+        <div class="search-rb">
+          <label for="search-q" class="visuallyhidden">Rechercher</label>
+          <input id="search-q" class="search-q" name="q" placeholder="Rechercher une recette, un ingrédient, ..." value="" type="text">
+        </div>
+        <input class="search-submit" value="OK" name="recherche-submit" type="submit">
+      </form>
+    </div>
+  </header>
+
+
+  <main role="main" id="main">
+      
+    <div class="main_search">
+      <div class="main_search-all">
+      
+        <div class="main_search-ingredients single-search">
+            <button id="btn-search-ingredients" class="btn_drop" type="button" role="listbox" aria-haspopup="true"  aria-active="descendant" aria-expanded="false" aria-controls="expandable" aria-label="Rechercher par ingrédient">
+              <span id="btn-search-ingredients-title" class="btn-search-title">Ingrédients</span>
+              <svg id="arrow" class="rotate arrow bx bx-chevron-up" width="15" height="8" viewBox="0 0 15 8" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round"/>
+              </svg> 
+            </button>
+
+            <div id="main_search-bar-ingredients search-bar-single" class="main_search-bar-ingredients">
+              <form id="search-ingredients" class="search-ingredients" methode="post" role="search">
+                <div class="single-search-bar-btn">
+                  <label for="search-sort" class="visuallyhidden">Rechercher par ingrédient</label>
+                  <input id="search-sort" class="search-q" name="q" value="" type="text">
+                  <span class="delete"></span>
+                  <input class="search-bar-submit" value="OK" name="recherche-submit-ingredients" type="submit">
+                </div>
+              </form>
+            </div>
+
+          <!-- A créer via DOM -->
+          <!-- <ul id="expandable" class="dropdown_content" aria-hidden="true">
+            <li class="submenu submenu1" role="option">
+              <button id="target" class="filter dropdown_content-filter" role="option" data-filter="popularite" type="button" aria-selected="false" tabindex="0" aria-label="Tri par popularité">Popularité</button>
+              <span class="sr-only">Popularité</span>
+            </li>
+            <li class="submenu" role="option">
+              <button class="filter dropdown_content-filter"  role="option" data-filter="date" type="button"  aria-selected="false" tabindex="0"  aria-label="Tri par date">Date</button>
+              <span class="sr-only">Date</span>
+            </li>
+            <li class="submenu"role="option" >
+              <button class="filter dropdown_content-filter"  role="option" data-filter="titre" type="button" aria-selected="false" tabindex="0"  aria-label="Tri par titre">Titre</button>
+              <span class="sr-only">Titre</span>
+            </li>
+          </ul> -->
+
+        </div>
+
+        <div class="main_search-appareils single-search"">
+          <button id="btn-search-appareils" class="btn_drop" type="button" role="listbox" aria-haspopup="true"  aria-active="descendant" aria-expanded="false" aria-controls="expandable" aria-label="Rechercher par appareil">
+            <span id="btn-search-appareils-title" class="btn-search-title">Appareils</span>
+            <svg id="arrow" class="rotate arrow bx bx-chevron-up" width="15" height="8" viewBox="0 0 15 8" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round"/>
+            </svg> 
+          </button>
+
+          <!-- Créer la liste via dom comme ci dessus -->
+
+        </div>
+  
+        <div class="main_search-ustensiles single-search"">
+          <button id="btn-search-ustensiles" class="btn_drop" type="button" role="listbox" aria-haspopup="true"  aria-active="descendant" aria-expanded="false" aria-controls="expandable" aria-label="Rechercher par ustensiles">
+            <span id="btn-search-ustensiles-title" class="btn-search-title">Ustensiles</span>
+            <svg id="arrow" class="rotate arrow bx bx-chevron-up" width="15" height="8" viewBox="0 0 15 8" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round"/>
+            </svg> 
+          </button>
+
+          <!-- Créer la liste via dom comme ci dessus -->
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+    
+</body>
+</html>
