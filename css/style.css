@@ -30,17 +30,19 @@
     color: var(--Black, #1B1B1B);
 }
 
+.active{
+    /* max-height: 200px; */
+    overflow: visible;
+}
+
+.rotate {
+    transform: rotate(180deg);
+    transition: 0.2s ease;
+}
+
 .center{
     margin-left: auto;
     margin-right: auto;
-}
-
-.visuallyhidden {
-    clip: rect(0 0 0 0);
-    margin: -1px;
-    overflow: hidden;
-    position: absolute;
-    width: 1px;
 }
 
 ::placeholder {
@@ -51,7 +53,17 @@
     line-height: normal;
 }
 
-button, svg, input.search-submit, input.search-bar-submit, .delete {
+.visuallyhidden {
+    clip: rect(0 0 0 0);
+    margin: -1px;
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+}
+
+
+
+button, svg, input.search-submit, input.filter-bar-submit, div#header_search .delete, .delete-main, .delete {
     cursor: pointer;
 }
 
@@ -144,10 +156,22 @@ input#search-q{
     font-size: 0.75rem;
 }
 
+div#header_search .delete-main{
+    position: absolute;
+    top: 18px;
+    right: 40px;
+    padding: 14px;
+    width: 30px;
+    height: 30px;
+    background: no-repeat url("./../assets/img/crossxl.svg");
+    object-fit: none;
+    background-position: center center;
+}
+
 input.search-submit{
     position: absolute;
     color: transparent;
-    right: 5px;
+    right: 3px;
     top: 10px;
     width: 42px;
     height: 42px;
@@ -176,25 +200,30 @@ main{
     margin-bottom: 200px;
 }
 
-/********* Search button single - Main section *********/
+/********* filter button single - Main section *********/
 
-div.main_search{
+div.main_filter{
+    display: flex;
+    justify-content: space-between;
     margin-top : 30px;
+
 }
 
-.main_search-all{
+.main_filter-all{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 60px;
+    height: 100%;
 }
 
-.single-search{
+.single-filter{
+    height: 100%;
     background-color: var(--white, #FFFFFF);
     border-radius: 11px;
 }
 
-#btn-search-ingredients, #btn-search-appareils, #btn-search-ustensiles{
+#btn-filter-ingredients, #btn-filter-appareils, #btn-filter-ustensiles{
     display: inline-flex;
     align-items: center;
     gap: 65px;
@@ -205,35 +234,46 @@ div.main_search{
     padding: 0px 16px;
 }
 
-span.btn-search-title{
+span.btn-filter-title{
     font-size: 1rem;
 }
 
-.search-ingredients{
-    position: relative;
-    display: flex;
+.filter-bar-single{
+    display: block;
 }
 
-.single-search-bar-btn{
-    width: 100%;
+.displayNone{
+    display: none;
+}
+
+.filter-ingredients{
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.single-filter-bar-btn{
+    position: relative;
+    /* width: 100%; */
     margin-bottom: 30px;
 }
 
-input#search-sort{
+input#filter-sort{
     display: block;
+    width: 90%;
     height: 36px;
     margin: 0px auto;
     padding-left: 3px;
     border: solid 1px var(--lightGrey, #C6C6C6);
     border-radius: 2px;
-    font-size: 0.75rem;
+    /* font-size: 0.75rem; */
 }
 
-input.search-bar-submit{
+input.filter-bar-submit{
     position: absolute;
     color: transparent;
-    right: 24px;
-    bottom: 30px;
+    right: 10px;
+    bottom: 0px;
     padding: 8px;
     border: none;
     background: no-repeat url("./../assets/img/loopg.svg");
@@ -244,13 +284,27 @@ input.search-bar-submit{
 .delete{
     position: absolute;
     top: 4px;
-    right: 50px;
+    right: 35px;
     padding: 14px;
     width: 12px;
     height: 12px;
     background: no-repeat url("./../assets/img/cross.svg");
     object-fit: none;
     background-position: center center;
+}
+
+.numberTotalRecipes{
+    display: flex;
+}
+
+.numberRecipes{
+    margin-right: 10px;
+}
+
+.numberRecipes, .recipes{
+    color: var(--Black, #1B1B1B);
+    font-family: Anton;
+    font-size: 21px;
 }
 
 
@@ -267,6 +321,11 @@ input.search-bar-submit{
         font-size: 0.813rem;
     }
 
+    div#header_search .delete-main{
+        top: 18px;
+        right: 50px;
+    }
+
     input.search-submit{
         right: 10px;
     }
@@ -274,24 +333,25 @@ input.search-bar-submit{
 
 
 @media screen and (min-width:480px) {
+    header img{
+        left: 47px;
+    }
+
     input#search-q{
         padding-left: 20px;
         font-size: 0.875rem;
     }
 
-    header img{
-        left: 47px;
+    div#header_search .delete-main{
+        right: 60px;
     }
+
 }
 
-
-
-  @media screen and (min-width:520px) {
-    .main_search-all {
-
+@media screen and (min-width:520px) {
+    .main_filter-all {
         justify-content: flex-start;
-   
-      }
+    }
 }
 
 
@@ -337,6 +397,11 @@ input.search-bar-submit{
         padding-left: 30px;
         font-size: 1rem;
     }
+
+    div#header_search .delete-main{
+        top: 20px;
+        right: 65px;
+    }
  }
 
  /* big landscape tablets, laptops, and desktops */
@@ -364,6 +429,11 @@ input.search-bar-submit{
         height: 72px;
     }
 
+    div#search .delete-main{
+        top: 20px;
+        right: 70px;
+    }
+
     input.search-submit{
         right: 10px;
         width: 52px;
@@ -380,7 +450,7 @@ input.search-bar-submit{
     }
 
     header h1 {
-        width: 65%;
+        width: 55%;
         font-size: 2.75rem;
     }
 

@@ -26,6 +26,7 @@
           <label for="search-q" class="visuallyhidden">Rechercher</label>
           <input id="search-q" class="search-q" name="q" placeholder="Rechercher une recette, un ingrédient, ..." value="" type="text">
         </div>
+        <span class="delete-main" tabindex="0"></span>
         <input class="search-submit" value="OK" name="recherche-submit" type="submit">
       </form>
     </div>
@@ -34,24 +35,24 @@
 
   <main role="main" id="main">
       
-    <div class="main_search">
-      <div class="main_search-all">
+    <div class="main_filter">
+      <div class="main_filter-all">
       
-        <div class="main_search-ingredients single-search">
-            <button id="btn-search-ingredients" class="btn_drop" type="button" role="listbox" aria-haspopup="true"  aria-active="descendant" aria-expanded="false" aria-controls="expandable" aria-label="Rechercher par ingrédient">
-              <span id="btn-search-ingredients-title" class="btn-search-title">Ingrédients</span>
+        <div class="main_filter-ingredients single-filter">
+            <button id="btn-filter-ingredients" class="btn_drop" type="button" role="listbox" aria-haspopup="true"  aria-active="descendant" aria-expanded="false" aria-controls="expandable" aria-label="Rechercher par ingrédient">
+              <span id="btn-filter-ingredients-title" class="btn-filter-title">Ingrédients</span>
               <svg id="arrow" class="rotate arrow bx bx-chevron-up" width="15" height="8" viewBox="0 0 15 8" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round"/>
               </svg> 
             </button>
 
-            <div id="main_search-bar-ingredients search-bar-single" class="main_search-bar-ingredients">
-              <form id="search-ingredients" class="search-ingredients" methode="post" role="search">
-                <div class="single-search-bar-btn">
-                  <label for="search-sort" class="visuallyhidden">Rechercher par ingrédient</label>
-                  <input id="search-sort" class="search-q" name="q" value="" type="text">
-                  <span class="delete"></span>
-                  <input class="search-bar-submit" value="OK" name="recherche-submit-ingredients" type="submit">
+            <div id="main_filter-bar-ingredients" class="filter-bar-single main_filter-bar-ingredients" aria-hidden="true">
+              <form id="filter-ingredients" class="filter-ingredients" methode="post" role="filter">
+                <div class="single-filter-bar-btn">
+                  <label for="filter-sort" class="visuallyhidden">Rechercher par ingrédient</label>
+                  <input id="filter-sort" class="filter-q" name="q" value="" type="text">
+                  <span class="delete" tabindex="0"></span>
+                  <input class="filter-bar-submit" value="OK" name="recherche-submit-ingredients" type="submit">
                 </div>
               </form>
             </div>
@@ -74,34 +75,58 @@
 
         </div>
 
-        <div class="main_search-appareils single-search"">
-          <button id="btn-search-appareils" class="btn_drop" type="button" role="listbox" aria-haspopup="true"  aria-active="descendant" aria-expanded="false" aria-controls="expandable" aria-label="Rechercher par appareil">
-            <span id="btn-search-appareils-title" class="btn-search-title">Appareils</span>
+        <div class="main_filter-appareils single-filter"">
+          <button id="btn-filter-appareils" class="btn_drop" type="button" role="listbox" aria-haspopup="true"  aria-active="descendant" aria-expanded="false" aria-controls="expandable" aria-label="Rechercher par appareil">
+            <span id="btn-filter-appareils-title" class="btn-filter-title">Appareils</span>
             <svg id="arrow" class="rotate arrow bx bx-chevron-up" width="15" height="8" viewBox="0 0 15 8" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
               <path d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round"/>
             </svg> 
           </button>
+
+          <div id="main_filter-bar-appareils" class="filter-bar-single main_filter-bar-appareils">
+            <form id="filter-appareils" class="filter-appareils" methode="post" role="filter">
+              <div class="single-filter-bar-btn">
+                <label for="filter-sort" class="visuallyhidden">Rechercher par Appareils</label>
+                <input id="filter-sort" class="filter-q" name="q" value="" type="text">
+                <span class="delete" tabindex="0"></span>
+                <input class="filter-bar-submit" value="OK" name="recherche-submit-appareils" type="submit">
+              </div>
+            </form>
+          </div>
 
           <!-- Créer la liste via dom comme ci dessus -->
 
         </div>
   
-        <div class="main_search-ustensiles single-search"">
-          <button id="btn-search-ustensiles" class="btn_drop" type="button" role="listbox" aria-haspopup="true"  aria-active="descendant" aria-expanded="false" aria-controls="expandable" aria-label="Rechercher par ustensiles">
-            <span id="btn-search-ustensiles-title" class="btn-search-title">Ustensiles</span>
+        <div class="main_filter-ustensiles single-filter"">
+          <button id="btn-filter-ustensiles" class="btn_drop" type="button" role="listbox" aria-haspopup="true"  aria-active="descendant" aria-expanded="false" aria-controls="expandable" aria-label="Rechercher par ustensiles">
+            <span id="btn-filter-ustensiles-title" class="btn-filter-title">Ustensiles</span>
             <svg id="arrow" class="rotate arrow bx bx-chevron-up" width="15" height="8" viewBox="0 0 15 8" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
               <path d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round"/>
             </svg> 
           </button>
 
+          <div id="main_filter-bar-ustensiles" class=" filter-bar-single main_filter-bar-ustensiles">
+            <form id="filter-ustensiles" class="filter-ustensiles" methode="post" role="filter">
+              <div class="single-filter-bar-btn">
+                <label for="filter-sort" class="visuallyhidden">Rechercher par ustensiles</label>
+                <input id="filter-sort" class="filter-q" name="q" value="" type="text">
+                <span class="delete" tabindex="0"></span>
+                <input class="filter-bar-submit" value="OK" name="recherche-submit-ustensiles" type="submit">
+              </div>
+            </form>
+          </div>
+
           <!-- Créer la liste via dom comme ci dessus -->
 
         </div>
       </div>
+
+      <div class="numberTotalRecipes"></div>
     </div>
 
   </main>
 
-    
+  <script type="module" src="./../scripts/pages/index.js"></script>
 </body>
 </html>
