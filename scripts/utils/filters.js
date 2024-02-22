@@ -4,7 +4,7 @@ export function dropdown(filter, arrow, btn){
     // filter.style.display="none";
     const showHideMenu = () => {
         filter.classList.toggle('active');
-        filter.classList.toggle('displayNone');
+        filter.classList.toggle('displayBlock');
         if (filter.classList.contains('active')) {
             btn.setAttribute('aria-expanded', 'true');
         } else {

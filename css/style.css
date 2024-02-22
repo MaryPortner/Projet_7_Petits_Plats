@@ -204,6 +204,7 @@ main{
 
 div.main_filter{
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     margin-top : 30px;
 
@@ -213,7 +214,7 @@ div.main_filter{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 60px;
+    gap: 30px;
     height: 100%;
 }
 
@@ -239,11 +240,11 @@ span.btn-filter-title{
 }
 
 .filter-bar-single{
-    display: block;
+    display: none;
 }
 
-.displayNone{
-    display: none;
+.displayBlock{
+    display: block;
 }
 
 .filter-ingredients{
@@ -295,6 +296,7 @@ input.filter-bar-submit{
 
 .numberTotalRecipes{
     display: flex;
+    margin: 50px auto;
 }
 
 .numberRecipes{
@@ -346,11 +348,18 @@ input.filter-bar-submit{
         right: 60px;
     }
 
+    .main_filter-all {
+        justify-content: flex-start;
+    }
+
 }
 
 @media screen and (min-width:520px) {
-    .main_filter-all {
-        justify-content: flex-start;
+
+
+    .numberTotalRecipes{
+        display: flex;
+        align-items: center;
     }
 }
 
@@ -402,6 +411,15 @@ input.filter-bar-submit{
         top: 20px;
         right: 65px;
     }
+
+    .main_filter{
+        max-height: 58px;
+    }
+
+    .main_filter-all{
+        gap: 45px;
+
+    }
  }
 
  /* big landscape tablets, laptops, and desktops */
@@ -440,7 +458,21 @@ input.filter-bar-submit{
         height: 52px;
     }
 
+    div.main_filter{
+        flex-direction: row;
+    }
+
+    .main_filter-all {
+        gap: 60px;
+    }
+
+    .numberTotalRecipes{
+        justify-content: center; 
+        margin: 0;   
+    }
 }
+
+
 
 /* hi-res laptops and desktops */ 
 @media screen and (min-width:1281px) { 
