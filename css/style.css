@@ -63,7 +63,7 @@
 
 
 
-button, svg, input.search-submit, input.filter-bar-submit, div#header_search .delete, .delete-main, .delete {
+button, svg, input.search-submit, input.filter-bar-submit, div#header_search .delete, .header_delete-main, .delete {
     cursor: pointer;
 }
 
@@ -156,7 +156,7 @@ input#search-q{
     font-size: 0.75rem;
 }
 
-div#header_search .delete-main{
+div#header_search .header_delete-main{
     position: absolute;
     top: 18px;
     right: 40px;
@@ -245,13 +245,14 @@ span.btn-filter-title{
 
 .displayBlock{
     display: block;
+
 }
 
-.filter-ingredients{
+/* .filter-ingredients{
     position: relative;
     display: flex;
     justify-content: center;
-}
+} */
 
 .single-filter-bar-btn{
     position: relative;
@@ -294,6 +295,37 @@ input.filter-bar-submit{
     background-position: center center;
 }
 
+ul{
+    list-style-type: none;
+    color: var(--Black, #1B1B1B);
+    font-family: Manrope;
+    font-size: 0.875rem;
+    margin-left: 16px;
+    height: 270px;
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+}
+
+ul::-webkit-scrollbar{
+    display: none; /* hidden scrollbar */
+}
+
+ul{
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /*firefox */
+}
+
+li{
+    margin-bottom: 13px;
+    text-transform: lowercase;
+}
+
+li::first-letter{
+    text-transform: uppercase;
+}
+
 .numberTotalRecipes{
     display: flex;
     margin: 50px auto;
@@ -323,7 +355,7 @@ input.filter-bar-submit{
         font-size: 0.813rem;
     }
 
-    div#header_search .delete-main{
+    div#header_search .header_delete-main{
         top: 18px;
         right: 50px;
     }
@@ -344,7 +376,7 @@ input.filter-bar-submit{
         font-size: 0.875rem;
     }
 
-    div#header_search .delete-main{
+    div#header_search .header_delete-main{
         right: 60px;
     }
 
@@ -407,9 +439,8 @@ input.filter-bar-submit{
         font-size: 1rem;
     }
 
-    div#header_search .delete-main{
-        top: 20px;
-        right: 65px;
+    div#header_search .header_delete-main{
+        right: 70px;
     }
 
     .main_filter{
@@ -447,9 +478,9 @@ input.filter-bar-submit{
         height: 72px;
     }
 
-    div#search .delete-main{
+    div#header_search .header_delete-main{
         top: 20px;
-        right: 70px;
+        right: 80px;
     }
 
     input.search-submit{

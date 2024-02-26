@@ -24,9 +24,9 @@
       <form id="search" class="search-menu" methode="post" role="search">
         <div class="search-rb">
           <label for="search-q" class="visuallyhidden">Rechercher</label>
-          <input id="search-q" class="search-q" name="q" placeholder="Rechercher une recette, un ingrédient, ..." value="" type="text">
+          <input id="search-q" class="search-q filterInput" name="q" placeholder="Rechercher une recette, un ingrédient, ..." value="" type="text">
         </div>
-        <span class="delete-main" tabindex="0"></span>
+        <span class="header_delete-main deleteData" tabindex="0"></span>
         <input class="search-submit" value="OK" name="recherche-submit" type="submit">
       </form>
     </div>
@@ -50,29 +50,12 @@
               <form id="filter-ingredients" class="filter-ingredients" methode="post" role="filter">
                 <div class="single-filter-bar-btn">
                   <label for="filter-sort" class="visuallyhidden">Rechercher par ingrédient</label>
-                  <input id="filter-sort" class="filter-q" name="q" value="" type="text">
-                  <span class="delete" tabindex="0"></span>
+                  <input id="filter-sort" class="filter-q filterInput" name="q" value="" type="text">
+                  <span class="delete deleteData" tabindex="0"></span>
                   <input class="filter-bar-submit" value="OK" name="recherche-submit-ingredients" type="submit">
                 </div>
               </form>
             </div>
-
-          <!-- A créer via DOM -->
-          <!-- <ul id="expandable" class="dropdown_content" aria-hidden="true">
-            <li class="submenu submenu1" role="option">
-              <button id="target" class="filter dropdown_content-filter" role="option" data-filter="popularite" type="button" aria-selected="false" tabindex="0" aria-label="Tri par popularité">Popularité</button>
-              <span class="sr-only">Popularité</span>
-            </li>
-            <li class="submenu" role="option">
-              <button class="filter dropdown_content-filter"  role="option" data-filter="date" type="button"  aria-selected="false" tabindex="0"  aria-label="Tri par date">Date</button>
-              <span class="sr-only">Date</span>
-            </li>
-            <li class="submenu"role="option" >
-              <button class="filter dropdown_content-filter"  role="option" data-filter="titre" type="button" aria-selected="false" tabindex="0"  aria-label="Tri par titre">Titre</button>
-              <span class="sr-only">Titre</span>
-            </li>
-          </ul> -->
-
         </div>
 
         <div class="main_filter-appareils single-filter"">
@@ -87,15 +70,12 @@
             <form id="filter-appareils" class="filter-appareils" methode="post" role="filter">
               <div class="single-filter-bar-btn">
                 <label for="filter-sort" class="visuallyhidden">Rechercher par Appareils</label>
-                <input id="filter-sort" class="filter-q" name="q" value="" type="text">
-                <span class="delete" tabindex="0"></span>
+                <input id="filter-sort" class="filter-q filterInput" name="q" value="" type="text">
+                <span class="delete deleteData" tabindex="0"></span>
                 <input class="filter-bar-submit" value="OK" name="recherche-submit-appareils" type="submit">
               </div>
             </form>
           </div>
-
-          <!-- Créer la liste via dom comme ci dessus -->
-
         </div>
   
         <div class="main_filter-ustensiles single-filter"">
@@ -110,15 +90,12 @@
             <form id="filter-ustensiles" class="filter-ustensiles" methode="post" role="filter">
               <div class="single-filter-bar-btn">
                 <label for="filter-sort" class="visuallyhidden">Rechercher par ustensiles</label>
-                <input id="filter-sort" class="filter-q" name="q" value="" type="text">
-                <span class="delete" tabindex="0"></span>
+                <input id="filter-sort" class="filter-q filterInput" name="q" value="" type="text">
+                <span class="delete deleteData" tabindex="0"></span>
                 <input class="filter-bar-submit" value="OK" name="recherche-submit-ustensiles" type="submit">
               </div>
             </form>
           </div>
-
-          <!-- Créer la liste via dom comme ci dessus -->
-
         </div>
       </div>
 
