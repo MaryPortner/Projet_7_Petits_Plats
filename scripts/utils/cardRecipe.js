@@ -30,5 +30,8 @@ class Recipes {
     }
 
 
+    buildCard(){
+        
+    }
 
 }

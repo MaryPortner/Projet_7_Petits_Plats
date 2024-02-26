@@ -1,9 +1,8 @@
-import { recipes } from "./../pages/index.js";
-
 const numberTotalRecipes = document.querySelector('.numberTotalRecipes');
 
 /** Display number of recipes  */
-export function displayNumberRecipes(){
+
+export function displayNumberRecipes(recipes){
         
     const numberRecipes = document.createElement('p');
     numberRecipes.classList.add("numberRecipes");
