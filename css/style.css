@@ -220,6 +220,8 @@ div.main_filter{
 }
 
 .single-filter{
+    position: relative;
+    z-index: 3;
     height: 100%;
     background-color: var(--white, #FFFFFF);
     border-radius: 11px;
@@ -342,7 +344,9 @@ li::first-letter{
     font-size: 21px;
 }
 
-/* display recipes */
+
+/******  recipes section ******/
+
 #main_allRecipes{
     display: flex;
     flex-wrap: wrap;
@@ -357,6 +361,12 @@ li::first-letter{
     box-shadow: 0px 4px 34px 30px rgba(0, 0, 0, 0.04);
 }
 
+.allRecipes_imgSection{
+    position: relative;
+    font-family: Manrope;
+    font-size: 0.750rem;
+}
+
 .allRecipes_imgSection-img{
     width: 100%;
     height: 253px;
@@ -365,6 +375,53 @@ li::first-letter{
     border-top-right-radius: 21px;
 }
 
+.allRecipes_imgSection-duration{
+    position: absolute;
+    z-index: 2;
+    top: 21px;
+    right: 23px;
+    padding: 5px 15px;
+    background-color: var(--third-color, #FFD15B);
+    border-radius: 21px;
+}
+
+.allRecipes_dataRecipes{
+    margin: 0 25px;
+}
+
+.allRecipes_dataRecipes-nameRecipe{
+    font-family: Anton;
+    margin-top: 32px;
+    font-size: 1.125rem;
+}
+
+.dataRecipes_recipe-title{
+    font-family: Manrope;
+    margin: 29px 0 15px 0;
+    color: var(--secondary-color, #7A7A7A);
+    font-size: 0.750rem;
+    font-weight: 700;
+    letter-spacing: 1.08px;
+}
+
+.dataRecipes_recipe-txt, .recipe-ingredient-section-title{
+    color: var(--Black, #1B1B1B);
+    font-family: Manrope;
+    font-size: 0.875rem;
+}
+
+.recipe-ingredient-section-title{
+    font-weight: 500;
+}
+
+.ingredient-section-qteUnit{
+    display: flex;
+    gap: 5px;
+    color: var(--Grey, #7A7A7A);
+    font-family: Manrope;
+    font-size: 0.875rem;
+    
+}
 
 /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
 @media screen and (min-width:360px) { 
@@ -532,6 +589,9 @@ li::first-letter{
 
     div.main_filter{
         flex-direction: row;
+        width: 96%;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .main_filter-all {

@@ -2,23 +2,23 @@ export class CardRecipe {
 /** 
  * 
  * @param { HTMLImageElement } image
- * @param { number } time
  * @param { string } name
+ * @param { number } time
+ * @param { string } description
  * @param { string } ingredient
  * @param { number } quantity
  * @param { string } unit
- * @param { string } description
  * 
  */
 
-constructor (image, time, name, ingredient, quantity, unit,  description){
+constructor (image, name, time, description, ingredient, quantity, unit){
     this.image = image;
-    this.time = time;
     this.name = name;
+    this.time = time;
+    this.description = description;
     this.ingredient = ingredient;
     this.quantity = quantity;
     this.unit = unit;
-    this.description = description;
 }
 
 
@@ -45,31 +45,35 @@ buildCard(){
             dataRecipes.classList.add('allRecipes_dataRecipes');
 
                 const nameRecipe = document.createElement('h1');
-                nameRecipe.classList.add('.allRecipes_dataRecipes-nameRecipe');
+                nameRecipe.classList.add('allRecipes_dataRecipes-nameRecipe');
+                nameRecipe.innerText =  `${this.name}`;
 
                 const recipe = document.createElement('div');
                 recipe.classList.add('dataRecipes_recipe');
 
                     const recipeTitle = document.createElement('h2');
                     recipeTitle.classList.add('dataRecipes_recipe-title');
+                    recipeTitle.innerText = `RECETTE`;
 
                     const recipeTxt = document.createElement('p');
                     recipeTxt.classList.add('dataRecipes_recipe-txt');
+                    recipeTxt.innerText = `${this.description}`;
 
                     const recipeIngredientsTitle = document.createElement('h2');
                     recipeIngredientsTitle.classList.add('dataRecipes_recipe-title');
+                    recipeIngredientsTitle.innerText = `INGREDIENTS`;
 
-                    const ingredientsSection = document.createElement('div');
-                    ingredientsSection.classList.add('recipe-ingredients-section');
+                  
 
-                        // this.displayIngredients(datas);
+                    
 
     
     
     recipe.appendChild(recipeTitle);
     recipe.appendChild(recipeTxt);
     recipe.appendChild(recipeIngredientsTitle);
-    recipe.appendChild(ingredientsSection);
+    recipe.appendChild(this.displayIngredients());
+  
 
     dataRecipes.appendChild(nameRecipe);
     dataRecipes.appendChild(recipe);
@@ -81,40 +85,52 @@ buildCard(){
     recipeCard.appendChild(dataRecipes);
 
     recipesSection.appendChild(recipeCard);
-    
+
+    this.displayIngredients();
+  
+  
     return recipesSection;
     
 }
 
-// displayIngredients(ingredient){
-
-//     // Boucle pour récupérer les ingrédients.                        
-//     // datas.forEach((ingredients) => {
+displayIngredients(){
         
-//         const ingredientSection = document.querySelector('.recipe-ingredients-section');
+    const ingredientsSection = document.createElement('div');
+    ingredientsSection.classList.add('recipe-ingredients-section');
 
-//             const ingredientTitle = document.createElement('h3');
-//             ingredientTitle.classList.add('recipe-ingredient-section-title');
 
-//             const ingredientQteUnit = document.createElement('div');
-//             ingredientQteUnit.classList.add('ingredient-section-qteUnit');
+            const ingredientTitle = document.createElement('h3');
+            ingredientTitle.classList.add('recipe-ingredient-section-title');
+            ingredientTitle.innerText = `${this.ingredient}`;
 
-//                 const quantity = document.createElement('p');
-//                 quantity.classList.add('ingredient-section-qte');
+            const ingredientQteUnit = document.createElement('div');
+            ingredientQteUnit.classList.add('ingredient-section-qteUnit');
 
-//                 const unit = document.createElement('p');
-//                 unit.classList.add('ingredient-section-unit');
-
-//                 ingredientQteUnit.appendChild(quantity);
-//                 ingredientQteUnit.appendChild(unit);
-
-//                 ingredientSection.appendChild(ingredient);
-//                 ingredientSection.appendChild(ingredientQteUnit);
-
-//                 return ingredientSection;
+                const quantity = document.createElement('p');
+                quantity.classList.add('ingredient-section-qte');
+                if(this.quantity != undefined){
+                    quantity.innerText = (`${this.quantity} `);
+                } else {
+                    quantity.innerText = '';
+                }
                 
-//     // });
-// }
 
+                const unit = document.createElement('p');
+                unit.classList.add('ingredient-section-unit');
+                if(this.unit != undefined){
+                    unit.innerText = (`${this.unit}`);
+                } else {
+                    unit.innerText = '';
+                }
+                
 
+    ingredientQteUnit.appendChild(quantity);
+    ingredientQteUnit.appendChild(unit);
+
+    ingredientsSection.appendChild(ingredientTitle);
+    ingredientsSection.appendChild(ingredientQteUnit);
+
+    return ingredientsSection;
+
+    }
 }

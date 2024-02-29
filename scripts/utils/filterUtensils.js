@@ -27,6 +27,8 @@ export function filterByUtensils(recipes){
             const utensil = document.createElement('li');
             utensil.innerHTML = `${el}`;
             utensil.classList.add("utensil");
+            utensil.setAttribute('tabindex', 0);
+
             listUtensils.appendChild(utensil);
         }
         return listUtensils;
