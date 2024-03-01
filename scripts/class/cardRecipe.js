@@ -1,33 +1,33 @@
 export class CardRecipe {
-/** 
- * 
- * @param { HTMLImageElement } image
- * @param { string } name
- * @param { number } time
- * @param { string } description
- * @param { string } ingredient
- * @param { number } quantity
- * @param { string } unit
- * 
- */
-
-constructor (image, name, time, description, ingredient, quantity, unit){
-    this.image = image;
-    this.name = name;
-    this.time = time;
-    this.description = description;
-    this.ingredient = ingredient;
-    this.quantity = quantity;
-    this.unit = unit;
-}
-
-
-buildCard(){
-    const recipesSection = document.querySelector('#main_allRecipes');
-
-        const recipeCard = document.createElement('article');
-        recipeCard.classList.add('allRecipes_article');
-
+    /** 
+     * 
+     * @param { HTMLImageElement } image
+     * @param { string } name
+     * @param { number } time
+     * @param { string } description
+     * @param { string } ingredient
+     * @param { number } quantity
+     * @param { string } unit
+     * 
+     */
+    
+    constructor (image, name, time, description, ingredient, quantity, unit){
+        this.image = image;
+        this.name = name;
+        this.time = time;
+        this.description = description;
+        this.ingredient = ingredient;
+        this.quantity = quantity;
+        this.unit = unit;
+    }
+    
+    
+    buildCard(){
+        const recipesSection = document.querySelector('#main_allRecipes');
+    
+            const recipeCard = document.createElement('article');
+            recipeCard.classList.add('allRecipes_article');
+    
             const imgSection = document.createElement('div');
             imgSection.classList.add('allRecipes_imgSection')
 
@@ -63,74 +63,65 @@ buildCard(){
                     recipeIngredientsTitle.classList.add('dataRecipes_recipe-title');
                     recipeIngredientsTitle.innerText = `INGREDIENTS`;
 
-                  
-
-                    
-
-    
-    
-    recipe.appendChild(recipeTitle);
-    recipe.appendChild(recipeTxt);
-    recipe.appendChild(recipeIngredientsTitle);
-    recipe.appendChild(this.displayIngredients());
-  
-
-    dataRecipes.appendChild(nameRecipe);
-    dataRecipes.appendChild(recipe);
-
-    imgSection.appendChild(imgRecipes);
-    imgSection.appendChild(duration);
-
-    recipeCard.appendChild(imgSection);
-    recipeCard.appendChild(dataRecipes);
-
-    recipesSection.appendChild(recipeCard);
-
-    this.displayIngredients();
-  
-  
-    return recipesSection;
-    
-}
-
-displayIngredients(){
         
-    const ingredientsSection = document.createElement('div');
-    ingredientsSection.classList.add('recipe-ingredients-section');
-
-
-            const ingredientTitle = document.createElement('h3');
-            ingredientTitle.classList.add('recipe-ingredient-section-title');
-            ingredientTitle.innerText = `${this.ingredient}`;
-
-            const ingredientQteUnit = document.createElement('div');
-            ingredientQteUnit.classList.add('ingredient-section-qteUnit');
-
-                const quantity = document.createElement('p');
-                quantity.classList.add('ingredient-section-qte');
-                if(this.quantity != undefined){
-                    quantity.innerText = (`${this.quantity} `);
-                } else {
-                    quantity.innerText = '';
-                }
-                
-
-                const unit = document.createElement('p');
-                unit.classList.add('ingredient-section-unit');
-                if(this.unit != undefined){
-                    unit.innerText = (`${this.unit}`);
-                } else {
-                    unit.innerText = '';
-                }
-                
-
-    ingredientQteUnit.appendChild(quantity);
-    ingredientQteUnit.appendChild(unit);
-
-    ingredientsSection.appendChild(ingredientTitle);
-    ingredientsSection.appendChild(ingredientQteUnit);
-
-    return ingredientsSection;
-
+        recipe.appendChild(recipeTitle);
+        recipe.appendChild(recipeTxt);
+        recipe.appendChild(recipeIngredientsTitle);
+        recipe.appendChild(this.displayIngredients());
+    
+        dataRecipes.appendChild(nameRecipe);
+        dataRecipes.appendChild(recipe);
+    
+        imgSection.appendChild(imgRecipes);
+        imgSection.appendChild(duration);
+    
+        recipeCard.appendChild(imgSection);
+        recipeCard.appendChild(dataRecipes);
+    
+        recipesSection.appendChild(recipeCard);
+    
+        this.displayIngredients();
+      
+        return recipesSection;
+        
     }
-}
+    
+    displayIngredients(){
+            
+        const ingredientsSection = document.createElement('div');
+        ingredientsSection.classList.add('recipe-ingredients-section');
+    
+                const ingredientTitle = document.createElement('h3');
+                ingredientTitle.classList.add('recipe-ingredient-section-title');
+                ingredientTitle.innerText = `${this.ingredient}`;
+    
+                const ingredientQteUnit = document.createElement('div');
+                ingredientQteUnit.classList.add('ingredient-section-qteUnit');
+    
+                    const quantity = document.createElement('p');
+                    quantity.classList.add('ingredient-section-qte');
+                    if(this.quantity != undefined){
+                        quantity.innerText = (`${this.quantity} `);
+                    } else {
+                        quantity.innerText = '';
+                    }
+                    
+                    const unit = document.createElement('p');
+                    unit.classList.add('ingredient-section-unit');
+                    if(this.unit != undefined){
+                        unit.innerText = (`${this.unit}`);
+                    } else {
+                        unit.innerText = '';
+                    }
+                    
+    
+        ingredientQteUnit.appendChild(quantity);
+        ingredientQteUnit.appendChild(unit);
+    
+        ingredientsSection.appendChild(ingredientTitle);
+        ingredientsSection.appendChild(ingredientQteUnit);
+    
+        return ingredientsSection;
+    
+        }
+    }
