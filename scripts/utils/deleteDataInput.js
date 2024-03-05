@@ -1,87 +1,31 @@
 export function deleteDataInput(){
-    const crossToDelete = document.querySelectorAll('.deleteDataIngredients, .deleteDataAppareils, .deleteDataUtensils, .header_delete-main');
+    const crossToDelete = document.querySelectorAll('.header_delete-main, .deleteDataIngredients, .deleteDataAppareils, .deleteDataUtensils' );
     console.log(crossToDelete);
     // const crossToDelete = document.querySelector('.header_delete-main');
     // const crossToDeleteIngredient = document.querySelector('.deleteDataIngredients');
     // const crossToDeleteAppareils = document.querySelector('.deleteDataAppareils');
     // const crossToDeleteUtensils = document.querySelector('.deleteDataUtensils');
     
-    const inputData = document.querySelectorAll('#filter-sort-ingredients, #filter-sort-appareils, #filter-sort-utensils, #search-q');
+    const inputData = document.querySelectorAll('#search-q, #filter-sort-ingredients, #filter-sort-appareils, #filter-sort-utensils ');
+    console.log(inputData);
     // const inputHeader = document.querySelector('#search-q');
 
 
-    for (let el of inputData){
+    function deleteDatas(input, cross){
+        /** if data is inserted into the input, the cross is displayed */
+        input.addEventListener('input', () => {
+            cross.style.display = "block";
+        });
 
-        for(let elToDelete of crossToDelete){
-            /** if data is inserted into the input, the cross is displayed */
-            el.addEventListener('input', () => {
-                elToDelete.style.display = "block";
-            });
-
-            /** Clicking on the cross erases the data and undisplays the cross */
-            elToDelete.addEventListener('click', () => {
-                el.value = '';
-                elToDelete.style.display = "none";
-            });  
-        }
+        /** Clicking on the cross erases the data and undisplays the cross */
+        cross.addEventListener('click', () => {
+            input.value = '';
+            cross.style.display = "none";
+        });  
     }
+
+    deleteDatas(inputData[0], crossToDelete[0]);
+    deleteDatas(inputData[1], crossToDelete[1]);
+    deleteDatas(inputData[2], crossToDelete[2]);
+    deleteDatas(inputData[3], crossToDelete[3]);
 }
-
-
-
-// export  function deleteDataInputFilterAndSearchbar(){
-
-//     const crossToDelete = document.querySelector('.header_delete-main');
-//     const crossToDeleteIngredient = document.querySelector('.deleteDataIngredients');
-//     const crossToDeleteAppareils = document.querySelector('.deleteDataAppareils');
-//     const crossToDeleteUtensils = document.querySelector('.deleteDataUtensils');
-    
-//     const inputDataIngredient = document.querySelector('#filter-sort-ingredients');
-//     const inputDataAppareils = document.querySelector('#filter-sort-appareils');
-//     const inputDataUtensils = document.querySelector('#filter-sort-utensils');
-//     const inputDataHeader = document.querySelector('#search-q');
-
-//     function deleteDataInput(inputFilters, cross){
-
-//         // const crossToDeleteHeader = document.querySelector('div#header_search .header_delete-main');
-//         // const inputDataHeader = document.querySelector('#search-q');
-    
-    
-    
-//         for (let el of inputFilters){
-    
-//             for(let elToDelete of cross){
-//                 /** if data is inserted into the input, the cross is displayed */
-//                 el.addEventListener('input', () => {
-//                     elToDelete.style.display = "block";
-//                 });
-    
-//                 /** Clicking on the cross erases the data and undisplays the cross */
-//                 elToDelete.addEventListener('click', () => {
-//                     el.value = '';
-//                     elToDelete.style.display = "none";
-//                 });  
-//             }
-//         }
-
-
- 
-//                 /** if data is inserted into the input, the cross is displayed */
-//                 inputFilters.addEventListener('input', () => {
-//                    cross.style.display = "block";
-//                 });
-    
-//                 /** Clicking on the cross erases the data and undisplays the cross */
-//                 cross.addEventListener('click', () => {
-//                     inputFilters.value = '';
-//                     cross.style.display = "none";
-//                 });  
-            
-//         }
-//         deleteDataInput(inputDataHeader,crossToDelete);
-//         deleteDataInput(inputDataIngredient, crossToDeleteIngredient);
-//         deleteDataInput(inputDataAppareils, crossToDeleteAppareils);
-//         deleteDataInput(inputDataUtensils, crossToDeleteUtensils);
-
-
-//     }
