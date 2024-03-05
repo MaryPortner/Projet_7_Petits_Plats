@@ -53,6 +53,10 @@
     line-height: normal;
 }
 
+*:focus::placeholder{
+    opacity: 0;
+}
+
 .visuallyhidden {
     clip: rect(0 0 0 0);
     margin: -1px;
@@ -158,6 +162,7 @@ input#search-q{
 
 div#header_search .header_delete-main{
     position: absolute;
+    display: none;
     top: 18px;
     right: 40px;
     padding: 14px;
@@ -242,7 +247,7 @@ span.btn-filter-title{
     font-size: 1rem;
 }
 
-.filter-bar-single{
+.filter-bar-single, .delete{
     display: none;
 }
 
@@ -263,7 +268,7 @@ span.btn-filter-title{
     margin-bottom: 30px;
 }
 
-input#filter-sort{
+input#filter-sort-ingredients, input#filter-sort-appareils, input#filter-sort-utensils{
     display: block;
     width: 90%;
     height: 36px;
@@ -358,6 +363,7 @@ li::first-letter{
 .allRecipes_article{
     width: 100%;
     border-radius: 21px;
+    background-color: var(--white, #FFFFFF);
     box-shadow: 0px 4px 34px 30px rgba(0, 0, 0, 0.04);
 }
 
@@ -408,6 +414,17 @@ li::first-letter{
     color: var(--Black, #1B1B1B);
     font-family: Manrope;
     font-size: 0.875rem;
+}
+
+.recipe-ingredients-main-section{
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom : 25px
+}
+
+.recipe-ingredient-section{
+   width: 50%;
+   margin: 15px 0;
 }
 
 .recipe-ingredient-section-title{
@@ -543,12 +560,14 @@ li::first-letter{
     #main_allRecipes {
         margin-top: 125px;
         gap: 66px 28px;
+        justify-content: flex-start;
       }
 
     .allRecipes_article{
         width: 45%;
     }
 
+ 
  }
 
  /* big landscape tablets, laptops, and desktops */
