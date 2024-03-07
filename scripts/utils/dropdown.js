@@ -1,21 +1,13 @@
 /**  Dropdown for filters */ 
 
-const arrowAppareils = document.querySelector('#btn-filter-appareils .arrow');
-const arrowIngredients = document.querySelector('#btn-filter-ingredients .arrow');
-const arrowUstensiles = document.querySelector('#btn-filter-ustensiles .arrow');
-
-const btnFilterAppareils = document.querySelector('#btn-filter-appareils');
-const btnFilterIngredients = document.querySelector('#btn-filter-ingredients');
-const btnFilterUstensiles = document.querySelector('#btn-filter-ustensiles');
-
-const filterBarAppareils = document.querySelector('.main_filter-bar-appareils');
-const filterBarIngredients = document.querySelector('.main_filter-bar-ingredients');
-const filterBarUstensiles = document.querySelector('.main_filter-bar-ustensiles');
+const arrow = document.querySelectorAll('#btn-filter-ingredients .arrow, #btn-filter-appareils .arrow,  #btn-filter-ustensiles .arrow');
+const btnToFilter = document.querySelectorAll('#btn-filter-ingredients, #btn-filter-appareils, #btn-filter-ustensiles');
+const filterBar = document.querySelectorAll('.main_filter-bar-ingredients, .main_filter-bar-appareils, .main_filter-bar-ustensiles');
 
 export function displayDropdown (){
 
     function dropdown(filter, arrow, btn){
-        const showHideFilter = () => {
+        const showHideDataList = () => {
             filter.classList.toggle('active');
             filter.classList.toggle('displayBlock');
             if (filter.classList.contains('active')) {
@@ -26,10 +18,10 @@ export function displayDropdown (){
             arrow.classList.toggle('rotate');
         }
 
-        btn.addEventListener('click', showHideFilter);
+        btn.addEventListener('click', showHideDataList);
     } 
 
-    dropdown(filterBarAppareils, arrowAppareils, btnFilterAppareils);
-    dropdown(filterBarIngredients, arrowIngredients, btnFilterIngredients);   
-    dropdown(filterBarUstensiles, arrowUstensiles, btnFilterUstensiles);
+    dropdown(filterBar[0], arrow[0], btnToFilter[0]);  
+    dropdown(filterBar[1], arrow[1], btnToFilter[1]); 
+    dropdown(filterBar[2], arrow[2], btnToFilter[2]);
 }

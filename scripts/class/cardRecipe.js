@@ -17,9 +17,6 @@ export class CardRecipe {
         this.time = time;
         this.description = description;
         this.ingredients = ingredients;
-        // this.quantity = quantity;
-        // this.unit = unit;
-   
     }
     
     
