@@ -4,20 +4,9 @@ export function filterByElements(recipes){
     const btnToFilter = document.querySelector('#btn-filter-ustensiles');
     const crossToDelete = document.querySelector('.deleteDataUtensils' );
     let elements = [];
-    // let filterBy = ["ustensils", "ingredients.ingredient", "appliance"];
 
-    // const mainFilterBarUstensiles = document.querySelector('.main_filter-bar-ustensiles');
     let regex = /^[^A-Z-É]*$/;
     
-
-
-
-
-    let arrayAllIngredients = [];
-    let arrayIngredient = [];
-
-    let arrayApplianceEl = [];
-
 
     function displayElementsUtensiles(){
         /** Loop for get all elements in recipes array*/
@@ -35,30 +24,16 @@ export function filterByElements(recipes){
     displayElementsUtensiles();
 
 
-
-
     function getListElements(arrayEl){    
         for (let i = 0 ; i < arrayEl.length ; i++){
             /** remove duplicates */
             if(!elements.includes(arrayEl[i]) && (regex.test(arrayEl[i]))){
                 elements.push(arrayEl[i]); 
-
-                // let tartelettes = elements.find((element) => element === 'moule à tartelettes (6)');
-     
-                // if (tartelettes){
-                //     tartelettes.replace("moule à tartelettes (6)", 'moule à tartelettes');
-                // }
                 elements.forEach((item, i) => { if (item == 'moule à tartelettes (6)') elements[i] = 'moule à tartelettes'; });
-
             }
         } 
     }
 
-   
-
-
-   console.log(elements);
-    
     function displayListOfElements(classUl, elements){
 
         const ul = document.createElement('ul');
@@ -82,14 +57,14 @@ export function filterByElements(recipes){
 
     input.addEventListener('input', () => {
         const inputValue =  input.value.toLowerCase().trim();
-        typeToFilter.forEach(utensilEl => {
-            const utensil = utensilEl.textContent.toLowerCase().trim();
-            if(utensil.includes(inputValue)){
-                utensilEl.classList.remove('hidden');
+        typeToFilter.forEach(filterEl => {
+            const textContentFilter = filterEl.textContent.toLowerCase().trim();
+            if(textContentFilter.includes(inputValue)){
+                filterEl.classList.remove('hidden');
             }else {
-                utensilEl.classList.add('hidden');
+                filterEl.classList.add('hidden');
             }
-            resetDatas(utensilEl);
+            resetDatas(filterEl);
         }); 
     });
 
