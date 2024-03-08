@@ -42,13 +42,25 @@ export function filterByElements(recipes){
             /** remove duplicates */
             if(!elements.includes(arrayEl[i]) && (regex.test(arrayEl[i]))){
                 elements.push(arrayEl[i]); 
+
+                // let tartelettes = elements.find((element) => element === 'moule à tartelettes (6)');
+     
+                // if (tartelettes){
+                //     tartelettes.replace("moule à tartelettes (6)", 'moule à tartelettes');
+                // }
+                elements.forEach((item, i) => { if (item == 'moule à tartelettes (6)') elements[i] = 'moule à tartelettes'; });
+
             }
         } 
     }
 
+   
 
+
+   console.log(elements);
     
     function displayListOfElements(classUl, elements){
+
         const ul = document.createElement('ul');
         ul.classList.add(`${classUl}`);
         for(let el of elements){

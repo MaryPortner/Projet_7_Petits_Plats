@@ -4,7 +4,7 @@ export function filterByIngredients(recipes){
     const btnToFilter = document.querySelector('#btn-filter-ingredients');
     const crossToDelete = document.querySelector('.deleteDataIngredients' );
     let elements = [];
-    let regex = /^[^A-Z-É]*$/;
+    // let regex = /^[^A-Z-É]*$/;
 
 
 
@@ -16,9 +16,9 @@ export function filterByIngredients(recipes){
         /** Loop for get all elements in recipes array*/
         let arrayIngredient = [];
         for(let i = 0 ; i < recipes.length ; i++){
-            let arrayAllIngredients = recipes[i].ingredients[0].ingredient;
-            arrayIngredient.push(arrayAllIngredients);
-            console.log(arrayIngredient);
+            let AllIngredients = recipes[i].ingredients[0].ingredient;
+            console.log(AllIngredients);
+            arrayIngredient.push(AllIngredients);
         }
         getListElements(arrayIngredient);
         /** Inserting list of utensils into the filter div */
@@ -32,18 +32,18 @@ export function filterByIngredients(recipes){
 
 
     function getListElements(arrayEl){  
-    
-
         for(let i = 0 ; i < arrayEl.length ; i++){
-            console.log(arrayEl[i]);  
+
             /** remove duplicates */
-            if(!elements.includes(arrayEl[i]) && (regex.test(arrayEl[i]))){
+            if( !elements.includes(arrayEl[i])){
                 elements.push(arrayEl[i]); 
-                console.log('after' ,elements);
+               
             } 
         }  
-      
+         console.log('after',elements);
     }
+
+
 
     
     function displayListOfElements(classUl, elements){
