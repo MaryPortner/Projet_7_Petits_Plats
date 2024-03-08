@@ -8,7 +8,7 @@ export function filterByElements(recipes){
 
     // const mainFilterBarUstensiles = document.querySelector('.main_filter-bar-ustensiles');
     let regex = /^[^A-Z-É]*$/;
-    const ul = document.createElement('ul');
+    
 
 
 
@@ -26,51 +26,30 @@ export function filterByElements(recipes){
             getListElements( arrayAllUstensil);
         }
         /** Inserting list of utensils into the filter div */
-        const element =  displayListOfElements('filter-ustensiles-list' ,elements);
+        const element =  displayListOfElements('filter-ustensiles-list' , elements);
         document.querySelector('.main_filter-bar-ustensiles').appendChild(element);
 
         // displayListOfElements('filter-ustensiles-list' ,elements);
-
-        console.log(elements);
     }
 
     displayElementsUtensiles();
 
 
 
-    function displayElementsIngredients(){
-        let arrayIngredient = [];
-        for(let i = 0 ; i < recipes.length ; i++){
-            let arrayAllIngredients = recipes[i].ingredients[0].ingredient;
-            arrayIngredient.push(arrayAllIngredients);
-          
-            
-            getListElements( arrayIngredient);
-        }
-        console.log(arrayIngredient);
-    }
-
-
-    displayElementsIngredients()
-
-
-
-
 
     function getListElements(arrayEl){    
-        for (let j = 0 ; j < arrayEl.length ; j++){
+        for (let i = 0 ; i < arrayEl.length ; i++){
             /** remove duplicates */
-            if(!elements.includes(arrayEl[j]) && (regex.test(arrayEl[j]))){
-                elements.push(arrayEl[j]); 
+            if(!elements.includes(arrayEl[i]) && (regex.test(arrayEl[i]))){
+                elements.push(arrayEl[i]); 
             }
         } 
     }
 
 
-  
     
     function displayListOfElements(classUl, elements){
-  
+        const ul = document.createElement('ul');
         ul.classList.add(`${classUl}`);
         for(let el of elements){
             /** creation of a li for each utensil */
@@ -107,7 +86,7 @@ export function filterByElements(recipes){
     function resetDatas(el){
     
          /** redisplays the data list if you empty the search field */
-         crossToDelete.addEventListener('click', () => {
+        crossToDelete.addEventListener('click', () => {
             el.classList.remove('hidden');
         }); 
 
@@ -119,5 +98,3 @@ export function filterByElements(recipes){
         });  
     }
 }
-
-
