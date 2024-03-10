@@ -10,6 +10,7 @@ export function displayDropdown (){
         const showHideDataList = () => {
             filter.classList.toggle('active');
             filter.classList.toggle('displayBlock');
+            /** accessibility */
             if (filter.classList.contains('active')) {
                 btn.setAttribute('aria-expanded', 'true');
             } else {

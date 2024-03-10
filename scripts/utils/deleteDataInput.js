@@ -22,15 +22,3 @@ export function deleteDataInput(){
 
 
 
-// for(let i ; i < inputData.length; i++){
-//     for( let j ; j < crossToDelete.length; j ++){
-//         inputData[i].addEventListener('input', () => {
-//             crossToDelete[j].style.display = "block";
-//         });
-//         crossToDelete[j].addEventListener('click', () => {
-//             inputData[i].value = '';
-//             crossToDelete[j].style.display = "none";
-//         }); 
-
-//     }
-// }

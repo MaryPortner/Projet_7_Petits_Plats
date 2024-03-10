@@ -4,7 +4,7 @@ export function filterByIngredients(recipes){
     const btnToFilter = document.querySelector('#btn-filter-ingredients');
     const crossToDelete = document.querySelector('.deleteDataIngredients' );
     let elements = [];
-    // let regex = /^[^A-Z-É]*$/;
+    let regex = /^[a-zA-ZàâçéèêëôöúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÎÏÔÖÚÙÛÜÆŒ._-\s]{1,30}$/;
 
 
 
@@ -16,7 +16,6 @@ export function filterByIngredients(recipes){
         let arrayIngredient = [];
         for(let i = 0 ; i < recipes.length ; i++){
             let AllIngredients = recipes[i].ingredients[0].ingredient;
-            console.log(AllIngredients);
             arrayIngredient.push(AllIngredients);
         }
         getListElements(arrayIngredient);
@@ -42,7 +41,7 @@ export function filterByIngredients(recipes){
         for(let el of elements){
             /** creation of a li for each utensil */
             const li = document.createElement('li');
-            li.innerHTML = `${el}`;
+            li.innerText = `${el}`;
             li.classList.add("ingredients");
             li.setAttribute('tabindex', 0);
 
@@ -54,19 +53,26 @@ export function filterByIngredients(recipes){
 
     /** filter the utensils from the data inserted in the input*/
     const input = document.querySelector('#filter-sort-ingredients');
-    const typeToFilter = document.querySelectorAll('.ingredients');
+    const elementsToFilter = document.querySelectorAll('.ingredients');
 
     input.addEventListener('input', () => {
+        /** lowercase and remove spaces from input value */
         const inputValue =  input.value.toLowerCase().trim();
-        typeToFilter.forEach(filterEl => {
-            const textContentFilter = filterEl.textContent.toLowerCase().trim();
-            if(textContentFilter.includes(inputValue)){
-                filterEl.classList.remove('hidden');
-            }else {
-                filterEl.classList.add('hidden');
-            }
-            resetDatas(filterEl);
-        }); 
+        /** check data entry */
+        if(regex.test(input.value)){
+            /** lloop over each filter element */
+            elementsToFilter.forEach(elFiltered => {
+                /** lowercase and remove spaces from element */
+                const textContentFilter = elFiltered.textContent.toLowerCase().trim();
+                if(textContentFilter.includes(inputValue)){
+                    /** displays the element corresponding to the input value */
+                    elFiltered.classList.remove('hidden');
+                }else {
+                    elFiltered.classList.add('hidden');
+                }
+                resetDatas(elFiltered);
+            }); 
+        }
     });
 
 
@@ -84,4 +90,6 @@ export function filterByIngredients(recipes){
             crossToDelete.style.display = 'none';
         });  
     }
+
+  
 }
