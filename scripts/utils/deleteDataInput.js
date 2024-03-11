@@ -1,6 +1,7 @@
 export function deleteDataInput(){
-    const crossToDelete = document.querySelectorAll('.header_delete-main, .deleteDataIngredients, .deleteDataAppareils, .deleteDataUtensils' );
-    const inputData = document.querySelectorAll('#search-q, #filter-sort-ingredients, #filter-sort-appareils, #filter-sort-utensils ');
+    const crossToDelete = document.querySelectorAll('.header_delete-main, .deleteData-ingredients, .deleteData-appliances, .deleteData-ustensils' );
+    const inputData = document.querySelectorAll('#search-q, #filter-sort-ingredients, #filter-sort-appliances, #filter-sort-ustensils ');
+    
     function deleteDatas(input, cross){
         /** if data is inserted into the input, the cross is displayed */
         input.addEventListener('input', () => {

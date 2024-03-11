@@ -1,27 +1,27 @@
 export function filterByElements(recipes){
 
     // let arrayAllElements = [];
-    const btnToFilter = document.querySelector('#btn-filter-ustensiles');
-    const crossToDelete = document.querySelector('.deleteDataUtensils' );
+    const btnToFilter = document.querySelector('#btn-filter-ustensils');
+    const crossToDelete = document.querySelector('.deleteData-ustensils' );
     let elements = [];
 
     let regexEl = /^[^A-Z-É]*$/;
     let regex = /^[a-zA-ZàâçéèêëôöúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÎÏÔÖÚÙÛÜÆŒ._-\s]{1,30}$/;
     
 
-    function displayElementsUtensiles(){
+    function displayElements(){
         /** Loop for get all elements in recipes array*/
         for(let i = 0 ; i < recipes.length ; i++){
             let arrayAllUstensil = recipes[i].ustensils;
             getListElements(arrayAllUstensil);
         }
         /** Inserting list of utensils into the filter div */
-        const element =  displayListOfElements('filter-ustensiles-list' , elements);
-        document.querySelector('.main_filter-bar-ustensiles').appendChild(element);
+        const element =  createListOfElements('filter-ustensils-list' , elements);
+        document.querySelector('.main_filter-bar-ustensils').appendChild(element);
 
     }
 
-    displayElementsUtensiles();
+    displayElements();
 
 
     function getListElements(arrayEl){    
@@ -34,7 +34,7 @@ export function filterByElements(recipes){
         } 
     }
 
-    function displayListOfElements(classUl, elements){
+    function createListOfElements(classUl, elements){
 
         const ul = document.createElement('ul');
         ul.classList.add(`${classUl}`);
@@ -42,7 +42,7 @@ export function filterByElements(recipes){
             /** creation of a li for each utensil */
             const li = document.createElement('li');
             li.innerText = `${el}`;
-            li.classList.add("utensil");
+            li.classList.add("ustensil");
             li.setAttribute('tabindex', 0);
 
             ul.appendChild(li);
@@ -51,9 +51,9 @@ export function filterByElements(recipes){
     }
 
 
-    /** filter the utensils from the data inserted in the input*/
-    const input = document.querySelector('#filter-sort-utensils');
-    const elementsToFilter = document.querySelectorAll('.utensil');
+    /** filter the ustensils from the data inserted in the input*/
+    const input = document.querySelector('#filter-sort-ustensils');
+    const elementsToFilter = document.querySelectorAll('.ustensil');
 
     input.addEventListener('input', () => {
         /** lowercase and remove spaces from input value */

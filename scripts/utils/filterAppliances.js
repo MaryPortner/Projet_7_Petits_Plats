@@ -1,8 +1,8 @@
 export function filterByAppliances(recipes){
-    const btnToFilter = document.querySelector('#btn-filter-appareils');
-    const crossToDelete = document.querySelector('.deleteDataAppareils' );
+    const btnToFilter = document.querySelector('#btn-filter-appliances');
+    const crossToDelete = document.querySelector('.deleteData-appliances' );
     let elements = [];
-    let filteredEl = '';
+
     let regex = /^[a-zA-ZàâçéèêëôöúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÎÏÔÖÚÙÛÜÆŒ._-\s]{1,30}$/;
 
 
@@ -11,13 +11,12 @@ export function filterByAppliances(recipes){
         /** Loop for get all elements in recipes array*/
         for(let i = 0 ; i < recipes.length ; i++){
             let arrayAppliance = recipes[i].appliance;
-            // console.log(arrayAppliance);
             getListElements( arrayAppliance);
         }
 
         /** Inserting list of utensils into the filter div */
-        const element =  displayListOfElements('filter-appareils-list' , elements);
-        document.querySelector('.main_filter-bar-appareils').appendChild(element);
+        const element =  createListOfElements('filter-appliances-list' , elements);
+        document.querySelector('.main_filter-bar-appliances').appendChild(element);
 
     }
 
@@ -28,18 +27,20 @@ export function filterByAppliances(recipes){
         /** remove duplicates */
         if(!elements.includes(arrayEl)){
             elements.push(arrayEl); 
+            elements.sort((a, b) => a.localeCompare(b));
+        
         }
     }
+    console.log(elements);
 
-
-    function displayListOfElements(classUl, elements){
+    function createListOfElements(classUl, elements){
         const ul = document.createElement('ul');
         ul.classList.add(`${classUl}`);
         for(let el of elements){
             /** creation of a li for each utensil */
             const li = document.createElement('li');
             li.innerText = `${el}`;
-            li.classList.add("appareils");
+            li.classList.add("appliances");
             li.setAttribute('tabindex', 0);
 
             ul.appendChild(li);
@@ -49,9 +50,9 @@ export function filterByAppliances(recipes){
 
 
     /** filter the utensils from the data inserted in the input*/
-    const input = document.querySelector('#filter-sort-appareils');
-    const elementsToFilter = document.querySelectorAll('.appareils');
-
+    const input = document.querySelector('#filter-sort-appliances');
+    const elementsToFilter = document.querySelectorAll('.appliances');
+  
 
     function displayListFiltered(){
         input.addEventListener('input', () => {
@@ -61,7 +62,6 @@ export function filterByAppliances(recipes){
             if(regex.test(input.value)){
                 /** lloop over each filter element */
                 elementsToFilter.forEach(elFiltered => {
-                    console.log(elFiltered);
                     /** lowercase and remove spaces from element */
                     const textContentFilter = elFiltered.textContent.toLowerCase().trim();
                     if(textContentFilter.includes(inputValue)){
@@ -103,12 +103,12 @@ export function filterByAppliances(recipes){
 
 
         // 2 - Au clic d'un des éléments, on va créer un tag "bouton" qui apparaitra au dessus de liste, il aura une croix pour le supprimer
-        // 3 - On récupérer les recettes qui contiennent le tag en question
-        // 4 - On va afficher les recettes
-        // 5 - On récupère les appareils dans ces recettes
-        // 6 - On affiche les appareils dans la liste, 
-        // 7 - On récupère les ustensiles dans les recettes
-        // 8 - On affiche les ustensiles
+        // 3 -  récupérer les recettes qui contiennent le tag en question
+        // 4 -  afficher les recettes
+        // 5 -  récupère les appareils dans ces recettes
+        // 6 -  affiche les appareils dans la liste, 
+        // 7 -  récupère les ustensiles dans les recettes
+        // 8 -  affiche les ustensiles
 
 
         elementsToFilter.forEach(elSelected => {
@@ -120,14 +120,14 @@ export function filterByAppliances(recipes){
                     mainTag.classList.add('main_Tag-Appliances');
 
                     const tag = document.createElement('div');
-                    tag.classList.add('tagAppliance');
+                    tag.classList.add('tag-Appliance');
 
                     const textEl = document.createElement('p');
-                    textEl.classList.add('tagAppliance-p');
+                    textEl.classList.add('tag-Appliance-p');
                     textEl.innerText =  `${elSelected.innerText}`; 
 
                     const deleteTag= document.createElement('span');
-                    deleteTag.classList.add('tagAppliance-delete');
+                    deleteTag.classList.add('tag-Appliance-delete');
                     
                     tag.appendChild(textEl);
                     tag.appendChild(deleteTag);
@@ -136,7 +136,6 @@ export function filterByAppliances(recipes){
 
                     document.querySelector('.main_tag').appendChild(mainTag);
 
-                  
                     elementsToFilter.forEach(elToDisplay => {
                         elToDisplay.classList.remove('hidden');
                         input.value = '';
@@ -147,16 +146,6 @@ export function filterByAppliances(recipes){
         });
  
 
-
-        //    ElementsToFilter.forEach(elementSelected => {
-        //     console.log(elementSelected);
-        //     if(!(elementSelected.classList.contains("hidden"))){
-        //         elementSelected.addEventListener('click', () => {
-        //             console.log('click Ok');
-        //         })
-        //     }
-        // });
-   
     }
 
 

@@ -2,7 +2,7 @@ export function filterByIngredients(recipes){
 
     // let arrayAllElements = [];
     const btnToFilter = document.querySelector('#btn-filter-ingredients');
-    const crossToDelete = document.querySelector('.deleteDataIngredients' );
+    const crossToDelete = document.querySelector('.deleteData-ingredients' );
     let elements = [];
     let regex = /^[a-zA-ZàâçéèêëôöúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÎÏÔÖÚÙÛÜÆŒ._-\s]{1,30}$/;
 
@@ -20,7 +20,7 @@ export function filterByIngredients(recipes){
         }
         getListElements(arrayIngredient);
         /** Inserting list of utensils into the filter div */
-        const element =  displayListOfElements('filter-ingredients-list' , elements);
+        const element =  createListOfElements('filter-ingredients-list' , elements);
         document.querySelector('.main_filter-bar-ingredients').appendChild(element);
     }
 
@@ -35,7 +35,7 @@ export function filterByIngredients(recipes){
     }
 
 
-    function displayListOfElements(classUl, elements){
+    function createListOfElements(classUl, elements){
         const ul = document.createElement('ul');
         ul.classList.add(`${classUl}`);
         for(let el of elements){
