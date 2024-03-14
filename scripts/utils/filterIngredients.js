@@ -1,10 +1,10 @@
-export function filterByIngredients(recipes){
+export function filterIngredients(recipes){
 
     // let arrayAllElements = [];
-    const btnToFilter = document.querySelector('#btn-filter-ingredients');
+    const btnDisplayDropdown = document.querySelector('#btn-display-dropdown-ingredients');
     const crossToDelete = document.querySelector('.deleteData-ingredients' );
     let elements = [];
-    let regex = /^[a-zA-ZàâçéèêëôöúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÎÏÔÖÚÙÛÜÆŒ._-\s]{1,30}$/;
+ 
 
 
 
@@ -30,6 +30,8 @@ export function filterByIngredients(recipes){
             /** remove duplicates */
             if( !elements.includes(arrayEl[i])){
                 elements.push(arrayEl[i]); 
+                /** sort items alphabetically */
+                elements.sort((a, b) => a.localeCompare(b));
             } 
         }  
     }
@@ -56,6 +58,7 @@ export function filterByIngredients(recipes){
     const elementsToFilter = document.querySelectorAll('.ingredients');
 
     input.addEventListener('input', () => {
+        const regex = /^[a-zA-ZàâçéèêëôöúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÎÏÔÖÚÙÛÜÆŒ._-\s]{1,30}$/;
         /** lowercase and remove spaces from input value */
         const inputValue =  input.value.toLowerCase().trim();
         /** check data entry */
@@ -84,7 +87,7 @@ export function filterByIngredients(recipes){
         }); 
 
         /** Clicking on the cross erases the data and undisplays the cross */
-        btnToFilter.addEventListener('click', () => {
+        btnDisplayDropdown.addEventListener('click', () => {
             input.value = '';
             el.classList.remove('hidden');
             crossToDelete.style.display = 'none';

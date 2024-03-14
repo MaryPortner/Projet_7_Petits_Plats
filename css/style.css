@@ -71,7 +71,7 @@
 
 
 
-button, svg, input.search-submit, input.filter-bar-submit, div#header_search .delete, .header_delete-main, .delete, .tag-Appliance-delete {
+button, svg, input.search-submit, input.filter-bar-submit, div#header_search .delete, .header_delete-main, .delete, .tag-appliances-delete {
     cursor: pointer;
 }
 
@@ -237,11 +237,11 @@ div.main_filter{
     box-shadow: 0px 4px 34px 30px rgba(0, 0, 0, 0.04);
 }
 
-.main_filter-ingredients, .tag-Appliance{
+.main_filter-ingredients, .tag-appliances{
     max-width: 213.167px;
 }
 
-#btn-filter-ingredients, #btn-filter-appliances, #btn-filter-ustensils, .tag-Appliance{
+#btn-display-dropdown-ingredients, #btn-display-dropdown-appliances, #btn-display-dropdown-ustensils, .tag-appliances{
     display: inline-flex;
     align-items: center;
     gap: 65px;
@@ -252,7 +252,7 @@ div.main_filter{
     padding: 17px 16px;
 }
 
-span.btn-filter-title{
+span.btn-display-dropdown-title{
     font-size: 1rem;
 }
 
@@ -371,9 +371,9 @@ li:hover{
     background-color:#32a2a8 ;
 }
 
-.main_Tag-Appliances{
+.main_Tag-appliances{
     position: relative;
-    z-index: 5;
+    z-index: 1;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -381,10 +381,10 @@ li:hover{
     width: 100%;
     height: 100%;
     margin-bottom: 10px;
-    background-color: greenyellow;
+    /* background-color: greenyellow; */
 }
 
-.tag-Appliance{
+.tag-appliances{
     display: flex;
     justify-content: space-between;
     align-content: center;
@@ -395,13 +395,13 @@ li:hover{
     background-color: var(--third-color);
 }
 
-.tag-Appliance-p{
+.tag-appliances-p{
     font-family: Manrope;
     font-size: 0.875rem;
     font-weight: 400;
 }
 
-.tag-Appliance-delete{
+.tag-appliances-delete{
     width: 14px;
     height: 13px;
     padding: 20px;
@@ -442,7 +442,7 @@ li:hover{
 
 .allRecipes_imgSection-duration{
     position: absolute;
-    z-index: 2;
+    z-index: 0;
     top: 21px;
     right: 23px;
     padding: 5px 15px;
@@ -623,7 +623,7 @@ li:hover{
         gap: 60px;
     }
 
-    .main_Tag-Appliances{
+    .main_Tag-appliances{
         /* position: relative;
         z-index: 5;
         display: flex;

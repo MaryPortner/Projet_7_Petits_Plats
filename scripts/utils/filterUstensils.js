@@ -1,12 +1,10 @@
-export function filterByElements(recipes){
+export function filterUstensils(recipes){
 
-    // let arrayAllElements = [];
-    const btnToFilter = document.querySelector('#btn-filter-ustensils');
+    const btnDisplayDropdown = document.querySelector('#btn-display-dropdown-ustensils');
     const crossToDelete = document.querySelector('.deleteData-ustensils' );
     let elements = [];
-
     let regexEl = /^[^A-Z-É]*$/;
-    let regex = /^[a-zA-ZàâçéèêëôöúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÎÏÔÖÚÙÛÜÆŒ._-\s]{1,30}$/;
+    
     
 
     function displayElements(){
@@ -30,6 +28,8 @@ export function filterByElements(recipes){
             if(!elements.includes(arrayEl[i]) && (regexEl.test(arrayEl[i]))){
                 elements.push(arrayEl[i]); 
                 elements.forEach((item, i) => { if (item == 'moule à tartelettes (6)') elements[i] = 'moule à tartelettes'; });
+                /** sort items alphabetically */
+                elements.sort((a, b) => a.localeCompare(b));
             }
         } 
     }
@@ -56,6 +56,7 @@ export function filterByElements(recipes){
     const elementsToFilter = document.querySelectorAll('.ustensil');
 
     input.addEventListener('input', () => {
+        const regex = /^[a-zA-ZàâçéèêëôöúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÎÏÔÖÚÙÛÜÆŒ._-\s]{1,30}$/;
         /** lowercase and remove spaces from input value */
         const inputValue =  input.value.toLowerCase().trim();
         /** check data entry */
@@ -87,7 +88,7 @@ export function filterByElements(recipes){
         }); 
 
         /** Clicking on the cross erases the data and undisplays the cross */
-        btnToFilter.addEventListener('click', () => {
+        btnDisplayDropdown.addEventListener('click', () => {
             input.value = '';
             el.classList.remove('hidden');
             crossToDelete.style.display = 'none';
