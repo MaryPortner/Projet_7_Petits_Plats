@@ -17,14 +17,14 @@ export function filterAppliances(recipes){
 }
 
 function collect(recipes){
-    /** The Set object lets you store unique values of any type, whether primitive values or object references */
+    /** The Set object lets you store unique values of any type */
     const list = new Set();
     let arrayList;
     /** Loop for get all elements in recipes array*/
     for(let i = 0 ; i < recipes.length ; i++){
         /** The add() method of Set () inserts a new element with a specified value in to this set, if there isn't an element with the same value already in this set  <=> push */
         list.add(recipes[i].appliance);
-            /** sort alphabetically */
+        /** sort alphabetically */
         arrayList = [...list].sort();
     }
     return arrayList;
@@ -75,19 +75,19 @@ function displayListElFiltered(){
 }
 
 
-function resetDatas(el){
+function resetDatas(elFiltered){
     const btnDisplayDropdown = document.querySelector(`#btn-display-dropdown-${name}`);
     const crossToDelete = document.querySelector(`.deleteData-${name}`);
         /** Clicking on the cross erases the data and undisplays the cross */
 
     crossToDelete.addEventListener('click', () => {
-        el.classList.remove('hidden');
+        elFiltered.classList.remove('hidden');
     }); 
 
     /** redisplays the data list if you empty the search field */
     btnDisplayDropdown.addEventListener('click', () => {
         input.value = '';
-        el.classList.remove('hidden');
+        elFiltered.classList.remove('hidden');
         crossToDelete.style.display = 'none';
     });  
 }
@@ -95,9 +95,7 @@ function resetDatas(el){
 
 function displayTag(){
     const listElements = document.querySelectorAll('.' + name);
-    const dropdown = document.querySelector('.filter-bar-single');
- 
-
+    const dropdown = document.querySelector(`#main_filter-bar-${name}`);
     // 1 - Je récupère la liste des ingrédients ou appareil ou ustensiles qui n'ont plus la class hidden
     // 2 - Au clic d'un des éléments, on va créer un tag "bouton" qui apparaitra au dessus de liste, il aura une croix pour le supprimer
     // 3 -  récupérer les recettes qui contiennent le tag en question
@@ -107,11 +105,11 @@ function displayTag(){
     // 7 -  récupère les ustensiles dans les recettes
     // 8 -  affiche les ustensiles
 
-    for(let elSelected of listElements){
+    for(let elSelectedInList of listElements){
         /** if the input is not empty  */
-        if(!elSelected.classList.contains("hidden")){
+        if(!elSelectedInList.classList.contains("hidden")){
                 
-            elSelected.addEventListener('click', () => {
+            elSelectedInList.addEventListener('click', () => {
                 const mainTag = document.createElement('div');
                 mainTag.classList.add(`main_Tag-${name}`);
 
@@ -120,41 +118,34 @@ function displayTag(){
 
                 const textEl = document.createElement('p');
                 textEl.classList.add(`tag-${name}-p`);
-                textEl.innerText =  `${elSelected.innerText}`; 
+                textEl.innerText =  `${elSelectedInList.innerText}`; 
 
-                const deleteTag = document.createElement('span');
-                deleteTag.classList.add(`tag-${name}-delete`);
+                const crossToDeleteTag = document.createElement('span');
+                crossToDeleteTag.classList.add(`tag-${name}-delete`);
                 
                 tag.appendChild(textEl);
-                tag.appendChild(deleteTag);
+                tag.appendChild(crossToDeleteTag);
 
                 mainTag.appendChild(tag);
 
                 document.querySelector('.main_tag').appendChild(mainTag);
 
 
-                elSelected.classList.remove('hidden');
+                elSelectedInList.classList.remove('hidden');
                 input.value = '';
                 /** removes the displayed tag from the list of elements */
-                elSelected.style.display = 'none'; 
-                dropdown.style.display = 'none'; 
+                elSelectedInList.style.display = 'none'; 
+                dropdown.classList.toggle('displayBlock');
 
-/** */
-                deleteTag.addEventListener('click', () => {
+                /** delete the tag and put the element back in the list */
+                crossToDeleteTag.addEventListener('click', () => {
                     mainTag.style.display = 'none';
-                    elSelected.style.display = 'block';
+                    elSelectedInList.style.display = 'block';
                 });                        
             });
-
-
-          
-         
-
-        
-
-
-          
         }
+
+       
     }
 }
 
@@ -169,14 +160,14 @@ function displayTag(){
 // //     input.value = '';
 // }
 
-// deleteTag.addEventListener('click', () => {
-//     elSelected.style.display = 'block';
+// crossToDeleteTag.addEventListener('click', () => {
+//     elSelectedInList.style.display = 'block';
 //     mainTag.style.display = 'none';
 // })
 
  
 
-// elSelected.classList.remove('hidden');
+// elSelectedInList.classList.remove('hidden');
 // input.value = '';
-// elSelected.style.display = 'none';
+// elSelectedInList.style.display = 'none';
 // dropdown.style.display = 'none';
