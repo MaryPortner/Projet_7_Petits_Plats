@@ -5,12 +5,9 @@ export function dropdown (){
        /** select each filter, arrow and button in each of the filter divs */
         const filter = wrapper.querySelector('.filter-bar-single');
         const arrow = wrapper.querySelector('.arrow');
-        const btn = wrapper.querySelector('button');
-
-        // displayDropdown(filter, arrow, button); 
-     
-
+        const btn = wrapper.querySelector('button');       
         const showHideDatasList = () => {
+            
             filter.classList.toggle('active');
             filter.classList.toggle('displayBlock');
             /** accessibility */

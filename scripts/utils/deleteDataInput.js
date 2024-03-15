@@ -1,23 +1,22 @@
-export function deleteDataInput(){
-    const crossToDelete = document.querySelectorAll('.header_delete-main, .deleteData-ingredients, .deleteData-appliances, .deleteData-ustensils' );
-    const inputData = document.querySelectorAll('#search-q, #filter-sort-ingredients, #filter-sort-appliances, #filter-sort-ustensils ');
-    
+export function deleteDataInput(name){
+    const crossToDelete = document.querySelector(`.deleteData-${name}`);
+    const inputData = document.querySelector(`#filter-sort-${name}`);
+    const btnDropdown = document.querySelector(`#btn-display-dropdown-${name}`);
 
-    deleteDatas(inputData[0], crossToDelete[0]);
-    deleteDatas(inputData[1], crossToDelete[1]);
-    deleteDatas(inputData[2], crossToDelete[2]);
-    deleteDatas(inputData[3], crossToDelete[3]);
-}
 
-function deleteDatas(input, cross){
-    /** if data is inserted into the input, the cross is displayed */
-    input.addEventListener('input', () => {
-        cross.style.display = "block";
+    btnDropdown.addEventListener('click', () =>{
+        inputData.value = '';
+    })
+
+       /** Clicking on the cross erases the data and undisplays the cross */
+       crossToDelete.addEventListener('click', () => {
+        inputData.value = '';
+        crossToDelete.style.display = "none";
     });
 
-    /** Clicking on the cross erases the data and undisplays the cross */
-    cross.addEventListener('click', () => {
-        input.value = '';
-        cross.style.display = "none";
-    });  
+    /** if data is inserted into the input, the cross is displayed */
+    inputData.addEventListener('input', () => {
+        crossToDelete.style.display = "block";
+    });
 }
+

@@ -71,7 +71,7 @@
 
 
 
-button, svg, input.search-submit, input.filter-bar-submit, div#header_search .delete, .header_delete-main, .delete, .tag-appliances-delete {
+button, svg, input.search-submit, div#header_search .delete, .header_delete-main, .delete, .tag-appliances-delete, .tag-ingredients-delete, .tag-ustensils-delete {
     cursor: pointer;
 }
 
@@ -237,11 +237,11 @@ div.main_filter{
     box-shadow: 0px 4px 34px 30px rgba(0, 0, 0, 0.04);
 }
 
-.main_filter-ingredients, .tag-appliances{
+.main_filter-ingredients, .tag-appliances, .tag-ingredients, .tag-ustensils{
     max-width: 213.167px;
 }
 
-#btn-display-dropdown-ingredients, #btn-display-dropdown-appliances, #btn-display-dropdown-ustensils, .tag-appliances{
+#btn-display-dropdown-ingredients, #btn-display-dropdown-appliances, #btn-display-dropdown-ustensils, .tag-appliances, .tag-ingredients, .tag-ustensils{
     display: inline-flex;
     align-items: center;
     gap: 65px;
@@ -288,11 +288,12 @@ input#filter-sort-ingredients, input#filter-sort-appliances, input#filter-sort-u
     /* font-size: 0.75rem; */
 }
 
-input.filter-bar-submit{
+span.filter-bar-submit{
     position: absolute;
     color: transparent;
     right: 10px;
-    bottom: 0px;
+    bottom: 10px;
+    right: 20px;
     padding: 8px;
     border: none;
     background: no-repeat url("./../assets/img/loopg.svg");
@@ -365,43 +366,45 @@ li:hover{
 
 .main_tag{
     position: relative;
-    height: 58px;
-    /* width: 60%; */
+    height: auto;
+    width: 100%;
+    max-width: 739px;
     margin-top: 35px;
-    background-color:#32a2a8 ;
+    padding-bottom: 30px;
+    /* background-color:#32a2a8 ; */
 }
 
-.main_Tag-appliances{
+.main_Tag-appliances, .main_Tag-ingredients, .main_Tag-ustensils{
     position: relative;
     z-index: 1;
     display: flex;
     flex-wrap: wrap;
-    flex-direction: column;
     align-content: center;
+    justify-content: center;
     width: 100%;
-    height: 100%;
     margin-bottom: 10px;
     /* background-color: greenyellow; */
 }
 
-.tag-appliances{
+.tag-appliances,.tag-ingredients, .tag-ustensils {
     display: flex;
     justify-content: space-between;
     align-content: center;
     gap: 20px;
     min-width: 213px;
-    height: 100%;
+    height: 58px;
+    margin-bottom: 20px;
     padding: 17px 8px 17px 18px;
     background-color: var(--third-color);
 }
 
-.tag-appliances-p{
+.tag-appliances-p, .tag-ingredients-p, .tag-ustensils-p {
     font-family: Manrope;
     font-size: 0.875rem;
     font-weight: 400;
 }
 
-.tag-appliances-delete{
+.tag-appliances-delete, .tag-ingredients-delete, .tag-ustensils-delete{
     width: 14px;
     height: 13px;
     padding: 20px;
@@ -617,22 +620,23 @@ li:hover{
     }
 
     .main_tag{
-        /* display: flex;
-        justify-content: flex-start; */
-        width: 60%;
-        gap: 60px;
+        display: flex;
+        justify-content: flex-start;
+        gap: 30px;
+        padding-bottom: 0px;
     }
 
-    .main_Tag-appliances{
-        /* position: relative;
-        z-index: 5;
-        display: flex;
-        flex-direction: column; */
-        left:37%;
+    .main_Tag-appliances, .main_Tag-ingredients, .main_Tag-ustensils{
+        /* left:37%; */
         width: 30%;
-        /* height: 100%;
-        margin-bottom: 10px; */
-        /* background-color: greenyellow; */
+    }
+
+   .main_Tag-ingredients{
+        /* left: 2.1%; */
+    }
+
+   .main_Tag-ustensils{
+        /* left:37%; */
     }
 
     #main_allRecipes {
@@ -695,6 +699,11 @@ li:hover{
         gap: 60px;
     }
 
+    .main_tag {
+        gap: 45px;
+        margin-left: 14px;
+      }
+
     .numberTotalRecipes{
         justify-content: center; 
         margin: 0;   
@@ -726,6 +735,22 @@ li:hover{
         font-size: 2.75rem;
     }
 
+    .main_tag{
+        min-width: 739px;
+        gap: 43px;
+        width: 60%;
+        margin-left: 20px;
+    }
 
 
 }
+
+
+@media screen and (min-width: 1400px) {
+    .main_tag {
+      min-width: 739px;
+      gap: 43px;
+      width: 60%;
+      margin-left: 20px;
+    }
+  }
