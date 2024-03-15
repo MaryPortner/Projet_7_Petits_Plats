@@ -1,4 +1,4 @@
-import { collect } from "../utils/collect.js";
+import { collectUstensils } from "../utils/collectUstensils.js";
 import { createListOfElements } from "../utils/createListOfElements.js";
 import { displayListElFiltered } from "../utils/displayListElFiltered.js";
 import { displayTag } from "../utils/displayTag.js";
@@ -8,10 +8,8 @@ let elements = [];
 const name = 'ustensils';
 
 
-
 export function filterUstensils(recipes){
-    elements = collect(recipes, name);
-    console.log(elements);
+    elements = collectUstensils(recipes, name);
     
     /** Inserting list of utensils into the filter div */
     const element =  createListOfElements(elements, name);

@@ -71,7 +71,7 @@
 
 
 
-button, svg, input.search-submit, div#header_search .delete, .header_delete-main, .delete, .tag-appliances-delete, .tag-ingredients-delete, .tag-ustensils-delete {
+button, svg, input.search-submit, div#header_search .delete, .header_delete-main, .delete, .tag-delete{
     cursor: pointer;
 }
 
@@ -217,21 +217,29 @@ div.main_filter{
     flex-direction: column;
     justify-content: space-between;
     margin-top : 30px;
-
 }
 
 .main_filter-all{
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
     gap: 30px;
     height: 100%;
 }
 
+#main_filter-ingredients-wrapper, #main_filter-appliances-wrapper, #main_filter-ustensils-wrapper{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* width: 30%; */
+}
+
 .single-filter{
     position: relative;
     z-index: 3;
-    height: 100%;
     background-color: var(--white, #FFFFFF);
     border-radius: 11px;
     box-shadow: 0px 4px 34px 30px rgba(0, 0, 0, 0.04);
@@ -242,14 +250,15 @@ div.main_filter{
 }
 
 #btn-display-dropdown-ingredients, #btn-display-dropdown-appliances, #btn-display-dropdown-ustensils, .tag-appliances, .tag-ingredients, .tag-ustensils{
+    position : relative;
     display: inline-flex;
     align-items: center;
-    gap: 65px;
+    justify-content: space-between;
+    width: 213px;
+    padding: 17px 16px;
     border: none;
     border-radius: 11px;
     background-color: var(--white, #FFFFFF);
-    margin: 0px 10px;
-    padding: 17px 16px;
 }
 
 span.btn-display-dropdown-title{
@@ -265,15 +274,8 @@ span.btn-display-dropdown-title{
 
 }
 
-/* .filter-ingredients{
-    position: relative;
-    display: flex;
-    justify-content: center;
-} */
-
 .single-filter-bar-btn{
     position: relative;
-    /* width: 100%; */
     margin-bottom: 30px;
 }
 
@@ -285,7 +287,6 @@ input#filter-sort-ingredients, input#filter-sort-appliances, input#filter-sort-u
     padding-left: 3px;
     border: solid 1px var(--lightGrey, #C6C6C6);
     border-radius: 2px;
-    /* font-size: 0.75rem; */
 }
 
 span.filter-bar-submit{
@@ -318,7 +319,6 @@ ul{
     color: var(--Black, #1B1B1B);
     font-family: Manrope;
     font-size: 0.875rem;
-    /* margin-left: 16px; */
     height: 270px;
     overflow: auto;
     overflow-x: hidden;
@@ -336,7 +336,6 @@ ul{
 }
 
 li{
-    /* margin-bottom: 13px; */
     text-transform: lowercase;
     padding: 9px 16px;
 }
@@ -374,15 +373,16 @@ li:hover{
     /* background-color:#32a2a8 ; */
 }
 
-.main_Tag-appliances, .main_Tag-ingredients, .main_Tag-ustensils{
-    position: relative;
+.main_Tag-wrapper{
+    position: absolute;
     z-index: 1;
     display: flex;
     flex-wrap: wrap;
     align-content: center;
     justify-content: center;
     width: 100%;
-    margin-bottom: 10px;
+    top: 35px;
+    margin-top: 30px;
     /* background-color: greenyellow; */
 }
 
@@ -390,10 +390,10 @@ li:hover{
     display: flex;
     justify-content: space-between;
     align-content: center;
-    gap: 20px;
+    gap: 10px;
     min-width: 213px;
     height: 58px;
-    margin-bottom: 20px;
+    margin-top: 10px;
     padding: 17px 8px 17px 18px;
     background-color: var(--third-color);
 }
@@ -404,7 +404,7 @@ li:hover{
     font-weight: 400;
 }
 
-.tag-appliances-delete, .tag-ingredients-delete, .tag-ustensils-delete{
+.tag-delete{
     width: 14px;
     height: 13px;
     padding: 20px;
@@ -616,7 +616,11 @@ li:hover{
     }
 
     .main_filter-all{
-        gap: 45px;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+        /* gap: 45px; */
+        height: 100%;
     }
 
     .main_tag{
@@ -626,30 +630,20 @@ li:hover{
         padding-bottom: 0px;
     }
 
-    .main_Tag-appliances, .main_Tag-ingredients, .main_Tag-ustensils{
-        /* left:37%; */
-        width: 30%;
-    }
-
-   .main_Tag-ingredients{
-        /* left: 2.1%; */
-    }
-
-   .main_Tag-ustensils{
-        /* left:37%; */
+    .main_Tag-wrapper{
+      flex-direction : column;
     }
 
     #main_allRecipes {
         margin-top: 125px;
         gap: 66px 28px;
-        justify-content: flex-start;
+        /* justify-content: flex-start; */
+        justify-content: space-around;
       }
 
     .allRecipes_article{
         width: 45%;
     }
-
- 
  }
 
  /* big landscape tablets, laptops, and desktops */
@@ -696,6 +690,7 @@ li:hover{
     }
 
     .main_filter-all {
+        justify-content: flex-start;
         gap: 60px;
     }
 

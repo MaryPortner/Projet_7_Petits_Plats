@@ -1,3 +1,4 @@
+/** Create list of elements for dropdown - Section filters - */
 export function createListOfElements(elements, name){
     const classUl = `filter-${name}-list` ;
     const ul = document.createElement('ul');

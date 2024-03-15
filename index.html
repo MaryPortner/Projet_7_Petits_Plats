@@ -36,9 +36,10 @@
   <main id="main">
       
     <div class="main_filter">
-
       <div class="main_filter-all">
-        <div class="main_filter-ingredients single-filter">
+
+        <div id="main_filter-ingredients-wrapper">
+          <div class="main_filter-ingredients single-filter">
             <button id="btn-display-dropdown-ingredients" class="btn_drop" type="button" role="listbox" aria-haspopup="true"  aria-active="descendant" aria-expanded="false" aria-controls="expandable" aria-label="Rechercher par ingrédient">
               <span id="btn-display-dropdown-ingredients-title" class="btn-display-dropdown-title">Ingrédients</span>
               <svg id="arrowIngredients" class="rotate arrow bx bx-chevron-up" width="15" height="8" viewBox="0 0 15 8" fill="none" aria-hidden="true"  role="img" focusable="false"  xmlns="http://www.w3.org/2000/svg">
@@ -56,54 +57,60 @@
                 </div>
               </form>
             </div>
-        </div>
-
-        <div class="main_filter-appliances single-filter">
-          <button id="btn-display-dropdown-appliances" class="btn_drop" type="button" role="listbox" aria-haspopup="true"  aria-active="descendant" aria-expanded="false" aria-controls="expandable" aria-label="Rechercher par appareil">
-            <span id="btn-display-dropdown-appliances-title" class="btn-display-dropdown-title">Appareils</span>
-            <svg id="arrowappliances" class="rotate arrow bx bx-chevron-up" width="15" height="8" viewBox="0 0 15 8" fill="none" aria-hidden="true"  role="img" focusable="false"  xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round"/>
-            </svg> 
-          </button>
-
-          <div id="main_filter-bar-appliances" class="filter-bar-single main_filter-bar-appliances">
-            <form id="filter-appliances" class="filter-appliances" methode="post" role="filter">
-              <div class="single-filter-bar-btn">
-                <label for="filter-sort-appliances" class="visuallyhidden">Rechercher par appliances</label>
-                <input id="filter-sort-appliances" class="filter-q filterInput" name="q" value="" type="text">
-                <span class="delete deleteData deleteData-appliances" tabindex="0"></span>
-                <span class="filter-bar-submit" value="OK" name="recherche-submit-appliances" focusable="false" type="button">
-              </div>
-            </form>
           </div>
         </div>
+
+        <div id="main_filter-appliances-wrapper">
+          <div class="main_filter-appliances single-filter">
+            <button id="btn-display-dropdown-appliances" class="btn_drop" type="button" role="listbox" aria-haspopup="true"  aria-active="descendant" aria-expanded="false" aria-controls="expandable" aria-label="Rechercher par appareil">
+              <span id="btn-display-dropdown-appliances-title" class="btn-display-dropdown-title">Appareils</span>
+              <svg id="arrowappliances" class="rotate arrow bx bx-chevron-up" width="15" height="8" viewBox="0 0 15 8" fill="none" aria-hidden="true"  role="img" focusable="false"  xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round"/>
+              </svg> 
+            </button>
+
+            <div id="main_filter-bar-appliances" class="filter-bar-single main_filter-bar-appliances">
+              <form id="filter-appliances" class="filter-appliances" methode="post" role="filter">
+                <div class="single-filter-bar-btn">
+                  <label for="filter-sort-appliances" class="visuallyhidden">Rechercher par appliances</label>
+                  <input id="filter-sort-appliances" class="filter-q filterInput" name="q" value="" type="text">
+                  <span class="delete deleteData deleteData-appliances" tabindex="0"></span>
+                  <span class="filter-bar-submit" value="OK" name="recherche-submit-appliances" focusable="false" type="button">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div id="main_filter-ustensils-wrapper">
+          <div class="main_filter-ustensils single-filter">
+            <button id="btn-display-dropdown-ustensils" class="btn_drop" type="button" role="listbox" aria-haspopup="true"  aria-active="descendant" aria-expanded="false" aria-controls="expandable" aria-label="Rechercher par ustensiles">
+              <span id="btn-display-dropdown-ustensils-title" class="btn-display-dropdown-title">Ustensiles</span>
+              <svg id="arrowUtensils" class="rotate arrow bx bx-chevron-up" width="15" height="8" viewBox="0 0 15 8" fill="none" aria-hidden="true"  role="img" focusable="false"  xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round"/>
+              </svg> 
+            </button>
   
-        <div class="main_filter-ustensils single-filter">
-          <button id="btn-display-dropdown-ustensils" class="btn_drop" type="button" role="listbox" aria-haspopup="true"  aria-active="descendant" aria-expanded="false" aria-controls="expandable" aria-label="Rechercher par ustensiles">
-            <span id="btn-display-dropdown-ustensils-title" class="btn-display-dropdown-title">Ustensiles</span>
-            <svg id="arrowUtensils" class="rotate arrow bx bx-chevron-up" width="15" height="8" viewBox="0 0 15 8" fill="none" aria-hidden="true"  role="img" focusable="false"  xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round"/>
-            </svg> 
-          </button>
-
-          <div id="main_filter-bar-ustensils" class=" filter-bar-single main_filter-bar-ustensils">
-            <form id="filter-ustensils" class="filter-ustensils" methode="post" role="filter">
-              <div class="single-filter-bar-btn">
-                <label for="filter-sort-ustensils" class="visuallyhidden">Rechercher par ustensiles</label>
-                <input id="filter-sort-ustensils" class="filter-q filterInput" name="q" value="" type="text">
-                <span class="delete deleteData deleteData-ustensils" tabindex="0"></span>
-                <span class="filter-bar-submit" value="OK" name="recherche-submit-ustensils" focusable="false" type="button">
-              </div>
-            </form>
+            <div id="main_filter-bar-ustensils" class=" filter-bar-single main_filter-bar-ustensils">
+              <form id="filter-ustensils" class="filter-ustensils" methode="post" role="filter">
+                <div class="single-filter-bar-btn">
+                  <label for="filter-sort-ustensils" class="visuallyhidden">Rechercher par ustensiles</label>
+                  <input id="filter-sort-ustensils" class="filter-q filterInput" name="q" value="" type="text">
+                  <span class="delete deleteData deleteData-ustensils" tabindex="0"></span>
+                  <span class="filter-bar-submit" value="OK" name="recherche-submit-ustensils" focusable="false" type="button">
+                </div>
+              </form>
+            </div>
           </div>
         </div>
+
       </div>
       <div class="numberTotalRecipes"></div>
     </div>
-    <div class="main_tag"></div>
-    <div id="main_allRecipes" class="main_allRecipes">
 
-    </div>
+    <!-- <div class="main_tag"></div> -->
+
+    <div id="main_allRecipes" class="main_allRecipes"></div>
 
   </main>
 

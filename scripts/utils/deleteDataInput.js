@@ -9,7 +9,7 @@ export function deleteDataInput(name){
     })
 
        /** Clicking on the cross erases the data and undisplays the cross */
-       crossToDelete.addEventListener('click', () => {
+    crossToDelete.addEventListener('click', () => {
         inputData.value = '';
         crossToDelete.style.display = "none";
     });
