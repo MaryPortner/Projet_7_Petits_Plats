@@ -14,4 +14,4 @@ export function collectAppliances(recipes, name){
     }
 
     return arrayList;
- }
+}

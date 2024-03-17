@@ -26,20 +26,3 @@ export function filterAppliances(recipes){
 
 
 
-
-// for(let elToDisplay of elementsToFilter){
-//     elToDisplay.classList.remove('hidden');
-// //     input.value = '';
-// }
-
-// crossToDeleteTag.addEventListener('click', () => {
-//     elSelectedInList.style.display = 'block';
-//     mainTag.style.display = 'none';
-// })
-
- 
-
-// elSelectedInList.classList.remove('hidden');
-// input.value = '';
-// elSelectedInList.style.display = 'none';
-// dropdown.style.display = 'none';

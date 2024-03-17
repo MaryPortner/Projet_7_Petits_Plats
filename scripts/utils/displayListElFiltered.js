@@ -10,7 +10,7 @@ export function displayListElFiltered(name){
         /** to lowercase and remove spaces of the element entered in the input*/
         const inputValue =  input.value.toLowerCase().trim();
         /** check data entry */
-        if(regex.test(input.value)){
+        if(regex.test(inputValue)){
             /** loop over each filter element */
             for (let elFiltered of elementsToFilter)  {
                 /** lowercase and remove spaces from element */
@@ -26,6 +26,7 @@ export function displayListElFiltered(name){
                 crossToDelete.addEventListener('click', () => {
                     elFiltered.classList.remove('hidden');
                 }); 
+
                 /** redisplays the data list if you empty the search field */
                 btnDisplayDropdown.addEventListener('click', () => {
                     input.value = '';
@@ -33,6 +34,13 @@ export function displayListElFiltered(name){
                     crossToDelete.style.display = 'none';
                 }); 
             }
+        }
+
+        if (inputValue == ''){
+            /** displays the element corresponding to the input value */
+            elementsToFilter.forEach(el =>{
+                el.classList.remove('hidden');
+            })
         }
     });
 }
