@@ -385,7 +385,7 @@ li:hover{
     gap: 5px;
     top: 25px;
     width: 100%;
-    margin-bottom: 35px;
+    margin-bottom: 55px;
     border-radius: 11px;
 }
 
@@ -638,7 +638,7 @@ li:hover{
     } */
 
     #main_allRecipes {
-        margin-top: 125px;
+        /* margin-top: 125px; */
         gap: 66px 28px;
         justify-content: space-around;
       }
@@ -710,7 +710,7 @@ li:hover{
     }
 
     #main_allRecipes {
-        margin-top: 55px;
+        /* margin-top: 55px; */
         gap: 66px 38px;
         justify-content: center;
     }

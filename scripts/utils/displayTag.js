@@ -9,7 +9,6 @@ export function displayTag(name){
     for(let elSelectedInList of listElements){
 
         elSelectedInList.addEventListener('click', () => {
-
             /** Create tag  */
             const tag = createTag(name, elSelectedInList);
             mainTag.appendChild(tag);
@@ -18,6 +17,7 @@ export function displayTag(name){
             removeFromList(elSelectedInList, input, dropdown);
             /** delete the tag and put the element back in the list */
             deleteTagAndUpdateList(tag, elSelectedInList)
+            
                             
         });
     }
@@ -38,14 +38,6 @@ function createTag(name, elSelectedInList){
     return tag;
 }
 
-function removeFromList(elSelectedInList, input, dropdown){
-    // elSelectedInList.classList.remove('hidden');
-    input.value = '';
-    /** removes the displayed tag from the list of elements */
-    elSelectedInList.style.display = 'none'; 
-    dropdown.classList.toggle('displayBlock');
-}
-
 function deleteTagAndUpdateList(tag, elSelectedInList){
     /** Create cross to delete tag */
     const crossToDeleteTag = document.createElement('span');
@@ -55,5 +47,18 @@ function deleteTagAndUpdateList(tag, elSelectedInList){
     crossToDeleteTag.addEventListener('click', () => {
         tag.style.display = 'none';
         elSelectedInList.style.display = 'block';
+        // Filtrer les recettes qui utilisent cet ustensile = > filtrer les recettes
+        // Mettre à jour le compteur de recettes
+        // mettre à jour la liste des ustensiles
+
     });  
 }
+
+function removeFromList(elSelectedInList, input, dropdown){
+    // elSelectedInList.classList.remove('hidden');
+    input.value = '';
+    /** removes the displayed tag from the list of elements */
+    elSelectedInList.style.display = 'none'; 
+    dropdown.classList.toggle('displayBlock');
+}
+

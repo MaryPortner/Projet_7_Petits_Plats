@@ -10,7 +10,6 @@ const name = 'ustensils';
 
 export function filterUstensils(recipes){
     elements = collectUstensils(recipes, name);
-    
     /** Inserting list of utensils into the filter div */
     const element =  createListOfElements(elements, name);
     document.querySelector(`.main_filter-bar-${name}`).appendChild(element);
