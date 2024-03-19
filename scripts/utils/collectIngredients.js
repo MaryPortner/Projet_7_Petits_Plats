@@ -6,11 +6,13 @@ export function collectIngredients(recipes, name){
     /** Loop for get all elements in recipes array*/
     for(let i = 0 ; i < recipes.length ; i++){
         if(name === 'ingredients'){
-            list.add(recipes[i].ingredients[0].ingredient);
+            list.add((recipes[i].ingredients[0].ingredient).toLowerCase().trim());
         } 
         /** sort alphabetically */
         arrayList = [...list].sort();
+        // console.log(arrayList);
     }
 
     return arrayList;
  }
+
