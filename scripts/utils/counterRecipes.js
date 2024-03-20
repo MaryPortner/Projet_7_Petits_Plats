@@ -1,17 +1,27 @@
-const numberTotalRecipes = document.querySelector('.numberTotalRecipes');
-
-/** Display number of recipes  */
-
 export function displayNumberRecipes(recipes){
-        
-    const numberRecipes = document.createElement('p');
-    numberRecipes.classList.add("numberRecipes");
-    numberRecipes.innerText = `${recipes.length}`;
+
+    const recipesContainer = document.querySelector('#main_allRecipes');
+    let numberRecipes = (recipesContainer.childNodes).length;
+    console.log(numberRecipes);
+    const numberTotalRecipes = document.querySelector('.numberTotalRecipes');
+
+    const numberRecipesContainer = document.createElement('p');
+    numberRecipesContainer.classList.add("numberRecipes");
+    if(numberRecipes > 0){
+        numberRecipesContainer.innerText = `${numberRecipes}`;
+    } else{
+        numberRecipesContainer.innerText = `${recipes.length}`;
+    }
 
     const recipesTxt = document.createElement("p");
     recipesTxt.classList.add("recipes");
     recipesTxt.innerText = `recettes`;
 
-    numberTotalRecipes.appendChild(numberRecipes);
+    numberTotalRecipes.appendChild(numberRecipesContainer);
     numberTotalRecipes.appendChild(recipesTxt);
+
+
 }
+
+
+

@@ -1,4 +1,4 @@
-import { collectAppliances } from "../utils/collectAppliances.js";
+import { collectAppliances } from "../utils/collect/appliances.js";
 import { createListOfElements } from "../utils/createListOfElements.js";
 import { displayListElFiltered } from "../utils/displayListElFiltered.js";
 import { displayTag } from "../utils/displayTag.js";

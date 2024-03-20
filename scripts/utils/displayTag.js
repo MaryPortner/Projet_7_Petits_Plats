@@ -2,14 +2,15 @@
 // // import { displayCardRecipes } from "./displayCardRecipes.js";
 import { recipes } from "../../data/recipes.js";
 import { CardRecipe } from "../class/cardRecipe.js";
-export let tagIngredients;
-export let tagAppliances;
-export let tagUstensils;
+import { displayNumberRecipes } from "./counterRecipes.js";
+
+
 
 
 export function displayTag(name){
     const dropdown = document.querySelector(`#main_filter-bar-${name}`);
     const input = document.querySelector(`#filter-sort-${name}`);
+    let innerTextTag;
     const listElements = document.querySelectorAll('.' + name);
 
     const mainTag = document.createElement('div');
@@ -26,23 +27,18 @@ export function displayTag(name){
             /** delete the tag and put the element back in the list */
             deleteTagAndUpdateList(tag, elSelectedInList);
 
-            // Au click sur l'élément de la liste je récupère l'élement cliqué
+            // get clicked element
             if (name === 'ingredients'){
-                tagIngredients =  elSelectedInList.innerText;
-                // console.log( tagIngredients);
+                innerTextTag =  elSelectedInList.innerText.toLowerCase().trim();
+                updateRecipes(recipes, innerTextTag);
             }
             if (name === 'appliances'){
-                tagAppliances =  elSelectedInList.innerText;
-                // console.log( tagAppliances);
+                innerTextTag =  elSelectedInList.innerText.toLowerCase().trim();
             }
             if (name === 'ustensils'){
-                tagUstensils =  elSelectedInList.innerText;
-                // console.log( tagUstensils);
-            }
-
-            updateRecipes(recipes, tagIngredients);
-       
-        });
+                innerTextTag =  elSelectedInList.innerText.toLowerCase().trim();
+            }  
+        });     
     }
     document.querySelector(`#main_filter-${name}-wrapper`).appendChild(mainTag);
 }
@@ -84,6 +80,40 @@ function removeFromList(elSelectedInList, input, dropdown){
 // Mettre à jour le compteur de recettes
 // mettre à jour la liste des ustensiles
 
+function updateRecipes(recipes, innerTextTag){
+
+    // const recipesContainer = document.querySelector('#main_allRecipes');
+    // let numberRecipes = (recipesContainer.childNodes).length;
+    // console.log(numberRecipes);
+    // const numberRecipesContainer = document.querySelector('.numberRecipes');
+
+    // const updateRecipesContainer = document.createElement('p');
+    // updateRecipesContainer.classList.add("numberRecipes");
+    // updateRecipesContainer.innerText = `${numberRecipes}`;
+
+
+    recipes.forEach(el => {
+        /** get array of ingredients for each recipe */
+        const arrayIngredients = el.ingredients;
+        let ingredientsByRecipes = [];
+
+        /** create an array of ingredients per recipe */
+        arrayIngredients.forEach(ingredients => {         
+            ingredientsByRecipes.push(ingredients.ingredient.toLowerCase().trim());
+        });
+
+        /** displays recipes that contain the selected tag */
+        if((ingredientsByRecipes.indexOf(innerTextTag) > -1)){
+            let recipeUpdate = new CardRecipe(el);
+            recipeUpdate.buildCard(); 
+        } 
+   
+    });
+ 
+}
+    
+
+
 // function updateRecipes(recipes){
 //     recipes.forEach(el => {
     
@@ -98,56 +128,6 @@ function removeFromList(elSelectedInList, input, dropdown){
 //     })
     
 // }
-
-
-function updateRecipes(recipes, tagIngredients){
-   
-    recipes.forEach(el => {
-    // console.log(el)
-        let arrayIngredients = el.ingredients;
-        let ingredientsByRecipes = [];
-
-        arrayIngredients.forEach(ingredients => {         
-            ingredientsByRecipes.push(ingredients.ingredient.toLowerCase().trim());
-            console.log(ingredientsByRecipes);
-            console.log(tagIngredients);
-        });
-
-
-
-     if((ingredientsByRecipes.indexOf(tagIngredients) > -1)){
-
-
-            let recipeUpdate = new CardRecipe(el);
-            recipeUpdate.buildCard();  
-        }
-
-    
-        // console.log(arrayIngredients[0].ingredient);
-        // arrayIngredients.forEach(ingredients => {
-           
-
-        // //    let  ingredient = (ingredients).normalize("NFD").replace(/[\u0300-\u036f]/g, '');
-        // //     ingredient = ingredient.toLowerCase().trim();
-        // //     console.log(ingredient);
-            // if(ingredientsByRecipes.contains(tagIngredients)){
-       
-        })
-        // console.log(tagIngredients.toLowerCase().trim());
- 
-        // let collectListIngredients = ((el.ingredients[0].ingredient).toLowerCase().trim());
-
-        // collectListIngredients = collectListIngredients.normalize("NFD").replace(/[\u0300-\u036f]/g, '');
-
-      
- 
-      
-
-    // });
-}
-    
-
-
 
 
 

@@ -1,4 +1,4 @@
-import { collectUstensils } from "../utils/collectUstensils.js";
+import { collectUstensils } from "../utils/collect/ustensils.js";
 import { createListOfElements } from "../utils/createListOfElements.js";
 import { displayListElFiltered } from "../utils/displayListElFiltered.js";
 import { displayTag } from "../utils/displayTag.js";
@@ -17,7 +17,6 @@ export function filterUstensils(recipes){
     deleteDataInput(name);
     displayListElFiltered(name);
     displayTag(name);
-    // displayRecipesByFilters();
 
 }
 

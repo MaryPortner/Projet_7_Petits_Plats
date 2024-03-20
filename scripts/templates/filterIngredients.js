@@ -1,4 +1,4 @@
-import { collectIngredients } from "../utils/collectIngredients.js";
+import { collectIngredients } from "../utils/collect/ingredients.js";
 import { createListOfElements } from "../utils/createListOfElements.js";
 import { displayListElFiltered } from "../utils/displayListElFiltered.js";
 import { displayTag } from "../utils/displayTag.js";

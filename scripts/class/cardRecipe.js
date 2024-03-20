@@ -78,8 +78,6 @@ export class CardRecipe {
     
         recipesSection.appendChild(recipeCard);
     
-        // this.displayIngredients();
-
         return recipesSection;
         
     }
