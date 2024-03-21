@@ -81,12 +81,9 @@ function removeFromList(elSelectedInList, input, dropdown){
     dropdown.classList.toggle('displayBlock');
 }
 
-// Filtrer les recettes qui utilisent cet ustensile = > filtrer les recettes
-// Mettre à jour le compteur de recettes
-// mettre à jour la liste des ustensiles
 
 function updateRecipes(recipes, innerTextTag){
-    let newArrayRecipesSortByIngredients = []
+    let newArrayRecipesSortByIngredients = [];
     recipes.forEach(el => {
         /** get array of ingredients for each recipe */
         const arrayIngredients = el.ingredients;
@@ -107,28 +104,28 @@ function updateRecipes(recipes, innerTextTag){
         } 
     });
 
-    console.log(newArrayRecipesSortByIngredients);
+    // console.log(newArrayRecipesSortByIngredients);
 
         /** Get list of appliance after filter by ingredients*/
             let appliance;
             const name = 'appliances';
             const elements = (collectAppliances(newArrayRecipesSortByIngredients, name));
             for( let i = 0 ; i < elements.length ; i++){
-                appliance = elements[i];
-                console.log(appliance);
+                appliance = elements[i].toLowerCase().trim();
             }
-
+            
             const elementsToFilter = document.querySelectorAll('.' + name);
-            console.log(elementsToFilter);
             /** get list of appliance */
             for (let elFiltered of elementsToFilter)  {
                 /** lowercase and remove spaces from element */
                 const textContentFilter = elFiltered.textContent.toLowerCase().trim();
-                if(textContentFilter.includes(appliance)){
-                    /** displays the element corresponding to the input value */
-                    elFiltered.classList.remove('hidden');
+                // console.log(textContentFilter);
+                // console.log(appliance);
+                if(textContentFilter === appliance){
+                    /** displays the element corresponding to elements of the recipe displayed */
+                    elFiltered.style.display = "block";
                 }else {
-                    elFiltered.classList.add('hidden');
+                    elFiltered.style.display = "none";
                 }
             }
 
