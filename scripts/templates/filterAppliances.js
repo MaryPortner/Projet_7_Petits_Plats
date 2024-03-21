@@ -11,7 +11,7 @@ const name = 'appliances';
 export function filterAppliances(recipes){
     elements = collectAppliances(recipes, name);
     
-    /** Inserting list of utensils into the filter div */
+    /** Inserting list of appliances into the filter div */
     const element =  createListOfElements(elements, name);
     document.querySelector(`.main_filter-bar-${name}`).appendChild(element);
 

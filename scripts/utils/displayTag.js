@@ -1,6 +1,10 @@
 import { CardRecipe } from "../class/cardRecipe.js";
 import { recipes } from "../../data/recipes.js";
 
+import { collectAppliances } from "./collect/appliances.js";
+
+
+
 
 export function displayTag(name){
     const dropdown = document.querySelector(`#main_filter-bar-${name}`);
@@ -82,14 +86,13 @@ function removeFromList(elSelectedInList, input, dropdown){
 // mettre à jour la liste des ustensiles
 
 function updateRecipes(recipes, innerTextTag){
-
+    let newArrayRecipesSortByIngredients = []
     recipes.forEach(el => {
-    
         /** get array of ingredients for each recipe */
         const arrayIngredients = el.ingredients;
         let ingredientsByRecipes = [];
 
-        /** create an array of ingredients per recipe */
+        /** create an array of ingredients per recipe  */
         arrayIngredients.forEach(ingredients => {         
             ingredientsByRecipes.push(ingredients.ingredient.toLowerCase().trim());
         });
@@ -98,22 +101,60 @@ function updateRecipes(recipes, innerTextTag){
         if((ingredientsByRecipes.indexOf(innerTextTag) > -1)){
             let recipeUpdate = new CardRecipe(el);
             recipeUpdate.buildCard(); 
-            console.log(el);
-            /** update appliance */
-            console.log(el.appliance);
+
+            /** Create a new recipe list when filtering by ingredients*/
+            newArrayRecipesSortByIngredients.push(el);
         } 
     });
+
+    console.log(newArrayRecipesSortByIngredients);
+
+        /** Get list of appliance after filter by ingredients*/
+            let appliance;
+            const name = 'appliances';
+            const elements = (collectAppliances(newArrayRecipesSortByIngredients, name));
+            for( let i = 0 ; i < elements.length ; i++){
+                appliance = elements[i];
+                console.log(appliance);
+            }
+
+            const elementsToFilter = document.querySelectorAll('.' + name);
+            console.log(elementsToFilter);
+            /** get list of appliance */
+            for (let elFiltered of elementsToFilter)  {
+                /** lowercase and remove spaces from element */
+                const textContentFilter = elFiltered.textContent.toLowerCase().trim();
+                if(textContentFilter.includes(appliance)){
+                    /** displays the element corresponding to the input value */
+                    elFiltered.classList.remove('hidden');
+                }else {
+                    elFiltered.classList.add('hidden');
+                }
+            }
+
     updateCounterRecipes()
 }
     
+// function displayElFiltered(elements, name){
+//     const filterApplianceList = document.querySelector('.filter-appliances-list');
+//     filterApplianceList.style.display = 'none';
+//     const element =  createListOfElements(elements, name);
+//     console.log(element);
+//     document.querySelector(`.main_filter-bar-${name}`).appendChild(element);
+// }
 
+/** redisplay list of appliances */
 function updateCounterRecipes(){
     const recipesContainer = document.querySelector('#main_allRecipes');
+    /** get number of recipes displayed */
     let numberRecipes = (recipesContainer.childNodes).length; 
     let getNumberRecipesContainer = document.querySelector('.numberRecipes')
+    /** update display number of recipes */
         getNumberRecipesContainer.innerText = `${numberRecipes}`;
-        // console.log(numberRecipes);
 }
+
+
+
 
 
 // function updateRecipes(recipes){
@@ -130,8 +171,6 @@ function updateCounterRecipes(){
 //     })
     
 // }
-
-
 
 // export function displayCardRecipes(recipes) {
 //     recipes.forEach(el => {

@@ -3,6 +3,7 @@ export function createListOfElements(elements, name){
     const classUl = `filter-${name}-list` ;
     const ul = document.createElement('ul');
     ul.classList.add(`${classUl}`);
+
     for(let el of elements){
         /** creation of a li for each element */
         const li = document.createElement('li');
@@ -12,5 +13,6 @@ export function createListOfElements(elements, name){
 
         ul.appendChild(li);
     }
+    
     return ul;
 }
