@@ -6,3 +6,4 @@ export function displayCardRecipes(recipes) {
         recipe.buildCard();  
     });
 }
+

@@ -1,7 +1,7 @@
 import { collectIngredients } from "../utils/collect/ingredients.js";
 import { createListOfElements } from "../utils/createListOfElements.js";
 import { displayListElFiltered } from "../utils/displayListElFiltered.js";
-import { displayTag } from "../utils/displayTag.js";
+import { createTagAndUpdateRecipes } from "../utils/createTagAndUpdateRecipes.js";
 import { deleteDataInput } from "../utils/deleteDataInput.js";
 
 let elements = [];
@@ -17,7 +17,7 @@ export function filterIngredients(recipes){
 
     deleteDataInput(name);
     displayListElFiltered(name);
-    displayTag(name);
+    createTagAndUpdateRecipes(name);
     // displayRecipesByFilters();
 
 }

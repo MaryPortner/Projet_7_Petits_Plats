@@ -1,7 +1,7 @@
 import { collectAppliances } from "../utils/collect/appliances.js";
 import { createListOfElements } from "../utils/createListOfElements.js";
 import { displayListElFiltered } from "../utils/displayListElFiltered.js";
-import { displayTag } from "../utils/displayTag.js";
+import { createTagAndUpdateRecipes } from "../utils/createTagAndUpdateRecipes.js";
 import { deleteDataInput } from "../utils/deleteDataInput.js";
 
 let elements = [];
@@ -9,7 +9,7 @@ const name = 'appliances';
 
 
 export function filterAppliances(recipes){
-    elements = collectAppliances(recipes, name);
+    elements = collectAppliances(recipes);
     
     /** Inserting list of appliances into the filter div */
     const element =  createListOfElements(elements, name);
@@ -17,7 +17,7 @@ export function filterAppliances(recipes){
 
     deleteDataInput(name);
     displayListElFiltered(name);
-    displayTag(name);
+    createTagAndUpdateRecipes(name);
   
 
     // displayRecipesByFilters();

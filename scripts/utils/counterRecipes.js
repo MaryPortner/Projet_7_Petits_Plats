@@ -1,7 +1,7 @@
-export function displayCounterRecipes(){
+export function displayCounterRecipes(recipes){
 
-    const recipesContainer = document.querySelector('#main_allRecipes');
-    let numberRecipes = (recipesContainer.childNodes).length;
+    // const recipesContainer = document.querySelector('#main_allRecipes');
+    let numberRecipes = recipes.length;
     const numberTotalRecipes = document.querySelector('.numberTotalRecipes');
 
     const numberRecipesContainer = document.createElement('p');
