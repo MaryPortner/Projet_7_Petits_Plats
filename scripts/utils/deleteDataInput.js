@@ -6,6 +6,7 @@ export function deleteDataInput(name){
 
     btnDropdown.addEventListener('click', () =>{
         inputData.value = '';
+        
     })
 
        /** Clicking on the cross erases the data and undisplays the cross */
