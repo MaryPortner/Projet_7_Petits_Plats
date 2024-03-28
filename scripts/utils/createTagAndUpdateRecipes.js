@@ -1,9 +1,10 @@
 import { CardRecipe } from "../class/cardRecipe.js";
-import { collectAppliances } from "./collect/appliances.js";
-import { collectIngredients } from "./collect/ingredients.js";
-import { collectUstensils } from "./collect/ustensils.js";
-import { createListOfElements } from "./createListOfElements.js";
+import { collectAppliances } from "../utils/collect/appliances.js";
+import { collectIngredients } from "../utils/collect/ingredients.js";
+import { collectUstensils } from "../utils/collect/ustensils.js";
+import { displayListElFiltered } from "./displayListElFiltered.js";
 import { recipes } from "../../data/recipes.js";
+
 
 
 export function createTagAndUpdateRecipes(name){
@@ -11,9 +12,8 @@ export function createTagAndUpdateRecipes(name){
     const input = document.querySelector(`#filter-sort-${name}`);
     let innerTextTag;
     const listElements = document.querySelectorAll('.' + name);
-    let newArrayRecipesSortByIngredients = [];
-
-
+    let  RecipesSortByIngredients = [];
+    
     const mainTag = document.createElement('div');
     mainTag.classList.add('main_Tag-wrapper');
 
@@ -35,11 +35,11 @@ export function createTagAndUpdateRecipes(name){
             getInnerTextTag(name, 'appliances', elSelectedInList);
             getInnerTextTag(name, 'ustensils', elSelectedInList);
 
-            updateRecipes(recipes, innerTextTag, newArrayRecipesSortByIngredients);
+            updateRecipes(recipes, innerTextTag, RecipesSortByIngredients);
             /** redisplay list of appliances on filter */
-            updateListOfElements((collectAppliances(newArrayRecipesSortByIngredients, 'appliances')), 'appliances');
-            updateListOfElements((collectIngredients(newArrayRecipesSortByIngredients, 'ingredients')), 'ingredients');
-            updateListOfElements((collectUstensils(newArrayRecipesSortByIngredients, 'ustensils')), 'ustensils');
+            updateListOfElements((collectAppliances(RecipesSortByIngredients, 'appliances')), 'appliances');
+            updateListOfElements((collectIngredients(RecipesSortByIngredients, 'ingredients')), 'ingredients');
+            updateListOfElements((collectUstensils(RecipesSortByIngredients, 'ustensils')), 'ustensils');
             updateCounterRecipes();
         }); 
     }
@@ -88,7 +88,7 @@ function removeFromList(elSelectedInList, input, dropdown){
 }
 
 
-function updateRecipes(recipes, innerTextTag, newArrayRecipesSortByIngredients){
+function updateRecipes(recipes, innerTextTag, RecipesSortByIngredients){
 
     recipes.forEach(el => {
         /** get array of ingredients for each recipe */
@@ -98,7 +98,7 @@ function updateRecipes(recipes, innerTextTag, newArrayRecipesSortByIngredients){
         /** create an array of ingredients per recipe  */
         arrayIngredients.forEach(ingredients => {         
             ingredientsByRecipes.push(ingredients.ingredient.toLowerCase().trim());
-         
+
         });
 
         /** displays recipes that contain the selected tag */
@@ -106,34 +106,36 @@ function updateRecipes(recipes, innerTextTag, newArrayRecipesSortByIngredients){
             let recipeUpdate = new CardRecipe(el);
             recipeUpdate.buildCard(); 
             /** Create a new recipe list when filtering by ingredients*/
-            newArrayRecipesSortByIngredients.push(el);
-          
+            RecipesSortByIngredients.push(el);
         } 
     });
-    console.log(newArrayRecipesSortByIngredients);
+    
+    console.log(RecipesSortByIngredients);
 }
     
 
-/** Redisplay list of appliances */
+/** Update list of elements */
 function updateListOfElements(arrayList, name){
-    /** Get list of appliances after filter by ingredients*/
-    let list = arrayList;
+    /** Get list of elements after filter*/
+    // let list = arrayList;
     let listOfElements = [];
-    list.forEach(listEl => {
+    arrayList.forEach(listEl => {
         listOfElements.push(listEl);        
     });
 
     const elementsToFilter = document.querySelectorAll('.' + name);
+
     elementsToFilter.forEach(elFiltered =>{
         elFiltered.style.display = 'none';
             for( let i = 0 ; i < listOfElements.length ; i++){
-            /** lowercase and remove spaces from element */
-            if(elFiltered.textContent.toLowerCase().trim() === listOfElements[i].toLowerCase().trim()){
-                /** displays the element corresponding to elements of the recipe displayed */
-                elFiltered.style.display = "block";
-            }
+                /** */
+                if(elFiltered.textContent.toLowerCase().trim() === listOfElements[i].toLowerCase().trim()){
+                    /** displays the element corresponding to elements of the recipe displayed */
+                    elFiltered.style.display = "block";
+                }
         }
     });
+    displayListElFiltered(name);
 }
   
 

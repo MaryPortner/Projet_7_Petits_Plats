@@ -4,11 +4,12 @@ import { displayListElFiltered } from "../utils/displayListElFiltered.js";
 import { createTagAndUpdateRecipes } from "../utils/createTagAndUpdateRecipes.js";
 import { deleteDataInput } from "../utils/deleteDataInput.js";
 
-let elements = [];
-const name = 'ingredients';
+
 
 
 export function filterIngredients(recipes){
+    let elements = [];
+    const name = 'ingredients';
     elements = collectIngredients(recipes, name);
     
     /** Inserting list of utensils into the filter div */
