@@ -1,7 +1,7 @@
 import { CardRecipe } from "../class/cardRecipe.js";
-import { collectAppliances } from "../utils/collect/appliances.js";
-import { collectIngredients } from "../utils/collect/ingredients.js";
-import { collectUstensils } from "../utils/collect/ustensils.js";
+import { filterAppliances } from "../templates/filterAppliances.js";
+import { filterIngredients } from "../templates/filterIngredients.js";
+import { filterUstensils } from "../templates/filterUstensils.js";
 import { displayListElFiltered } from "./displayListElFiltered.js";
 import { recipes } from "../../data/recipes.js";
 
@@ -13,7 +13,11 @@ export function createTagAndUpdateRecipes(name){
     let innerTextTag;
     const listElements = document.querySelectorAll('.' + name);
     let  RecipesSortByIngredients = [];
-    
+    // let RecipesSortByAppliances = [];
+    // let RecipesSortByIngredients = [];
+    // let RecipesSortByUstensils = [];
+
+
     const mainTag = document.createElement('div');
     mainTag.classList.add('main_Tag-wrapper');
 
@@ -37,9 +41,9 @@ export function createTagAndUpdateRecipes(name){
 
             updateRecipes(recipes, innerTextTag, RecipesSortByIngredients);
             /** redisplay list of appliances on filter */
-            updateListOfElements((collectAppliances(RecipesSortByIngredients, 'appliances')), 'appliances');
-            updateListOfElements((collectIngredients(RecipesSortByIngredients, 'ingredients')), 'ingredients');
-            updateListOfElements((collectUstensils(RecipesSortByIngredients, 'ustensils')), 'ustensils');
+            // updateListOfElements((collectAppliances(RecipesSortByIngredients, 'appliances')), 'appliances');
+            // updateListOfElements((collectIngredients(RecipesSortByIngredients, 'ingredients')), 'ingredients');
+            // updateListOfElements((collectUstensils(RecipesSortByIngredients, 'ustensils')), 'ustensils');
             updateCounterRecipes();
         }); 
     }
@@ -109,34 +113,49 @@ function updateRecipes(recipes, innerTextTag, RecipesSortByIngredients){
             RecipesSortByIngredients.push(el);
         } 
     });
+
+    // document.getElementById(".main_filter-bar-appliances").removeChild(document.getElementById(".main_filter-bar-appliances").children[1]);
+    // document.getElementById(".main_filter-bar-ingredients").removeChild(document.getElementById(".main_filter-bar-ingredients").children[1]);
+    // document.getElementById(".main_filter-bar-ustensils").removeChild(document.getElementById(".main_filter-bar-ustensils").children[1]);
+
+    document.getElementById("main_filter-bar-appliances").removeChild(document.querySelector(`.filter-appliances-list`));
+    document.getElementById("main_filter-bar-ingredients").removeChild( document.querySelector(`.filter-ingredients-list`));
+    document.getElementById("main_filter-bar-ustensils").removeChild(document.querySelector(`.filter-ustensils-list`));
+
+    // document.querySelector(`.filter-appliances-list`).innerHTML = '';
+    // document.querySelector(`.filter-ingredients-list`).innerHTML = '';
+    // document.querySelector(`.filter-ustensils-list`).innerHTML = '';
+
+    filterAppliances(RecipesSortByIngredients);
+    filterIngredients(RecipesSortByIngredients);
+    filterUstensils(RecipesSortByIngredients);
     
     console.log(RecipesSortByIngredients);
 }
     
 
-/** Update list of elements */
-function updateListOfElements(arrayList, name){
-    /** Get list of elements after filter*/
-    // let list = arrayList;
-    let listOfElements = [];
-    arrayList.forEach(listEl => {
-        listOfElements.push(listEl);        
-    });
+/** Redisplay list of appliances */
+// function updateListOfElements(arrayList, name){
+//     /** Get list of elements after filter*/
+//     let list = arrayList;
+//     let listOfElements = [];
+//     list.forEach(listEl => {
+//         listOfElements.push(listEl);        
+//     });
 
-    const elementsToFilter = document.querySelectorAll('.' + name);
-
-    elementsToFilter.forEach(elFiltered =>{
-        elFiltered.style.display = 'none';
-            for( let i = 0 ; i < listOfElements.length ; i++){
-                /** */
-                if(elFiltered.textContent.toLowerCase().trim() === listOfElements[i].toLowerCase().trim()){
-                    /** displays the element corresponding to elements of the recipe displayed */
-                    elFiltered.style.display = "block";
-                }
-        }
-    });
-    displayListElFiltered(name);
-}
+//     const elementsToFilter = document.querySelectorAll('.' + name);
+//     elementsToFilter.forEach(elFiltered =>{
+//         elFiltered.style.display = 'none';
+//             for( let i = 0 ; i < listOfElements.length ; i++){
+//             /** lowercase and remove spaces from element */
+//             if(elFiltered.textContent.toLowerCase().trim() === listOfElements[i].toLowerCase().trim()){
+//                 /** displays the element corresponding to elements of the recipe displayed */
+//                 elFiltered.style.display = "block";
+//             }
+//         }
+//     });
+//     displayListElFiltered(name);
+// }
   
 
 /** update number recipes */
