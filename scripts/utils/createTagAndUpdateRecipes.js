@@ -1,5 +1,7 @@
 import { CardRecipe } from "../class/cardRecipe.js";
 import { collectAppliances } from "./collect/appliances.js";
+import { collectIngredients } from "./collect/ingredients.js";
+import { collectUstensils } from "./collect/ustensils.js";
 import { createListOfElements } from "./createListOfElements.js";
 import { recipes } from "../../data/recipes.js";
 
@@ -34,7 +36,10 @@ export function createTagAndUpdateRecipes(name){
             getInnerTextTag(name, 'ustensils', elSelectedInList);
 
             updateRecipes(recipes, innerTextTag, newArrayRecipesSortByIngredients);
-            updateListOfElements(newArrayRecipesSortByIngredients, 'appliances');
+            /** redisplay list of appliances on filter */
+            updateListOfElements((collectAppliances(newArrayRecipesSortByIngredients, 'appliances')), 'appliances');
+            updateListOfElements((collectIngredients(newArrayRecipesSortByIngredients, 'ingredients')), 'ingredients');
+            updateListOfElements((collectUstensils(newArrayRecipesSortByIngredients, 'ustensils')), 'ustensils');
             updateCounterRecipes();
         }); 
     }
@@ -102,6 +107,7 @@ function updateRecipes(recipes, innerTextTag, newArrayRecipesSortByIngredients){
             recipeUpdate.buildCard(); 
             /** Create a new recipe list when filtering by ingredients*/
             newArrayRecipesSortByIngredients.push(el);
+          
         } 
     });
     console.log(newArrayRecipesSortByIngredients);
@@ -109,13 +115,12 @@ function updateRecipes(recipes, innerTextTag, newArrayRecipesSortByIngredients){
     
 
 /** Redisplay list of appliances */
-function updateListOfElements(newArrayRecipesSortByIngredients, name){
-    /** Get list of alls appliances after filter by ingredients*/
-    let list = (collectAppliances(newArrayRecipesSortByIngredients, name));
+function updateListOfElements(arrayList, name){
+    /** Get list of appliances after filter by ingredients*/
+    let list = arrayList;
     let listOfElements = [];
     list.forEach(listEl => {
-        listOfElements.push(listEl);
-        // console.log(listOfElements);
+        listOfElements.push(listEl);        
     });
 
     const elementsToFilter = document.querySelectorAll('.' + name);
