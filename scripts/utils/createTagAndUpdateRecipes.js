@@ -114,17 +114,9 @@ function updateRecipes(recipes, innerTextTag, RecipesSortByIngredients){
         } 
     });
 
-    // document.getElementById(".main_filter-bar-appliances").removeChild(document.getElementById(".main_filter-bar-appliances").children[1]);
-    // document.getElementById(".main_filter-bar-ingredients").removeChild(document.getElementById(".main_filter-bar-ingredients").children[1]);
-    // document.getElementById(".main_filter-bar-ustensils").removeChild(document.getElementById(".main_filter-bar-ustensils").children[1]);
-
-    document.getElementById("main_filter-bar-appliances").removeChild(document.querySelector(`.filter-appliances-list`));
-    document.getElementById("main_filter-bar-ingredients").removeChild( document.querySelector(`.filter-ingredients-list`));
-    document.getElementById("main_filter-bar-ustensils").removeChild(document.querySelector(`.filter-ustensils-list`));
-
-    // document.querySelector(`.filter-appliances-list`).innerHTML = '';
-    // document.querySelector(`.filter-ingredients-list`).innerHTML = '';
-    // document.querySelector(`.filter-ustensils-list`).innerHTML = '';
+    document.getElementById("main_filter-bar-appliances").removeChild(document.getElementById("main_filter-bar-appliances").children[1]);
+    document.getElementById("main_filter-bar-ingredients").removeChild(document.getElementById("main_filter-bar-ingredients").children[1]);
+    document.getElementById("main_filter-bar-ustensils").removeChild(document.getElementById("main_filter-bar-ustensils").children[1]);
 
     filterAppliances(RecipesSortByIngredients);
     filterIngredients(RecipesSortByIngredients);
@@ -133,6 +125,41 @@ function updateRecipes(recipes, innerTextTag, RecipesSortByIngredients){
     console.log(RecipesSortByIngredients);
 }
     
+
+
+  
+
+/** update number recipes */
+function updateCounterRecipes(){
+    const recipesContainer = document.querySelector('#main_allRecipes');
+    /** get number of recipes displayed */
+    let numberRecipes = recipesContainer.childElementCount; 
+    /** update display number of recipes */
+    document.querySelector('.numberRecipes').innerText = numberRecipes;
+}
+
+
+
+
+
+    // document.getElementById("main_filter-bar-appliances").removeChild(document.querySelector(`.filter-appliances-list`));
+    // document.getElementById("main_filter-bar-ingredients").removeChild( document.querySelector(`.filter-ingredients-list`));
+    // document.getElementById("main_filter-bar-ustensils").removeChild(document.querySelector(`.filter-ustensils-list`));
+
+
+    // document.getElementById("main_filter-bar-appliances").innerHTML = '';
+    // document.getElementById("main_filter-bar-ingredients").innerHTML = '';
+    // document.getElementById("main_filter-bar-ustensils").innerHTML = '';
+
+
+
+    // document.querySelector(`.filter-appliances-list`).innerHTML = '';
+    // document.querySelector(`.filter-ingredients-list`).innerHTML = '';
+    // document.querySelector(`.filter-ustensils-list`).innerHTML = '';
+
+
+
+
 
 /** Redisplay list of appliances */
 // function updateListOfElements(arrayList, name){
@@ -156,18 +183,6 @@ function updateRecipes(recipes, innerTextTag, RecipesSortByIngredients){
 //     });
 //     displayListElFiltered(name);
 // }
-  
-
-/** update number recipes */
-function updateCounterRecipes(){
-    const recipesContainer = document.querySelector('#main_allRecipes');
-    /** get number of recipes displayed */
-    let numberRecipes = recipesContainer.childElementCount; 
-    /** update display number of recipes */
-    document.querySelector('.numberRecipes').innerText = numberRecipes;
-}
-
-
 
 
 
