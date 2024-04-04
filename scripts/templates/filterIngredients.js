@@ -7,10 +7,11 @@ import { deleteDataInput } from "../utils/deleteDataInput.js";
 
 
 
-export function filterIngredients(recipes){
+export function filterIngredients(recipes, ingSelected){
     let elements = [];
     const name = 'ingredients';
     elements = collectIngredients(recipes, name);
+    elements = elements.filter(el => el !== ingSelected);
     
     /** Inserting list of utensils into the filter div */
     const element =  createListOfElements(elements, name);
@@ -19,7 +20,6 @@ export function filterIngredients(recipes){
     deleteDataInput(name);
     displayListElFiltered(name);
     createTagAndUpdateRecipes(name);
-    // displayRecipesByFilters();
 
 }
 
