@@ -1,3 +1,4 @@
+/** displays the list of elements matching the entry in the input */
 export function displayListElFiltered(name){
     /** filter data based on the element inserted into the input*/
     const btnDisplayDropdown = document.querySelector(`#btn-display-dropdown-${name}`);

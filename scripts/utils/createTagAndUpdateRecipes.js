@@ -5,6 +5,8 @@ import { filterUstensils } from "../templates/filterUstensils.js";
 import { recipes } from "../../data/recipes.js";
 
 
+/** Selection de plusieurs ingredients - selectSeveralIng */
+const selectionIng = [];
 
 export function createTagAndUpdateRecipes(name){
 
@@ -31,8 +33,12 @@ function updateRecipesByIngredients(listElements, name, recipes, mainTag, input,
 
     for(let elSelectedInList of listElements){
         elSelectedInList.addEventListener('click', () => {
-            
+            /** save ingredient selected */
             ingSelected =  elSelectedInList.innerText.toLowerCase().trim(); 
+            /** save all selected ingredients*/
+            selectionIng.push(ingSelected);
+
+            console.log(selectionIng)
             /** Create tag  */
             const tag = createTag(name, elSelectedInList);
             mainTag.appendChild(tag);
@@ -42,9 +48,10 @@ function updateRecipesByIngredients(listElements, name, recipes, mainTag, input,
             /** delete the tag and put the element back in the list */
             deleteTagAndUpdateList(tag, elSelectedInList);
 
-            selectedRecipes = getSelectedRecipes(recipes, ingSelected, selectedRecipes);
+            selectedRecipes = getSelectedRecipes(recipes);
+            console.log(selectedRecipes);
 
-            removeFromList(input, elSelectedInList, dropdown);
+            removeSelectedElFromList(input, elSelectedInList, dropdown);
 
             filterListElements(selectedRecipes, ingSelected);
 
@@ -84,10 +91,32 @@ function deleteTagAndUpdateList(tag, elSelectedInList){
     const crossToDeleteTag = document.createElement('span');
     crossToDeleteTag.classList.add('tag-delete');
     tag.appendChild(crossToDeleteTag);
+
+    // let  selectedRecipes = [];
       /** listener for delete the tag and put the element back in the list */
     crossToDeleteTag.addEventListener('click', () => {
+        const item = crossToDeleteTag.parentElement.querySelector('p').innerText.toLowerCase().trim();
+        let  selectedRecipes = [];
+        /** Mettre à jour la selection */
+        const index = selectionIng.findIndex(i => i === item);
+        selectionIng.splice(index, 1);
+
+        /** To delete tag */
         tag.style.display = 'none';
         elSelectedInList.style.display = 'block';
+
+        /** To filter recipes */
+        selectedRecipes = getSelectedRecipes(recipes);
+        console.log(selectedRecipes);
+
+       /** redisplay recipes  */
+        displayRecipes(selectedRecipes);
+
+        // METTRE A JOUR LA LISTE DES INGREDIENTS
+        //  putBackSelectedElFromList(input, elSelectedInList, dropdown)
+
+        updateCounterRecipes();
+
     });  
 }
 
@@ -102,10 +131,10 @@ function displayRecipes(recipesSortByElements){
 }
 
 
-function filterListElements(sortBy, ingSelected){
-    filterAppliances(sortBy, ingSelected);
-    filterIngredients(sortBy, ingSelected);
-    filterUstensils(sortBy, ingSelected);
+function filterListElements(sortBy){
+    filterAppliances(sortBy);
+    filterIngredients(sortBy);
+    filterUstensils(sortBy);
 }
 
 
@@ -120,45 +149,52 @@ function getIngredientsByRecipesSelected(el){
 
     });
 
+    // console.log(ingredientsByRecipes)
+
     return ingredientsByRecipes;
 }
 
 
-// function getListElementsUpdated(listElementsSelected, elSelectedInList){
-//     listElementsSelected.forEach(el =>{
-//         if (el === elSelectedInList){
-//             el.style.display ='none';
-//         }
-
-//     })
-
-  
-//     return listElementsSelected;
-// }
 
 
-function getSelectedRecipes(recipes, ingSelected, selectedRecipes){
-    recipes.forEach(el => {
-        let ingredientsByRecipes = getIngredientsByRecipesSelected(el);
-        // console.log(ingredientsByRecipes);
+function getSelectedRecipes(recipes){
+/** list to return */
+    const list = [];
+    recipes.forEach(recipe => {
+        let count = 0; 
+        let ingredientsByRecipes = getIngredientsByRecipesSelected(recipe);
 
-        /** displays recipes that contain the selected tag */
-        if((ingredientsByRecipes.indexOf(ingSelected) > -1)){
-            /** Create a new recipe list when filtering by ingredients*/
-            selectedRecipes.push(el);
-        } 
+        selectionIng.forEach(ing => {
+            /** displays recipes that contain the selected tag */
+            if(ingredientsByRecipes.indexOf(ing) > -1){
+                count ++;
+            }
+        })
+
+        if( count == selectionIng.length){
+             /** Create a new recipe list when filtering by ingredients selected */
+            list.push(recipe);
+        }
     });
 
-    return selectedRecipes; 
+    return list; 
 }
 
 
 
-function removeFromList(input, elSelectedInList, dropdown){
+function removeSelectedElFromList(input, elSelectedInList, dropdown){
     // elSelectedInList.classList.remove('hidden');
     input.value = '';
     /** removes the displayed tag from the list of elements */
     elSelectedInList.style.display = 'none'; 
+    dropdown.classList.toggle('displayBlock');
+}
+
+function putBackSelectedElFromList(input, elSelectedInList, dropdown){
+    // elSelectedInList.classList.remove('hidden');
+    input.value = '';
+    /** removes the displayed tag from the list of elements */
+    elSelectedInList.style.display = 'block'; 
     dropdown.classList.toggle('displayBlock');
 }
 
