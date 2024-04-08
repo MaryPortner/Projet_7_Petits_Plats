@@ -20,9 +20,6 @@ export function filterAppliances(recipes){
     displayListElFiltered(name);
     createTagAndUpdateRecipes(name);
   
-
-    // displayRecipesByFilters();
-
 }
 
 

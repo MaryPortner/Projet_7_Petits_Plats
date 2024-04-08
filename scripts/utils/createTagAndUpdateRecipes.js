@@ -37,21 +37,14 @@ function updateRecipesByIngredients(listElements, name, recipes, mainTag, input,
             ingSelected =  elSelectedInList.innerText.toLowerCase().trim(); 
             /** save all selected ingredients*/
             selectionIng.push(ingSelected);
-
-            console.log(selectionIng)
             /** Create tag  */
             const tag = createTag(name, elSelectedInList);
             mainTag.appendChild(tag);
-
             deleteListElement();
- 
             /** delete the tag and put the element back in the list */
             deleteTagAndUpdateList(tag, elSelectedInList);
 
             selectedRecipes = getSelectedRecipes(recipes);
-            console.log(selectedRecipes);
-
-            removeSelectedElFromList(input, elSelectedInList, dropdown);
 
             filterListElements(selectedRecipes, ingSelected);
 
@@ -59,7 +52,7 @@ function updateRecipesByIngredients(listElements, name, recipes, mainTag, input,
 
             updateCounterRecipes();
 
-            listElementsSelected = document.querySelectorAll('.' + name);
+            removeSelectedElFromList(input, elSelectedInList, name);
         });       
     }
 }
@@ -107,13 +100,13 @@ function deleteTagAndUpdateList(tag, elSelectedInList){
 
         /** To filter recipes */
         selectedRecipes = getSelectedRecipes(recipes);
-        console.log(selectedRecipes);
-
        /** redisplay recipes  */
         displayRecipes(selectedRecipes);
 
         // METTRE A JOUR LA LISTE DES INGREDIENTS
         //  putBackSelectedElFromList(input, elSelectedInList, dropdown)
+        const elementsToFilter = document.querySelectorAll('.' + 'ingredients');
+        console.log(elementsToFilter);
 
         updateCounterRecipes();
 
@@ -182,17 +175,27 @@ function getSelectedRecipes(recipes){
 
 
 
-function removeSelectedElFromList(input, elSelectedInList, dropdown){
-    // elSelectedInList.classList.remove('hidden');
-    input.value = '';
-    /** removes the displayed tag from the list of elements */
-    elSelectedInList.style.display = 'none'; 
+function removeSelectedElFromList(input, elSelectedInList, name){
+    const dropdown = document.querySelector(`#main_filter-bar-${name}`);
+    const elementsToFilter = document.querySelectorAll('.' + name);
+    input.value = ''; 
+
+   /** removes the displayed tag from the list of elements */
+   dropdown.addEventListener('click', () => {
+        elementsToFilter.forEach(el => {
+            if(el.innerText.toLowerCase().trim() === elSelectedInList.innerText.toLowerCase().trim()){
+                el.style.display = 'none';
+            }
+        })
+    });
+ 
+
     dropdown.classList.toggle('displayBlock');
 }
 
-function putBackSelectedElFromList(input, elSelectedInList, dropdown){
-    // elSelectedInList.classList.remove('hidden');
-    input.value = '';
+function putBackSelectedElFromList( elSelectedInList, name){
+    const dropdown = document.querySelector(`#main_filter-bar-${name}`);
+    const elementsToFilter = document.querySelectorAll('.' + name);
     /** removes the displayed tag from the list of elements */
     elSelectedInList.style.display = 'block'; 
     dropdown.classList.toggle('displayBlock');

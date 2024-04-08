@@ -5,7 +5,7 @@ import { createTagAndUpdateRecipes } from "../utils/createTagAndUpdateRecipes.js
 import { deleteDataInput } from "../utils/deleteDataInput.js";
 
 
-
+const getElement = []
 
 export function filterIngredients(recipes){
     let elements = [];
@@ -14,14 +14,12 @@ export function filterIngredients(recipes){
     /** Inserting list of utensils into the filter div */
     const element =  createListOfElements(elements, name);
     document.querySelector(`.main_filter-bar-${name}`).appendChild(element);
-
-    // console.log(element);
-
     deleteDataInput(name);
     /** displays the list of elements matching the entry in the input */
     displayListElFiltered(name);
-    createTagAndUpdateRecipes(name);
-
+    createTagAndUpdateRecipes(name);  
 }
+
+
 
 
