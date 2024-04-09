@@ -20,5 +20,3 @@ export function filterUstensils(recipes){
     createTagAndUpdateRecipes(name);
 
 }
-
-

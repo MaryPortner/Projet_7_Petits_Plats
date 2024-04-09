@@ -19,8 +19,5 @@ export function filterAppliances(recipes){
     deleteDataInput(name);
     displayListElFiltered(name);
     createTagAndUpdateRecipes(name);
-  
 }
-
-
 

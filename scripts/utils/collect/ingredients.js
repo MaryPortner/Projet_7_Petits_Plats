@@ -18,3 +18,5 @@ export function collectIngredients(recipes){
     }
     return arrayList;
  }
+
+

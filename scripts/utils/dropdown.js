@@ -21,5 +21,3 @@ export function dropdown (){
         btn.addEventListener('click', showHideDatasList);
    });
 }
-
-

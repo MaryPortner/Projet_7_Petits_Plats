@@ -396,6 +396,7 @@ li:hover{
     gap: 10px;
     min-width: 213px;
     height: 58px;
+    margin-bottom: 15px;
     padding: 17px 8px 17px 18px;
     background-color: var(--third-color);
 }
