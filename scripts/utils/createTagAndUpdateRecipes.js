@@ -10,7 +10,10 @@ const selectionIng = [];
 
 export function createTagAndUpdateRecipes(name){
 
-    const mainTagWrapper = document.querySelector(`#main_filter-${name}-wrapper`);
+    const mainFilter = document.querySelector(`#main_filter-${name}-wrapper`);
+    console.log(mainFilter);
+    const mainTagWrapper = mainFilter.querySelector('.main_Tag-wrapper');
+    console.log(mainTagWrapper);
 
     displayRecipes(recipes);
     updateRecipesByIngredients(name, recipes, mainTagWrapper);
@@ -19,11 +22,9 @@ export function createTagAndUpdateRecipes(name){
 
 
 function updateRecipesByIngredients(name, recipes, mainTagWrapper){
-    const input = document.querySelector(`#filter-sort-${name}`);
     let ingSelected;
     const listElements = document.querySelectorAll('.' + name);
     let  selectedRecipes = [];
-    let listElementsSelected = [];
 
     for(let elSelectedInList of listElements){
         elSelectedInList.addEventListener('click', () => {
@@ -34,10 +35,9 @@ function updateRecipesByIngredients(name, recipes, mainTagWrapper){
             /** Create tag  */
             const tag = createTag(name, elSelectedInList);
             mainTagWrapper.appendChild(tag);
-            deleteListElement();
-            /** delete the tag and put the element back in the list */
-            deleteTagAndUpdateList(tag, elSelectedInList);
 
+            deleteListElement();
+       
             selectedRecipes = getSelectedRecipes(recipes);
 
             filterListElements(selectedRecipes, ingSelected);
@@ -46,7 +46,10 @@ function updateRecipesByIngredients(name, recipes, mainTagWrapper){
 
             updateCounterRecipes();
 
-            removeSelectedElFromList(input, elSelectedInList, name);
+            removeSelectedElFromList(selectionIng, name);
+
+            /** delete the tag and put the element back in the list */
+            deleteTagAndUpdateList(tag, elSelectedInList);
         });       
     }
 }
@@ -93,6 +96,7 @@ function deleteTagAndUpdateList(tag, elSelectedInList){
         /** To delete tag */
         tag.style.display = 'none';
         // elSelectedInList.style.display = 'block';
+        console.log(elSelectedInList);
 
         /** To filter recipes */
         selectedRecipes = getSelectedRecipes(recipes);
@@ -170,20 +174,18 @@ function getSelectedRecipes(recipes){
 }
 
 
-function removeSelectedElFromList(input, elSelectedInList, name){
+function removeSelectedElFromList( selectionIng, name){
     const dropdown = document.querySelector(`#main_filter-bar-${name}`);
     const elementsToFilter = document.querySelectorAll('.' + name);
-    input.value = ''; 
-
+    // input.value = ''; 
    /** removes the displayed tag from the list of elements */
-   dropdown.addEventListener('click', () => {
-        elementsToFilter.forEach(el => {
-            if(el.innerText.toLowerCase().trim() === elSelectedInList.innerText.toLowerCase().trim()){
+    elementsToFilter.forEach(el => {
+        selectionIng.forEach(selection => {
+            if(el.innerText.toLowerCase().trim() === selection){
                 el.style.display = 'none';
             }
-        })
+        });
     });
- 
 
     dropdown.classList.toggle('displayBlock');
 }

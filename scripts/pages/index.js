@@ -1,5 +1,5 @@
 // import { displayCardRecipes } from "../utils/displayCardRecipes.js";
-import { createTagWrapper } from "../utils/createTagWrapper.js";
+// import { createTagWrapper } from "../utils/createTagWrapper.js";
 import { displayCounterRecipes } from "../utils/counterRecipes.js";
 import { dropdown } from "../utils/dropdown.js";
 import { filterAppliances } from "../templates/filterAppliances.js";
@@ -18,9 +18,9 @@ filterAppliances(recipes);
 filterIngredients(recipes);
 filterUstensils(recipes);
 
-createTagWrapper('appliances');
-createTagWrapper('ingredients');
-createTagWrapper('ustensils');
+// createTagWrapper('appliances');
+// createTagWrapper('ingredients');
+// createTagWrapper('ustensils');
 
 
 
