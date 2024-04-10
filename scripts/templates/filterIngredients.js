@@ -1,7 +1,7 @@
 import { collectIngredients } from "../utils/collect/ingredients.js";
 import { createListOfElements } from "../utils/createListOfElements.js";
 import { displayListElFiltered } from "../utils/displayListElFiltered.js";
-import { createTagAndUpdateRecipes } from "../utils/createTagAndUpdateRecipes.js";
+import { displayUpdatedRecipes } from "../utils/displayUpdatedRecipes.js";
 import { deleteDataInput } from "../utils/deleteDataInput.js";
 
 
@@ -16,5 +16,5 @@ export function filterIngredients(recipes){
     deleteDataInput(name);
     /** displays the list of elements matching the entry in the input */
     displayListElFiltered(name);
-    createTagAndUpdateRecipes(name);  
+    displayUpdatedRecipes(name);  
 }

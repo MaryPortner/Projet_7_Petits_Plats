@@ -1,7 +1,7 @@
 import { collectAppliances } from "../utils/collect/appliances.js";
 import { createListOfElements } from "../utils/createListOfElements.js";
 import { displayListElFiltered } from "../utils/displayListElFiltered.js";
-import { createTagAndUpdateRecipes } from "../utils/createTagAndUpdateRecipes.js";
+import { displayUpdatedRecipes } from "../utils/displayUpdatedRecipes.js";
 import { deleteDataInput } from "../utils/deleteDataInput.js";
 
 
@@ -18,6 +18,6 @@ export function filterAppliances(recipes){
 
     deleteDataInput(name);
     displayListElFiltered(name);
-    createTagAndUpdateRecipes(name);
+    displayUpdatedRecipes(name);
 }
 

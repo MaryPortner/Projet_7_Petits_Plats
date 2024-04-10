@@ -8,7 +8,7 @@ import { recipes } from "../../data/recipes.js";
 /** Selection de plusieurs ingredients - selectSeveralIng */
 const selectionIng = [];
 
-export function createTagAndUpdateRecipes(name){
+export function displayUpdatedRecipes(name){
 
     const mainFilter = document.querySelector(`#main_filter-${name}-wrapper`);
     const mainTagWrapper = mainFilter.querySelector('.main_Tag-wrapper');
@@ -16,40 +16,6 @@ export function createTagAndUpdateRecipes(name){
     displayRecipes(recipes);
 
     updateRecipesByIngredients(name, recipes, mainTagWrapper);
-}
-
-
-
-function updateRecipesByIngredients(name, recipes, mainTagWrapper){
-    let ingSelected;
-    const listElements = document.querySelectorAll('.' + name);
-    let  selectedRecipes = [];
-
-    for(let elSelectedInList of listElements){
-        elSelectedInList.addEventListener('click', () => {
-            /** save ingredient selected */
-            ingSelected =  elSelectedInList.innerText.toLowerCase().trim(); 
-            /** save all selected ingredients*/
-            selectionIng.push(ingSelected);
-            /** Create tag  */
-            const tag = createTag(name, elSelectedInList);
-            mainTagWrapper.appendChild(tag);
-            /** delete list elements of filters for recreate it with updated recipes */
-            deleteListElement();
-           
-            selectedRecipes = getSelectedRecipes(recipes);
-
-            filterListElements(selectedRecipes, ingSelected);
-
-            displayRecipes(selectedRecipes);
-
-            removeSelectedElFromList(selectionIng, name);
-            /** delete the tag and put the element back in the list */
-            deleteTagAndUpdateList(tag, name);
-
-            updateCounterRecipes();
-        });       
-    }
 }
 
 
@@ -80,24 +46,25 @@ function deleteTagAndUpdateList(tag, name){
     crossToDeleteTag.classList.add('tag-delete');
     tag.appendChild(crossToDeleteTag);
 
-      /** listener for delete the tag and put the element back in the list */
+    /** listener for delete the tag and put the element back in the list */
     crossToDeleteTag.addEventListener('click', () => {
         const item = crossToDeleteTag.parentElement.querySelector('p').innerText.toLowerCase().trim();
         let  selectedRecipes = [];
-        /*****  update selection to the tag *****/
-        /** find index corresponding of item (innerText to the tag) */
+
+        /*****  Update selection to the tag *****/
+        /** Find index corresponding of item (innerText to the tag) */
         const index = selectionIng.findIndex(i => i === item);
-         /** delete of the array selectionIng the item corresponding  */
+         /** Delete of the array selectionIng the item corresponding  */
         selectionIng.splice(index, 1);
+    
 
         /** To delete tag */
         tag.style.display = 'none';
 
-        /** To filter recipes */
+        /** To get selected recipes */
         selectedRecipes = getSelectedRecipes(recipes);
- 
-
-        putBackSelectedElFromList(selectedRecipes, selectionIng, name)
+        /** put the deleted tag element back into the list of elements */
+        putBackDeselectedElFromList(selectedRecipes, selectionIng, name)
 
         updateCounterRecipes();
 
@@ -161,40 +128,31 @@ function getSelectedRecipes(recipes){
 }
 
 
+function putBackDeselectedElFromList(selectedRecipes, selectionIng, name){
+
+    /** delete list elements of filters for recreate it with updated recipes */
+    deleteListElement();
+    /** to filter list with updated recipes */
+    filterListElements(selectedRecipes);
+    /** redisplay recipes  */
+    displayRecipes(selectedRecipes);
+    /** remove from the list the elements for which tags are always displayed */
+    removeTagOfListElement(selectionIng, name);
+}
+
+
 function removeSelectedElFromList(selectionIng, name){
-
     const dropdown = document.querySelector(`#main_filter-bar-${name}`);
-    const listElementsToFilter = document.querySelectorAll('.' + name);
-
-   /** removes the displayed tag from the list of elements */
-    listElementsToFilter.forEach(el => {
-        // console.log(el);
-        selectionIng.forEach(selection => {
-            // console.log(selection);
-            if(el.innerText.toLowerCase().trim() === selection){
-                el.style.display = 'none';
-            }
-        });
-    });
+    removeTagOfListElement(selectionIng, name);
     dropdown.classList.toggle('displayBlock');
 }
 
 
-function putBackSelectedElFromList(selectedRecipes, selectionIng, name){
-
-
-    deleteListElement();
-
-    filterListElements(selectedRecipes);
-    /** redisplay recipes  */
-    displayRecipes(selectedRecipes);
-
-    const listElementsToFilter = document.querySelectorAll('.' + name);      
-    /** removes the displayed tag from the list of elements */
+function removeTagOfListElement(selectionIng, name){
+    const listElementsToFilter = document.querySelectorAll('.' + name);
+   /** remove from the list the elements for which tags are always displayed */
     listElementsToFilter.forEach(el => {
-        // console.log(el);
         selectionIng.forEach(selection => {
-            // console.log(selection);
             if(el.innerText.toLowerCase().trim() === selection){
                 el.style.display = 'none';
             }
@@ -202,21 +160,38 @@ function putBackSelectedElFromList(selectedRecipes, selectionIng, name){
     });
 }
 
-// function removeTagOfListElement(selectionIng, name ){
-//     const listElementsToFilter = document.querySelectorAll('.' + name);
-//     /** removes the displayed tag from the list of elements */
-//     listElementsToFilter.forEach(el => {
-//         // console.log(el);
-//         selectionIng.forEach(selection => {
-//             // console.log(selection);
-//             if(el.innerText.toLowerCase().trim() === selection){
-//                 el.style.display = 'none';
-//             }
-//         });
-//     });
-// }
 
+function updateRecipesByIngredients(name, recipes, mainTagWrapper){
+    let ingSelected;
+    const listElements = document.querySelectorAll('.' + name);
+    let  selectedRecipes = [];
 
+    for(let elSelectedInList of listElements){
+        elSelectedInList.addEventListener('click', () => {
+            /** save ingredient selected */
+            ingSelected =  elSelectedInList.innerText.toLowerCase().trim(); 
+            /** save all selected ingredients*/
+            selectionIng.push(ingSelected);
+            /** Create tag  */
+            const tag = createTag(name, elSelectedInList);
+            mainTagWrapper.appendChild(tag);
+            /** delete list elements of filters for recreate it with updated recipes */
+            deleteListElement();
+    
+            selectedRecipes = getSelectedRecipes(recipes);
+
+            filterListElements(selectedRecipes, ingSelected);
+
+            displayRecipes(selectedRecipes);
+
+            removeSelectedElFromList(selectionIng, name);
+            /** delete the tag and put the element back in the list */
+            deleteTagAndUpdateList(tag, name);
+
+            updateCounterRecipes();
+        });       
+    }
+}
 
 /** update number recipes */
 function updateCounterRecipes(){
