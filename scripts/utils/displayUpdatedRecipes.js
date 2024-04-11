@@ -5,6 +5,7 @@ import { filterUstensils } from "../templates/filterUstensils.js";
 import { recipes } from "../../data/recipes.js";
 
 
+
 /** Selection de plusieurs ingredients - selectSeveralIng */
 const selectionIng = [];
 
@@ -16,6 +17,7 @@ export function displayUpdatedRecipes(name){
     displayRecipes(recipes);
 
     updateRecipesByIngredients(name, recipes, mainTagWrapper);
+
 }
 
 
@@ -57,12 +59,11 @@ function deleteTagAndUpdateList(tag, name){
          /** Delete of the array selectionIng the item corresponding  */
         selectionIng.splice(index, 1);
     
-
         /** To delete tag */
         tag.style.display = 'none';
 
         /** To get selected recipes */
-        selectedRecipes = getSelectedRecipes(recipes);
+        selectedRecipes = getSelectedRecipesByIngredients(recipes);
         /** put the deleted tag element back into the list of elements */
         putBackDeselectedElFromList(selectedRecipes, selectionIng, name)
 
@@ -90,9 +91,9 @@ function filterListElements(sortBy){
 }
 
 
-function getIngredientsByRecipesSelected(el){
+function getIngredientsBySelectedRecipes(recipes){
     /** get array of ingredients for each recipe */
-    const arrayIngredients = el.ingredients;
+    const arrayIngredients = recipes.ingredients;
     let ingredientsByRecipes = [];
 
     /** create an array of ingredients per recipe  */
@@ -103,14 +104,35 @@ function getIngredientsByRecipesSelected(el){
     return ingredientsByRecipes;
 }
 
+function getAppliancesByRecipesSelected(selectedRecipes){
+    /** get array of ingredients for each recipe */
 
-function getSelectedRecipes(recipes){
+    let applianceByRecipes = new Set();
+    let getAppliances;
+
+    /** create an array of ingredients per recipe  */
+    selectedRecipes.forEach(recip => {     
+        
+        applianceByRecipes.add(recip.appliance.toLowerCase().trim());
+        // applianceByRecipes.push(recip.appliance);
+    });
+   ;
+    getAppliances = Array.from(applianceByRecipes).sort()
+    console.log(getAppliances);
+    return applianceByRecipes;
+}
+
+// createTagByApplianceSelected(){
+
+// }
+
+
+function getSelectedRecipesByIngredients(recipes){
 /** list to return */
     const list = [];
     recipes.forEach(recipe => {
         let count = 0; 
-        let ingredientsByRecipes = getIngredientsByRecipesSelected(recipe);
-
+        let ingredientsByRecipes = getIngredientsBySelectedRecipes(recipe);
         selectionIng.forEach(ing => {
             /** displays recipes that contain the selected tag */
             if(ingredientsByRecipes.indexOf(ing) > -1){
@@ -126,6 +148,8 @@ function getSelectedRecipes(recipes){
 
     return list; 
 }
+
+
 
 
 function putBackDeselectedElFromList(selectedRecipes, selectionIng, name){
@@ -178,9 +202,10 @@ function updateRecipesByIngredients(name, recipes, mainTagWrapper){
             /** delete list elements of filters for recreate it with updated recipes */
             deleteListElement();
     
-            selectedRecipes = getSelectedRecipes(recipes);
+            selectedRecipes = getSelectedRecipesByIngredients(recipes);
 
-            filterListElements(selectedRecipes, ingSelected);
+                getAppliancesByRecipesSelected(selectedRecipes);
+            filterListElements(selectedRecipes);
 
             displayRecipes(selectedRecipes);
 
