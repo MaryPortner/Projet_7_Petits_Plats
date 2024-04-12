@@ -5,19 +5,14 @@ import { filterUstensils } from "../templates/filterUstensils.js";
 import { recipes } from "../../data/recipes.js";
 
 
-
 /** Selection de plusieurs ingredients - selectSeveralIng */
 const selectionIng = [];
+const selectApp = [];
+const selectUte = [];
 
 export function displayUpdatedRecipes(name){
-
-    const mainFilter = document.querySelector(`#main_filter-${name}-wrapper`);
-    const mainTagWrapper = mainFilter.querySelector('.main_Tag-wrapper');
-
     displayRecipes(recipes);
-
-    updateRecipesByIngredients(name, recipes, mainTagWrapper);
-
+    updateRecipesbyFilter(name, recipes);
 }
 
 
@@ -29,7 +24,11 @@ function createTag(name, elSelectedInList){
     textEl.classList.add(`tag-${name}-p`);
     textEl.innerText =  `${elSelectedInList.innerText}`; 
 
+    const crossToDeleteTag = document.createElement('span');
+    crossToDeleteTag.classList.add('tag-delete');
+
     tag.appendChild(textEl);
+    tag.appendChild(crossToDeleteTag);
 
     return tag;
 }
@@ -43,34 +42,31 @@ function deleteListElement(){
 
 
 function deleteTagAndUpdateList(tag, name){
-    /** Create cross to delete tag */
-    const crossToDeleteTag = document.createElement('span');
-    crossToDeleteTag.classList.add('tag-delete');
-    tag.appendChild(crossToDeleteTag);
+
+    let crossToDeleteTag = tag.querySelector('.tag-delete');
 
     /** listener for delete the tag and put the element back in the list */
     crossToDeleteTag.addEventListener('click', () => {
         const item = crossToDeleteTag.parentElement.querySelector('p').innerText.toLowerCase().trim();
-        let  selectedRecipes = [];
-
-        /*****  Update selection to the tag *****/
-        /** Find index corresponding of item (innerText to the tag) */
+        let  filteredRecipes = [];
+        /*****  update selection to the tag *****/
+        /** find index corresponding of item (innerText to the tag) */
         const index = selectionIng.findIndex(i => i === item);
-         /** Delete of the array selectionIng the item corresponding  */
+         /** delete of the array selectionIng the item corresponding  */
         selectionIng.splice(index, 1);
-    
+
         /** To delete tag */
         tag.style.display = 'none';
 
-        /** To get selected recipes */
-        selectedRecipes = getSelectedRecipesByIngredients(recipes);
-        /** put the deleted tag element back into the list of elements */
-        putBackDeselectedElFromList(selectedRecipes, selectionIng, name)
+        /** To filter recipes */
+        filteredRecipes = getfilteredRecipes(recipes, name);
+ 
+        putBackSelectedElFromList(filteredRecipes, selectionIng, name)
 
         updateCounterRecipes();
 
     });  
-  
+
 }
 
 
@@ -91,9 +87,9 @@ function filterListElements(sortBy){
 }
 
 
-function getIngredientsBySelectedRecipes(recipes){
+function getIngredients(recipe){
     /** get array of ingredients for each recipe */
-    const arrayIngredients = recipes.ingredients;
+    const arrayIngredients = recipe.ingredients;
     let ingredientsByRecipes = [];
 
     /** create an array of ingredients per recipe  */
@@ -104,79 +100,117 @@ function getIngredientsBySelectedRecipes(recipes){
     return ingredientsByRecipes;
 }
 
-function getAppliancesByRecipesSelected(selectedRecipes){
-    /** get array of ingredients for each recipe */
+// function getAppliances(recipe){
+//     console.log(recipe.appliance);
+//     let applianceByRecipes = [];
+//     applianceByRecipes.push(recipe.appliance.toLowerCase().trim());
 
-    let applianceByRecipes = new Set();
-    let getAppliances;
+//     return applianceByRecipes;
 
-    /** create an array of ingredients per recipe  */
-    selectedRecipes.forEach(recip => {     
-        
-        applianceByRecipes.add(recip.appliance.toLowerCase().trim());
-        // applianceByRecipes.push(recip.appliance);
-    });
-   ;
-    getAppliances = Array.from(applianceByRecipes).sort()
-    console.log(getAppliances);
-    return applianceByRecipes;
-}
 
-// createTagByApplianceSelected(){
 
 // }
 
 
-function getSelectedRecipesByIngredients(recipes){
-/** list to return */
+
+
+function getfilteredRecipes(recipes, name){
+    /** list to return */
     const list = [];
     recipes.forEach(recipe => {
         let count = 0; 
-        let ingredientsByRecipes = getIngredientsBySelectedRecipes(recipe);
-        selectionIng.forEach(ing => {
-            /** displays recipes that contain the selected tag */
-            if(ingredientsByRecipes.indexOf(ing) > -1){
-                count ++;
+
+        if(name === 'ingredients'){
+            let ingredientsByRecipes = getIngredients(recipe);
+            selectionIng.forEach(ing => {
+                /** displays recipes that contain the selected tag */
+                if(ingredientsByRecipes.indexOf(ing) > -1){
+                    count ++;
+                }
+            })
+    
+            if( count == selectionIng.length){
+                /** Create a new recipe list when filtering by ingredients selected */
+                list.push(recipe);
             }
-        })
-
-        if( count == selectionIng.length){
-             /** Create a new recipe list when filtering by ingredients selected */
-            list.push(recipe);
         }
+
+
+
     });
-
+    
     return list; 
-}
+      
+       
 
 
 
 
-function putBackDeselectedElFromList(selectedRecipes, selectionIng, name){
+     
 
-    /** delete list elements of filters for recreate it with updated recipes */
-    deleteListElement();
-    /** to filter list with updated recipes */
-    filterListElements(selectedRecipes);
-    /** redisplay recipes  */
-    displayRecipes(selectedRecipes);
-    /** remove from the list the elements for which tags are always displayed */
-    removeTagOfListElement(selectionIng, name);
-}
+
+
+    // To filter by Appliances
+
+        // To filter by ingredients
+        // recipes.forEach(recipe => {
+        //     let count = 0; 
+
+        
+        //     let applianceByRecipes = getAppliances(recipe);
+     
+    
+        //     selectApp.forEach(app => {
+        //         /** displays recipes that contain the selected tag */
+        //         if(applianceByRecipes.indexOf(app) > -1){
+        //             count ++;
+        //         }
+        //     })
+    
+        //     if( count == selectApp.length){
+        //          /** Create a new recipe list when filtering by ingredients selected */
+        //         list.push(recipe);
+        //     }
+        // });
+
+    
+  
+    }
 
 
 function removeSelectedElFromList(selectionIng, name){
+
     const dropdown = document.querySelector(`#main_filter-bar-${name}`);
-    removeTagOfListElement(selectionIng, name);
+    const listElementsToFilter = document.querySelectorAll('.' + name);
+
+   /** removes the displayed tag from the list of elements */
+    listElementsToFilter.forEach(el => {
+        // console.log(el);
+        selectionIng.forEach(selection => {
+            // console.log(selection);
+            if(el.innerText.toLowerCase().trim() === selection){
+                el.style.display = 'none';
+            }
+        });
+    });
     dropdown.classList.toggle('displayBlock');
 }
 
 
-function removeTagOfListElement(selectionIng, name){
-    const listElementsToFilter = document.querySelectorAll('.' + name);
-   /** remove from the list the elements for which tags are always displayed */
+function putBackSelectedElFromList(filteredRecipes, selectionIng, name){
+
+    deleteListElement();
+
+    filterListElements(filteredRecipes);
+    /** redisplay recipes  */
+    displayRecipes(filteredRecipes);
+
+    const listElementsToFilter = document.querySelectorAll('.' + name);      
+    /** removes the displayed tag from the list of elements */
     listElementsToFilter.forEach(el => {
+        // console.log(el);
         selectionIng.forEach(selection => {
+            // console.log(selection);
             if(el.innerText.toLowerCase().trim() === selection){
                 el.style.display = 'none';
             }
@@ -185,10 +219,23 @@ function removeTagOfListElement(selectionIng, name){
 }
 
 
-function updateRecipesByIngredients(name, recipes, mainTagWrapper){
+/** update number recipes */
+function updateCounterRecipes(){
+    const recipesContainer = document.querySelector('#main_allRecipes');
+    /** get number of recipes displayed */
+    let numberRecipes = recipesContainer.childElementCount; 
+    /** update display number of recipes */
+    document.querySelector('.numberRecipes').innerText = numberRecipes;
+}
+
+
+function updateRecipesbyFilter(name, recipes){
+
+    const mainFilter = document.querySelector(`#main_filter-${name}-wrapper`);
+    const mainTagWrapper = mainFilter.querySelector('.main_Tag-wrapper');
     let ingSelected;
     const listElements = document.querySelectorAll('.' + name);
-    let  selectedRecipes = [];
+    let  filteredRecipes = [];
 
     for(let elSelectedInList of listElements){
         elSelectedInList.addEventListener('click', () => {
@@ -199,15 +246,15 @@ function updateRecipesByIngredients(name, recipes, mainTagWrapper){
             /** Create tag  */
             const tag = createTag(name, elSelectedInList);
             mainTagWrapper.appendChild(tag);
+
             /** delete list elements of filters for recreate it with updated recipes */
             deleteListElement();
-    
-            selectedRecipes = getSelectedRecipesByIngredients(recipes);
+        
+            filteredRecipes = getfilteredRecipes(recipes, name);
 
-                getAppliancesByRecipesSelected(selectedRecipes);
-            filterListElements(selectedRecipes);
+            filterListElements(filteredRecipes);
 
-            displayRecipes(selectedRecipes);
+            displayRecipes(filteredRecipes);
 
             removeSelectedElFromList(selectionIng, name);
             /** delete the tag and put the element back in the list */
@@ -216,13 +263,6 @@ function updateRecipesByIngredients(name, recipes, mainTagWrapper){
             updateCounterRecipes();
         });       
     }
-}
 
-/** update number recipes */
-function updateCounterRecipes(){
-    const recipesContainer = document.querySelector('#main_allRecipes');
-    /** get number of recipes displayed */
-    let numberRecipes = recipesContainer.childElementCount; 
-    /** update display number of recipes */
-    document.querySelector('.numberRecipes').innerText = numberRecipes;
+    // getAppliances(recipes);
 }
