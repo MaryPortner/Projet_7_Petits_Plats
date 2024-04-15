@@ -54,7 +54,7 @@ function deleteTagAndUpdateList(tag, name){
         if(name === 'appliances'){
             /** find index corresponding of item (innerText to the tag) */
             const index = selectApp.findIndex(i => i === item);
-            /** delete of the array selectIng the item corresponding  */
+            /** delete of the array selectApp the item corresponding  */
             selectApp.splice(index, 1);
         }
 
@@ -74,9 +74,15 @@ function deleteTagAndUpdateList(tag, name){
         /** To filter recipes */
         filteredRecipes = getFilteredRecipes(recipes, name);
         /** put back selected element from list after delete tag corresponding */
-        putBackSelectedElFromList(filteredRecipes, selectIng, name);
-        putBackSelectedElFromList(filteredRecipes, selectUst, name);
+        
+        if(name === 'ingredients'){
+            putBackSelectedElFromList(filteredRecipes, selectIng, name);
+        }
 
+        if(name === 'ustensils'){
+            putBackSelectedElFromList(filteredRecipes, selectUst, name);
+        }
+        
         updateCounterRecipes();
 
     });  
@@ -202,7 +208,6 @@ function removeSelectedElFromList(selectEl, name){
 
     const dropdown = document.querySelector(`#main_filter-bar-${name}`);
     const listElementsToFilter = document.querySelectorAll('.' + name);
-    console.log(listElementsToFilter);
 
    /** removes the displayed tag from the list of elements */
     listElementsToFilter.forEach(el => {
@@ -227,7 +232,8 @@ function putBackSelectedElFromList(filteredRecipes, select, name){
     /** redisplay recipes  */
     displayRecipes(filteredRecipes);
 
-    const listElementsToFilter = document.querySelectorAll('.' + name);      
+    const listElementsToFilter = document.querySelectorAll('.' + name);
+    console.log(listElementsToFilter);      
     /** removes the displayed tag from the list of elements */
     listElementsToFilter.forEach(el => {
         select.forEach(selection => {
@@ -238,6 +244,7 @@ function putBackSelectedElFromList(filteredRecipes, select, name){
         });
     });
 }
+
 
 
 /** update number recipes */
