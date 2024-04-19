@@ -314,7 +314,7 @@ function updateRecipesbyFilter(name, recipes){
 
             updateCounterRecipes();
 
-            displayRecipesWithMultiFilters(name, filteredRecipes);
+            displayRecipesWithMultiFilters(recipes);
 
           
 
@@ -325,51 +325,152 @@ function updateRecipesbyFilter(name, recipes){
 }
 
  
-function displayRecipesWithMultiFilters(name, filteredRecipes){
-    console.log(filteredRecipes);
+function displayRecipesWithMultiFilters(recipes){
+
+
     /** get list elements */
     const listElementsApp = document.querySelectorAll('.appliances');
     const listElementsIng = document.querySelectorAll('.ingredients');
     const listElementsUst = document.querySelectorAll('.ustensils');
 
-    let multiFilteredRecipes = [];
-    let selectIng = [];
-    let selectUst = [];
+    let multiRecipes = [];
+    let multiFilteredRecipes = new Set();
 
-    filteredRecipes.forEach(recipe => {
+    console.log(selectIng);
+    console.log(selectUst);
+    console.log(selectApp);
+
+
+    recipes.forEach(recipe => {
         /** get all elements by recipe */
         const appliancesByRecipes =  getAppliances(recipe);
         const ingredientsByRecipes =  getIngredients(recipe);
         const ustensilsByRecipes = getUstensils(recipe);
+    /** get recipes contains selected elements */
+        appliancesByRecipes.forEach(app => {
+            selectApp.forEach(a => {
+                if(app === a){
+                    multiRecipes.push(recipe);
+                }
+            });
+        });
 
-        // if(name === 'appliances'){
-            for(let el of listElementsIng){
-                /** when clicking on an element */
-                el.addEventListener('click', () => {
-                    selectIng.push(el);
-                    // console.log(selectIng);
-                    /** if the recipe contains el clicked, push it into the array*/
-                    if(ingredientsByRecipes.includes(el.innerHTML)){
-                        multiFilteredRecipes.push(recipe);
-                    }
-                    // removeSelectedElFromList(selectIng, 'ingredients');
-                    displayRecipes(multiFilteredRecipes);
-                });
-            }
+        ingredientsByRecipes.forEach(ing => {
+            selectIng.forEach(i => {
+                if(ing === i){
+                    multiRecipes.push(recipe);
+                }
+            });
+        });
 
-    
-
-            // const ustensilsByRecipes = getUstensils(recipe);
-            // console.log(ustensilsByRecipes);
-        // }
-
-
-        console.log(multiFilteredRecipes);
-    
-    
-        updateCounterRecipes();
-    
+        ustensilsByRecipes.forEach(ust => {
+            selectUst.forEach(u => {
+                if(ust === u){
+                    multiRecipes.push(recipe);
+                    console.log(multiRecipes);
+                }
+            });
+        });
     });
+
+
+/** get the recipes with each of the selected elements */
+    multiRecipes.forEach(recipe => {
+        const appliancesByRecipes =  getAppliances(recipe);
+  
+
+
+        selectApp.forEach(app => {
+            if(appliancesByRecipes.includes(app)){
+                multiFilteredRecipes.add(recipe);
+            }
+        });
+    });
+
+    multiFilteredRecipes.forEach(recipe => {
+        const ingredientsByRecipes =  getIngredients(recipe);
+        selectIng.forEach(ing => {
+            if(!ingredientsByRecipes.includes(ing)){
+                multiFilteredRecipes.delete(recipe);
+            }
+        })
+    })
+
+    multiFilteredRecipes.forEach(recipe => {
+        const ustensilsByRecipes = getUstensils(recipe);
+        selectUst.forEach(ust => {
+            if(!ustensilsByRecipes.includes(ust)){
+                multiFilteredRecipes.delete(recipe);
+            }
+        })
+    })
+
+
+    displayRecipes(multiFilteredRecipes);
+
+    console.log(multiFilteredRecipes);
+
+
+
+// if(name === 'appliances'){
+    // for(let el of listElementsIng){
+    //     /** when clicking on an element */
+    //     el.addEventListener('click', () => {
+    //         selectIng.push(el);
+    //         // console.log(selectIng);
+    //         /** if the recipe contains el clicked, push it into the array*/
+    //         if(ingredientsByRecipes.includes(el.innerHTML)){
+    //             multiFilteredRecipes.push(recipe);
+    //         }
+    //         // removeSelectedElFromList(selectIng, 'ingredients');
+    //         displayRecipes(multiFilteredRecipes);
+    //     });
+    // }
+
+
+    //         // const ustensilsByRecipes = getUstensils(recipe);
+    //         // console.log(ustensilsByRecipes);
+    //     // }
+
+
+    //     console.log(multiFilteredRecipes);
+    
+    
+    //     updateCounterRecipes();
+    
+    // });
+
+
+
+//*  
+// function displayRecipesWithMultiFilters(recipes, name){
+
+//     const listElementsApp = document.querySelectorAll('.appliances');
+//     // console.log(listElementsApp);
+
+//     const listElementsIng = document.querySelectorAll('.ingredients');
+//     // console.log(listElementsIng);
+
+//     const listElementsUst = document.querySelectorAll('.ustensils');
+//     // console.log(listElementsUst);
+
+//     let filteredRecipes = getFilteredRecipes(recipes, name);
+//     console.log(filteredRecipes);
+
+//     // console.log(selectIng);
+//     // console.log(selectUst);
+//     // console.log(selectApp);
+
+//     listElementsApp.forEach(el => {
+//         el.addEventListener('click', () => {
+//             recipes.forEach(r => {
+//                 let allIng = r.ingredients;
+//                 console.log(allIng);
+//             // if(r.appliance.toLowerCase().trim()))
+//             })
+//         })
+//     })
+// }
    
   
 }

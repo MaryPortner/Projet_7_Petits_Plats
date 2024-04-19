@@ -13,3 +13,9 @@ export function collectAppliances(recipes){
     // console.log(arrayList);
     return arrayList;
 }
+
+
+
+
+
+
