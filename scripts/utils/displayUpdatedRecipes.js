@@ -2,6 +2,9 @@ import { CardRecipe } from "../class/cardRecipe.js";
 import { filterAppliances } from "../templates/filterAppliances.js";
 import { filterIngredients } from "../templates/filterIngredients.js";
 import { filterUstensils } from "../templates/filterUstensils.js";
+import { byAppliance } from "./getFilteredRecipes/ByAppliance.js";
+import { byIngredients } from "./getFilteredRecipes/byIngredients.js";
+import { byUstensils } from "./getFilteredRecipes/byUstensils.js";
 import { recipes } from "../../data/recipes.js";
 
 
@@ -76,6 +79,10 @@ function deleteTagAndUpdateList(tag, name){
         filteredRecipes = getFilteredRecipes(recipes, name);
         /** put back selected element from list after delete tag corresponding */
         
+        if(name === 'appliances'){
+            putBackSelectedElFromList(filteredRecipes, selectApp, name);
+        }
+
         if(name === 'ingredients'){
             putBackSelectedElFromList(filteredRecipes, selectIng, name);
         }
@@ -108,109 +115,24 @@ function filterListElements(sortBy){
 }
 
 
-function getAppliances(recipe){
-    /** get appliance per recipe  */
-    let applianceByRecipes = [];
-    applianceByRecipes.push(recipe.appliance.toLowerCase().trim());
-
-    return applianceByRecipes;
-}
-
-
-function getIngredients(recipe){
-    /** get array of ingredients per recipe */
-    const arrayIngredients = recipe.ingredients;
-    let ingredientsByRecipes = [];
-
-    /** create an array of ingredients per recipe  */
-    arrayIngredients.forEach(ingredients => {         
-        ingredientsByRecipes.push(ingredients.ingredient.toLowerCase().trim());
-    });
-
-    return ingredientsByRecipes;
-}
-
-
-function getUstensils(recipe){
-    /** get array of ingredients per recipe */
-    const arrayUstensils = recipe.ustensils;
-    let ustensilsByRecipes = [];
-
-    /** create an array of ingredients per recipe  */
-    arrayUstensils.forEach(ustensils => {         
-        ustensilsByRecipes.push(ustensils.toLowerCase().trim());
-    });
-
-    return ustensilsByRecipes;
-}
-
 
 function getFilteredRecipes(recipes, name){
     /** list to return */
     const list = [];
     recipes.forEach(recipe => {
-        let countApp = 0; 
-        let countIng = 0; 
-        let countUst = 0; 
-
-        let ingMatch = true;
-        let ustMatch = true;
-        let appMatch = true;
-
+  
         // To filter by Appliances
         if(name === 'appliances'){
-            let applianceByRecipes = getAppliances(recipe);
-            console.log(applianceByRecipes)
-            selectApp.forEach(app => {
-                console.log(app);
-                /** displays recipes that contain the selected tag */
-                console.log(applianceByRecipes.indexOf(app) > -1);
-                if(applianceByRecipes.indexOf(app) > -1){
-                    countApp ++;
-                }
-            });
-            console.log(countApp != selectApp.length);
-            if( countApp != selectApp.length){
-                /** Create a new recipe list when filtering by appliance selected */
-                appMatch = false;
-            }
+            byAppliance(recipe, selectApp, list);
         }
 
         if(name === 'ingredients'){
-            let ingredientsByRecipes = getIngredients(recipe);
-            console.log(ingredientsByRecipes);
-            selectIng.forEach(ing => {
-                /** displays recipes that contain the selected tag */
-                if(ingredientsByRecipes.indexOf(ing) > -1){
-                    countIng ++;
-                }
-            });
-    
-            if( countIng != selectIng.length){
-                /** Create a new recipe list when filtering by ingredients selected */
-                ingMatch = false;
-            }
+            byIngredients(recipe, selectIng, list);
         }
 
         if(name === 'ustensils'){
-            let ustensilsByRecipes = getUstensils(recipe);
-            console.log(ustensilsByRecipes);
-            selectUst.forEach(ust => {
-                    /** displays recipes that contain the selected tag */
-                    if(ustensilsByRecipes.indexOf(ust) > -1){
-                        countUst ++;
-                    }
-                });
-        
-                if( countUst != selectUst.length){
-                     /** Create a new recipe list when filtering by appliance selected */
-                    ustMatch = false;
-                }
-            }
-
-            if(appMatch && ingMatch && ustMatch){
-                list.push(recipe);
-            }
+            byUstensils(recipe, selectUst, list);
+        }
     });
     console.log(list);
     return list;     
