@@ -10,7 +10,7 @@ export function filterIngredients(recipes){
     const name = 'ingredients';
     elements = collectIngredients(recipes, name);
     /** Inserting list of utensils into the filter div */
-    const element =  createListOfElements(elements, name);
+    const element =  createListOfElements(name, elements);
     document.querySelector(`.main_filter-bar-${name}`).appendChild(element);
     
     deleteDataInput(name);

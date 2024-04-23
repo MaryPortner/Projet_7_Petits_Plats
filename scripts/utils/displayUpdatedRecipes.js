@@ -6,6 +6,7 @@ import { recipes } from "../../data/recipes.js";
 
 
 /** Selection de plusieurs ingredients - selectSeveralIng */
+let  filteredRecipes = [];
 const selectApp = [];
 const selectIng = [];
 const selectUst = [];
@@ -148,55 +149,70 @@ function getFilteredRecipes(recipes, name){
     /** list to return */
     const list = [];
     recipes.forEach(recipe => {
-        let count = 0; 
+        let countApp = 0; 
+        let countIng = 0; 
+        let countUst = 0; 
+
+        let ingMatch = true;
+        let ustMatch = true;
+        let appMatch = true;
 
         // To filter by Appliances
         if(name === 'appliances'){
             let applianceByRecipes = getAppliances(recipe);
+            console.log(applianceByRecipes)
             selectApp.forEach(app => {
+                console.log(app);
                 /** displays recipes that contain the selected tag */
+                console.log(applianceByRecipes.indexOf(app) > -1);
                 if(applianceByRecipes.indexOf(app) > -1){
-                    count ++;
+                    countApp ++;
                 }
             });
-    
-            if( count == selectApp.length){
+            console.log(countApp != selectApp.length);
+            if( countApp != selectApp.length){
                 /** Create a new recipe list when filtering by appliance selected */
-                list.push(recipe);
+                appMatch = false;
             }
         }
 
         if(name === 'ingredients'){
             let ingredientsByRecipes = getIngredients(recipe);
+            console.log(ingredientsByRecipes);
             selectIng.forEach(ing => {
                 /** displays recipes that contain the selected tag */
                 if(ingredientsByRecipes.indexOf(ing) > -1){
-                    count ++;
+                    countIng ++;
                 }
             });
     
-            if( count == selectIng.length){
+            if( countIng != selectIng.length){
                 /** Create a new recipe list when filtering by ingredients selected */
-                list.push(recipe);
+                ingMatch = false;
             }
         }
 
         if(name === 'ustensils'){
-            let applianceByRecipes = getUstensils(recipe);
+            let ustensilsByRecipes = getUstensils(recipe);
+            console.log(ustensilsByRecipes);
             selectUst.forEach(ust => {
                     /** displays recipes that contain the selected tag */
-                    if(applianceByRecipes.indexOf(ust) > -1){
-                        count ++;
+                    if(ustensilsByRecipes.indexOf(ust) > -1){
+                        countUst ++;
                     }
                 });
         
-                if( count == selectUst.length){
+                if( countUst != selectUst.length){
                      /** Create a new recipe list when filtering by appliance selected */
-                    list.push(recipe);
+                    ustMatch = false;
                 }
             }
+
+            if(appMatch && ingMatch && ustMatch){
+                list.push(recipe);
+            }
     });
-    
+    console.log(list);
     return list;     
 
 }
@@ -256,7 +272,7 @@ function updateCounterRecipes(){
 
 
 function updateRecipesbyFilter(name, recipes){
-    let filteredRecipes = [];
+
     const mainFilter = document.querySelector(`#main_filter-${name}-wrapper`);
     const mainTagWrapper = mainFilter.querySelector('.main_Tag-wrapper');
     let selection;

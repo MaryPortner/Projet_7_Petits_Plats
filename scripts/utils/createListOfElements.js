@@ -1,5 +1,5 @@
 /** Create list of elements for dropdown - Section filters - */
-export function createListOfElements(elements, name){
+export function createListOfElements(name, elements){
     const classUl = `filter-${name}-list` ;
     const ul = document.createElement('ul');
     ul.classList.add(`${classUl}`);

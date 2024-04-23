@@ -10,7 +10,7 @@ export function collectAppliances(recipes){
         /** sort alphabetically */
         arrayList = [...list].sort();
     }
-    // console.log(arrayList);
+    console.log(arrayList);
     return arrayList;
 }
 
@@ -19,3 +19,85 @@ export function collectAppliances(recipes){
 
 
 
+// function getFilteredRecipes(recipes, name){
+//     /** list to return */
+//     const list = [];
+//     recipes.forEach(recipe => {
+//         // let countApp = 0;
+//         let countIng = 0;
+//         let countUst = 0;
+
+//         let ingMatch = true;
+//         let ustMatch = true;
+//         let appMatch = true;
+       
+
+//         // // To filter by Appliances
+//         if(name === 'appliances'){
+        
+
+//             let applianceByRecipes = getAppliances(recipe);
+//             console.log(applianceByRecipes);
+
+        
+
+//             selectApp.forEach(app => {
+//                 /** displays recipes that contain the selected tag */
+//                 // if(applianceByRecipes.indexOf(app) > -1){
+//                 //     countApp ++;
+//                 // }
+
+
+//                 if(app != recipe.appliance){
+//                     console.log(app);
+//                     console.log(recipe.appliance);
+//                     appMatch = false;
+//                 }
+//             });
+    
+//             // if( countApp == selectApp.length){
+//             //     /** Create a new recipe list when filtering by appliance selected */
+//             //     // list.push(recipe);
+//             //     appMatch = true;
+//             // }
+//         }
+
+//         if(name === 'ingredients'){
+//             let ingredientsByRecipes = getIngredients(recipe);
+//             selectIng.forEach(ing => {
+//                 /** displays recipes that contain the selected tag */
+//                 if(ingredientsByRecipes.indexOf(ing) > -1){
+//                     countIng ++;
+//                 }
+//             });
+    
+//             if( countIng != selectIng.length){
+//                 /** Create a new recipe list when filtering by ingredients selected */
+//                 // list.push(recipe);
+//                 ingMatch = false;
+//             }
+//         }
+
+//         if(name === 'ustensils'){
+//             let ustensilsByRecipes = getUstensils(recipe);
+//             selectUst.forEach(ust => {
+//                 /** displays recipes that contain the selected tag */
+//                 if(ustensilsByRecipes.indexOf(ust) > -1){
+//                     countUst ++;
+//                 }
+//             });
+        
+//             if( countUst != selectUst.length){
+//                     /** Create a new recipe list when filtering by appliance selected */
+//                 // list.push(recipe);
+//                 ingMatch = false;
+//             }
+//         }  
+
+//         if (appMatch && ingMatch && ustMatch){
+//             list.push(recipe);
+//         }
+//     });
+
+//     return list;     
+// }

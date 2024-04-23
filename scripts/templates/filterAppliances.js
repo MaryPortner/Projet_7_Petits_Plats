@@ -13,7 +13,7 @@ export function filterAppliances(recipes){
     elements = collectAppliances(recipes);
     
     /** Inserting list of appliances into the filter div */
-    const element =  createListOfElements(elements, name);
+    const element =  createListOfElements(name, elements);
     document.querySelector(`.main_filter-bar-${name}`).appendChild(element);
 
     deleteDataInput(name);

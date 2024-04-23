@@ -16,6 +16,8 @@ export function collectIngredients(recipes){
 
     
     }
+
+    console.log(arrayList);
     return arrayList;
  }
 
