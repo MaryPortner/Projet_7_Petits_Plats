@@ -1,15 +1,21 @@
+import { byAppliance } from "./getFilteredRecipes/ByAppliance.js";
+import { byIngredients } from "./getFilteredRecipes/byIngredients.js";
+import { byUstensils } from "./getFilteredRecipes/byUstensils.js";
 import { CardRecipe } from "../class/cardRecipe.js";
 import { filterAppliances } from "../templates/filterAppliances.js";
 import { filterIngredients } from "../templates/filterIngredients.js";
 import { filterUstensils } from "../templates/filterUstensils.js";
-import { byAppliance } from "./getFilteredRecipes/ByAppliance.js";
-import { byIngredients } from "./getFilteredRecipes/byIngredients.js";
-import { byUstensils } from "./getFilteredRecipes/byUstensils.js";
+import { getAppliancesByRecipe } from "./getByRecipes/getAppliances.js";
+import { getUstensilsByRecipe } from "./getByRecipes/getUstensils.js";
 import { recipes } from "../../data/recipes.js";
+
+
+
 
 
 /** Selection de plusieurs ingredients - selectSeveralIng */
 let  filteredRecipes = [];
+let listFilteredByIngredients = [];
 const selectApp = [];
 const selectIng = [];
 const selectUst = [];
@@ -134,11 +140,67 @@ function getFilteredRecipes(recipes, name){
             byUstensils(recipe, selectUst, list);
         }
     });
-    console.log(list);
-    return list;     
 
+    return list;    
 }
 
+
+
+function selectByAppliance(){
+    const listFiltered = filteredRecipes;
+    let countApp = 0;
+    const list = [];
+
+    listFiltered.forEach(recipe => {
+        let applianceByRecipes = getAppliancesByRecipe(recipe);
+        selectApp.forEach(app => {
+            if (applianceByRecipes.indexOf(app) > -1){
+                console.log(recipe);
+                countApp++;
+            }
+        });
+
+        if(countApp == selectApp.length){
+            list.push(recipe);
+        }
+    });
+
+    // console.log(list);
+    return list;
+}
+
+
+// function selectByUstensils(listFilteredByIngredients){
+//     console.log(listFilteredByIngredients);
+//     const listFiltered = listFilteredByIngredients;
+//     let countUst = 0;
+//     const list = [];
+
+//     listFiltered.forEach(recipe => {
+//         let ustensilsByRecipes = getUstensilsByRecipe(recipe);
+//         // byAppliance(recipe, selectApp, list);
+//         selectUst.forEach(ust => {
+//             /** count recipes that contain selected tags */
+//             if(ustensilsByRecipes.includes(ust) > -1){
+//                 countUst ++;
+//             }
+//         });
+        
+//         if(countUst == selectUst.length){
+//                 /** Create a new recipe list when filtering by ustensils selected */
+//             list.push(recipe);
+//         }
+//    });
+//     // console.log(list);
+//     return list;
+// }
+
+
+
+
+
+
+// getRecipesByMultiSelection(filteredRecipes);
 
 function removeSelectedElFromList(selectEl, name){
 
@@ -234,17 +296,27 @@ function updateRecipesbyFilter(name, recipes){
             displayRecipes(filteredRecipes);
 
             /** remove elements in list of filter */
-            if(name === 'appliances'){
-                removeSelectedElFromList(selectApp, name);
-            }
+            removeSelectedElFromList(selectApp, name);
+            removeSelectedElFromList(selectIng, name);
+            removeSelectedElFromList(selectUst, name);
+        
 
-            if(name === 'ingredients'){
-                removeSelectedElFromList(selectIng, name);
-            }
-            
-            if(name === 'ustensils'){
-                removeSelectedElFromList(selectUst, name);
-            }
+            selectByAppliance();
+
+            const listFilteredByIngredients = selectByAppliance();
+
+            // filterListElements(listFiltered);
+            displayRecipes(listFilteredByIngredients);
+
+            console.log(listFilteredByIngredients);
+
+            /** To Filter by ustensils */
+
+            // selectByUstensils(listFilteredByIngredients);
+
+            // const listFilteredByUstensils = selectByUstensils();
+
+            // displayRecipes(listFilteredByUstensils);
     
             /** delete the tag and put the element back in the list */
             deleteTagAndUpdateList(tag, name);

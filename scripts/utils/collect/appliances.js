@@ -10,7 +10,6 @@ export function collectAppliances(recipes){
         /** sort alphabetically */
         arrayList = [...list].sort();
     }
-    console.log(arrayList);
     return arrayList;
 }
 
