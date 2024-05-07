@@ -147,15 +147,13 @@ function getFilteredRecipes(recipes, name){
 }
 
 
-function removeSelectedElFromList(selectEl, name){
-    const dropdown = document.querySelector(`#main_filter-bar-${name}`);
+function removeSelectedElFromList(name, allElSelected){
+
     const listElementsToFilter = document.querySelectorAll('.' + name);
 
-   /** removes the displayed tag from the list of elements */
-    listElementsToFilter.forEach(el => {
-
-        // console.log(el);
-        selectEl.forEach(selection => {
+    /** removes the displayed tag from the list of elements */
+    listElementsToFilter.forEach(el => {    
+        allElSelected.forEach(selection => {
             // console.log(selection);
             if(el.innerText.toLowerCase().trim() === selection){
                 el.style.display = 'none';
@@ -163,9 +161,8 @@ function removeSelectedElFromList(selectEl, name){
         });
     });
 
-    dropdown.classList.toggle('displayBlock');
+    document.querySelector(`#main_filter-bar-${name}`).classList.toggle('displayBlock');  
 }
-
 
 function putBackSelectedElFromList(filteredRecipes, select, name){
 
@@ -175,8 +172,7 @@ function putBackSelectedElFromList(filteredRecipes, select, name){
     /** redisplay recipes  */
     displayRecipes(filteredRecipes);
 
-    const listElementsToFilter = document.querySelectorAll('.' + name);
-    console.log(listElementsToFilter);      
+    const listElementsToFilter = document.querySelectorAll('.' + name);    
     /** removes the displayed tag from the list of elements */
     listElementsToFilter.forEach(el => {
         select.forEach(selection => {
@@ -201,7 +197,7 @@ function updateCounterRecipes(){
 
 
 function updateRecipesbyFilter(name, recipes){
-
+    let allElSelected = [];
     const mainFilter = document.querySelector(`#main_filter-${name}-wrapper`);
     const mainTagWrapper = mainFilter.querySelector('.main_Tag-wrapper');
     let selection;
@@ -227,6 +223,20 @@ function updateRecipesbyFilter(name, recipes){
                 selectUst.push(selection);
             }
 
+            selectApp.forEach(select => {
+                allElSelected.push(select)
+            })
+
+            selectIng.forEach(select => {
+                allElSelected.push(select)
+            });
+
+            selectUst.forEach(select => {
+                allElSelected.push(select)
+            })
+
+            // console.log(allElSelected);
+
             /** Create tag  */
             const tag = createTag(name, elSelected);
             mainTagWrapper.appendChild(tag);
@@ -245,9 +255,9 @@ function updateRecipesbyFilter(name, recipes){
             displayRecipes(filteredRecipes);
 
             /** remove elements in list of filter */
-            removeSelectedElFromList(selectApp, name);
-            removeSelectedElFromList(selectIng, name);
-            removeSelectedElFromList(selectUst, name);
+            removeSelectedElFromList(name, allElSelected);
+            // removeSelectedElFromList('ingredients', allElSelected);
+            // removeSelectedElFromList('ustensils', allElSelected);
     
             /** delete the tag and put the element back in the list */
             deleteTagAndUpdateList(tag, name);

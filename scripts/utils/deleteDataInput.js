@@ -3,7 +3,6 @@ export function deleteDataInput(name){
     const inputData = document.querySelector(`#filter-sort-${name}`);
     const btnDropdown = document.querySelector(`#btn-display-dropdown-${name}`);
 
-
     btnDropdown.addEventListener('click', () =>{
         inputData.value = '';
         

@@ -1,59 +1,70 @@
-//    // To filter by Appliances
-//    if(name === 'appliances'){
-//     let applianceByRecipes = getAppliances(recipe);
-//     console.log(applianceByRecipes)
-//     selectApp.forEach(app => {
-//         console.log(app);
-//         /** displays recipes that contain the selected tag */
-//         console.log(applianceByRecipes.indexOf(app) > -1);
-//         if(applianceByRecipes.indexOf(app) > -1){
-//             countApp ++;
-//         }
-//     });
+// function removeSelectedElFromList(name, allElSelected){
+//     console.log(name);
+//     // if(name === 'appliances'){
 
-//     if( countApp != selectApp.length){
-//         /** Create a new recipe list when filtering by appliance selected */
-//         appMatch = false;
-//     }
-// }
+//     //     removeEl(name);
+//     // }
 
-// if(name === 'ingredients'){
-//     let ingredientsByRecipes = getIngredients(recipe);
-//     console.log(ingredientsByRecipes);
-//     selectIng.forEach(ing => {
-//         /** displays recipes that contain the selected tag */
-//         if(ingredientsByRecipes.indexOf(ing) > -1){
-//             countIng ++;
-//         }
-//     });
+//     // if(name === 'ingredients'){
 
-//     if( countIng != selectIng.length){
-//         /** Create a new recipe list when filtering by ingredients selected */
-//         ingMatch = false;
-//     }
-// }
+//     //     removeEl(name);
+//     // }
 
-// if(name === 'ustensils'){
-//     let ustensilsByRecipes = getUstensils(recipe);
-//     console.log(ustensilsByRecipes);
-//     selectUst.forEach(ust => {
-//             /** displays recipes that contain the selected tag */
-//             if(ustensilsByRecipes.indexOf(ust) > -1){
-//                 countUst ++;
+
+//     // if(name === 'ustensils'){
+ 
+//     //     removeEl(name
+     
+//     // }
+
+
+//     // const dropdown = document.querySelector(`#main_filter-bar-${name}`);
+//     const listElementsToFilter = document.querySelectorAll('.' + name);
+// //      const getTag = document.querySelectorAll('.tag-' + name);
+// //      let textTag;
+// //       getTag.forEach(tagText => {
+// //         textTag = tagText.innerText.toLowerCase();
+// //         console.log(textTag);
+// //       });
+
+//     let classList; 
+//    /** removes the displayed tag from the list of elements */
+//     listElementsToFilter.forEach(el => {
+//         classList = el.classList.value;
+//         // console.log(classList);
+
+//         allElSelected.forEach(selection => {
+//             console.log(selection);
+//             if(el.innerText.toLowerCase().trim() === selection){
+//                 el.style.display = 'none';
 //             }
 //         });
+//         // console.log(name);
 
-//         if( countUst != selectUst.length){
-//              /** Create a new recipe list when filtering by appliance selected */
-//             ustMatch = false;
-//         }
+//     });
+
+
+  
+
+
+//     if(name === 'appliances'){
+
+//         document.querySelector(`#main_filter-bar-${name}`).classList.toggle('displayBlock');  
 //     }
 
-//     if(appMatch && ingMatch && ustMatch){
-//         list.push(recipe);
-//     }
-// });
-// console.log(list);
-// return list;     
+//     if(name === 'ingredients'){
 
+//         document.querySelector(`#main_filter-bar-${name}`).classList.toggle('displayBlock');  
+//     }
+
+
+//     if(name === 'ustensils'){
+ 
+//         document.querySelector(`#main_filter-bar-${name}`).classList.toggle('displayBlock');  
+     
+//     }
+
+
+        
+  
 // }
