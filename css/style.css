@@ -166,6 +166,7 @@ input#search-q{
 
 div#header_search .header_delete-main{
     position: absolute;
+    z-index: 10;
     display: none;
     top: 18px;
     right: 40px;
@@ -177,7 +178,7 @@ div#header_search .header_delete-main{
     background-position: center center;
 }
 
-input.search-submit{
+button.search-submit{
     position: absolute;
     color: transparent;
     right: 3px;
@@ -193,7 +194,7 @@ input.search-submit{
     transition: 0.4s ease-in-out;
 }
 
-input.search-submit:hover, input.search-submit:focus{
+button.search-submit:hover, button.search-submit:focus{
     background: no-repeat url("./../assets/img/loopb.svg");
     object-fit: none;
     background-position: center center;
@@ -522,7 +523,7 @@ li:hover{
         right: 50px;
     }
 
-    input.search-submit{
+    button.search-submit{
         right: 10px;
     }
 }
@@ -679,7 +680,7 @@ li:hover{
         right: 80px;
     }
 
-    input.search-submit{
+    button.search-submit{
         right: 10px;
         width: 52px;
         height: 52px;

@@ -1,27 +1,23 @@
 import { byAppliance } from "./getFilteredRecipes/ByAppliance.js";
 import { byIngredients } from "./getFilteredRecipes/byIngredients.js";
 import { byUstensils } from "./getFilteredRecipes/byUstensils.js";
-import { CardRecipe } from "../class/cardRecipe.js";
+import { displayCardRecipes } from "./displayCardRecipes.js";
 import { filterAppliances } from "../filters/filterAppliances.js";
 import { filterIngredients } from "../filters/filterIngredients.js";
 import { filterUstensils } from "../filters/filterUstensils.js";
-import { getAppliancesByRecipe } from "./getByRecipes/getAppliances.js";
-import { getUstensilsByRecipe } from "./getByRecipes/getUstensils.js";
 import { recipes } from "../../data/recipes.js";
-
 
 
 
 
 /** Selection de plusieurs ingredients - selectSeveralIng */
 let  filteredRecipes = [];
-let listFilteredByIngredients = [];
 const selectApp = [];
 const selectIng = [];
 const selectUst = [];
 
 export function displayUpdatedRecipes(name){
-    displayRecipes(recipes);
+    displayCardRecipes(recipes);
     updateRecipesbyFilter(name, recipes);
 }
 
@@ -44,7 +40,7 @@ function createTag(name, elSelected){
 }
 
 
-function deleteListElement(){
+export function deleteListElement(){
     document.getElementById("main_filter-bar-appliances").removeChild(document.getElementById("main_filter-bar-appliances").children[1]);
     document.getElementById("main_filter-bar-ingredients").removeChild(document.getElementById("main_filter-bar-ingredients").children[1]);
     document.getElementById("main_filter-bar-ustensils").removeChild(document.getElementById("main_filter-bar-ustensils").children[1]);
@@ -106,22 +102,11 @@ function deleteTagAndUpdateList(tag, name){
 }
 
 
-function displayRecipes(recipesSortByElements){
-    document.querySelector('#main_allRecipes').innerHTML = '';
-
-    recipesSortByElements.forEach(recipe => {
-        let recipeUpdate = new CardRecipe(recipe);
-        recipeUpdate.buildCard();
-    });
-}
-
-
-function filterListElements(sortBy){
+export function filterListElements(sortBy){
     filterAppliances(sortBy);
     filterIngredients(sortBy);
     filterUstensils(sortBy);
 }
-
 
 
 function getFilteredRecipes(recipes, name){
@@ -147,15 +132,15 @@ function getFilteredRecipes(recipes, name){
 }
 
 
-function removeSelectedElFromList(name, allElSelected){
+function removeSelectedElFromList(name){
 
+    const tag = document.querySelectorAll(`.tag-${name}-p`);
     const listElementsToFilter = document.querySelectorAll('.' + name);
 
     /** removes the displayed tag from the list of elements */
-    listElementsToFilter.forEach(el => {    
-        allElSelected.forEach(selection => {
-            // console.log(selection);
-            if(el.innerText.toLowerCase().trim() === selection){
+    listElementsToFilter.forEach(el => {
+        tag.forEach(selection => {
+            if(el.innerText.toLowerCase().trim() === selection.innerText.toLowerCase().trim()){
                 el.style.display = 'none';
             }
         });
@@ -164,13 +149,14 @@ function removeSelectedElFromList(name, allElSelected){
     document.querySelector(`#main_filter-bar-${name}`).classList.toggle('displayBlock');  
 }
 
+
 function putBackSelectedElFromList(filteredRecipes, select, name){
 
     deleteListElement();
 
     filterListElements(filteredRecipes);
     /** redisplay recipes  */
-    displayRecipes(filteredRecipes);
+    displayCardRecipes(filteredRecipes);
 
     const listElementsToFilter = document.querySelectorAll('.' + name);    
     /** removes the displayed tag from the list of elements */
@@ -235,8 +221,6 @@ function updateRecipesbyFilter(name, recipes){
                 allElSelected.push(select)
             })
 
-            // console.log(allElSelected);
-
             /** Create tag  */
             const tag = createTag(name, elSelected);
             mainTagWrapper.appendChild(tag);
@@ -252,20 +236,15 @@ function updateRecipesbyFilter(name, recipes){
     
             filterListElements(filteredRecipes);
 
-            displayRecipes(filteredRecipes);
-
+            displayCardRecipes(filteredRecipes); 
             /** remove elements in list of filter */
-            removeSelectedElFromList(name, allElSelected);
-            // removeSelectedElFromList('ingredients', allElSelected);
-            // removeSelectedElFromList('ustensils', allElSelected);
-    
+            removeSelectedElFromList(name, allElSelected);    
             /** delete the tag and put the element back in the list */
             deleteTagAndUpdateList(tag, name);
 
             updateCounterRecipes();
         });       
     }
-
 }
 
  

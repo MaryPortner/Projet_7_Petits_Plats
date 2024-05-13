@@ -8,13 +8,14 @@ import { deleteDataInput } from "../utils/deleteDataInput.js";
 
 
 export function filterAppliances(recipes){
-    let elements = [];
+    let elements = collectAppliances(recipes);
     const name = 'appliances';
-    elements = collectAppliances(recipes);
+    // elements = collectAppliances(recipes);
     
     /** Inserting list of appliances into the filter div */
     const element =  createListOfElements(name, elements);
     document.querySelector(`.main_filter-bar-${name}`).appendChild(element);
+    // console.log(element.children);
 
     deleteDataInput(name);
     displayListElFiltered(name);
