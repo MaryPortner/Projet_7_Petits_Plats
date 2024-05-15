@@ -4,7 +4,7 @@ export function deleteDataInput(name){
     const crossToDeleteMain = document.querySelector(`.deleteData`);
     const inputData = document.querySelector(`#filter-sort-${name}`);
     const inputMain = document.querySelector(`#search-q`);
-   
+    const submit = document.querySelector('button.search-submit');
 
     btnDropdown.addEventListener('click', () =>{
         inputData.value = '';
@@ -30,5 +30,9 @@ export function deleteDataInput(name){
     inputMain.addEventListener('input', () => {
         crossToDeleteMain.style.display = "block";
     });
+
+    submit.addEventListener('click', () => {
+        crossToDeleteMain.style.display = "none";
+    })
 }
 

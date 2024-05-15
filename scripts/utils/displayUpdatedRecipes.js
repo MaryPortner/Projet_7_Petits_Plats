@@ -8,8 +8,6 @@ import { filterUstensils } from "../filters/filterUstensils.js";
 import { recipes } from "../../data/recipes.js";
 
 
-
-
 /** Selection de plusieurs ingredients - selectSeveralIng */
 let  filteredRecipes = [];
 const selectApp = [];
@@ -22,7 +20,7 @@ export function displayUpdatedRecipes(name){
 }
 
 
-function createTag(name, elSelected){
+export function createTag(name, elSelected){
     const tag = document.createElement('div');
     tag.classList.add(`tag-${name}`);
 
@@ -173,7 +171,7 @@ function putBackSelectedElFromList(filteredRecipes, select, name){
 
 
 /** update number recipes */
-function updateCounterRecipes(){
+export function updateCounterRecipes(){
     const recipesContainer = document.querySelector('#main_allRecipes');
     /** get number of recipes displayed */
     let numberRecipes = recipesContainer.childElementCount; 
@@ -227,13 +225,11 @@ function updateRecipesbyFilter(name, recipes){
 
             /** delete list elements of filters for recreate it with updated recipes */
             deleteListElement();
-        
             /** selected recipes by multiple filters */
             filteredRecipes = getFilteredRecipes(recipes, 'ingredients');
             filteredRecipes = getFilteredRecipes(filteredRecipes, 'appliances');
             filteredRecipes = getFilteredRecipes(filteredRecipes, 'ustensils');
-    
-    
+  
             filterListElements(filteredRecipes);
 
             displayCardRecipes(filteredRecipes); 

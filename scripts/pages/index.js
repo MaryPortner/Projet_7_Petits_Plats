@@ -6,8 +6,6 @@ import { filterUstensils } from "../filters/filterUstensils.js";
 import { recipes } from "./../../data/recipes.js";
 import { recipesSelectedBysearchBar } from "../utils/recipesSelectedBySearchBar.js";
 
-
-
 displayCounterRecipes(recipes);
 dropdown();
 filterAppliances(recipes);
