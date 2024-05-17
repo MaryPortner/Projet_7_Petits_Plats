@@ -42,7 +42,7 @@ export function recipesSelectedBysearchBar(recipes){
             
                     }
                 });
-         
+
                 filterListElements(recipesFiltered);
                 displayCardRecipes(recipesFiltered);
                 updateCounterRecipes(recipesFiltered); 
