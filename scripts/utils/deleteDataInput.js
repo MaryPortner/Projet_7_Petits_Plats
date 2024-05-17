@@ -31,8 +31,8 @@ export function deleteDataInput(name){
         crossToDeleteMain.style.display = "block";
     });
 
-    submit.addEventListener('click', () => {
-        crossToDeleteMain.style.display = "none";
+    submit.addEventListener('click', (e) => {
+       e.preventDefault();
     })
 }
 
