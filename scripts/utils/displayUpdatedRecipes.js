@@ -164,7 +164,7 @@ export function recipesSelectedBysearchBar(recipes){
             return;
 
         } else {
-            let recipesFiltered = searchB(recipes, research);
+            let recipesFiltered = searchA(recipes, research);
            
             deleteListElement();
             /** selected recipes by multiple filters */
@@ -335,7 +335,7 @@ function updateRecipesbyFilter(name, recipes){
     const mainFilter = document.querySelector(`#main_filter-${name}-wrapper`);
     const mainTagWrapper = mainFilter.querySelector('.main_Tag-wrapper');
     let selection;
-    const listElements = document.querySelectorAll('.' + name);
+    const listElements = document.querySelectorAll(`.${name}`);
 
 
     for(let elSelected of listElements){
