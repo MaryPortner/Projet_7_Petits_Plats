@@ -23,6 +23,6 @@ export function collectUstensils(recipes){
         /** sort alphabetically */
         arrayList = [...list].sort();
     }
-
+    // console.log(arrayList);
     return arrayList;
  }

@@ -5,8 +5,6 @@ import { displayUpdatedRecipes } from "../utils/displayUpdatedRecipes.js";
 import { deleteDataInput } from "../utils/deleteDataInput.js";
 
 
-
-
 export function filterAppliances(recipes){
     let elements = collectAppliances(recipes);
     const name = 'appliances';
