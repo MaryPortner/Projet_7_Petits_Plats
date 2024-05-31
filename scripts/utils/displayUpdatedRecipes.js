@@ -79,10 +79,9 @@ import { GetElementsByRecipe } from "../class/getElementsByRecipes.js";
 // }
 
 export function displayUpdatedRecipes(recipes){
+
     // displayCardRecipes(recipes);
     getRecipesByFilterBar(recipes);
-    console.log('testA', recipes);
-
 }
 
 function getRecipesByFilterBar(recipes){
@@ -90,6 +89,7 @@ function getRecipesByFilterBar(recipes){
     
     input.addEventListener('input', (e) => {
         let research = e.target.value.toLowerCase().trim();
+
         if(research.trim().length < 3 ){
             console.log('Votre recherche doit contenir au moins 3 caractères');
             return;
@@ -101,64 +101,63 @@ function getRecipesByFilterBar(recipes){
         }
     });
 
-    updateCounterRecipes();
+    // updateCounterRecipes();
 }
 
 function searchB(recipes, research){
 
-    console.log('testB', recipes);
-    let recipesSelected = [];
+    console.log('getElements', recipes);
+    // let recipesSelected = [];
 
-    let appliances = new GetElementsByRecipe(recipes);
-    appliances.getAppliances();
-    console.log('search', appliances.getAppliances());
+    let getElementsByRecipe = new GetElementsByRecipe(recipes);
+    console.log(getElementsByRecipe.getAppliances());
+    let appliances = getElementsByRecipe.getAppliances();
+   console.log(appliances);
 
-    let ingredients = new GetElementsByRecipe(recipes);
-    ingredients.getIngredients();
-    console.log( ingredients.getIngredients());
+    let ingredients = getElementsByRecipe.getIngredients()
+    console.log(ingredients);
 
-    let ustensils = new GetElementsByRecipe(recipes);
-    ustensils.getUstensils();
-    console.log(ustensils.getUstensils());
+    let ustensils = getElementsByRecipe.getUstensils();
+    console.log(ustensils);
 
 
-    for(let i = 0 ;  i < recipes.length ; i ++ ){
+    // for(let i = 0 ;  i < recipes.length ; i ++ ){
         
-        // let appliances = getAppliancesByRecipe(recipes[i]);
-        // let ingredients = getIngredientsByRecipes(recipes[i]);
-        // let ustensils = getUstensilsByRecipe(recipes[i]);
+    //     // let appliances = getAppliancesByRecipe(recipes[i]);
+    //     // let ingredients = getIngredientsByRecipes(recipes[i]);
+    //     // let ustensils = getUstensilsByRecipe(recipes[i]);
 
 
 
-        if(appliances.getAppliances().includes(research)){
-            recipesSelected.push(recipes[i]); 
-        } 
+    //     if(appliances.getAppliances().includes(research)){
+    //         recipesSelected.push(recipes[i]); 
+    //     } 
 
-        if( ingredients.getIngredients().includes(research)){
-            recipesSelected.push(recipes[i]); 
-            }
+    //     if( ingredients.getIngredients().includes(research)){
+    //         recipesSelected.push(recipes[i]); 
+    //         }
 
-        if(ustensils.getUstensils().includes(research)){
-            recipesSelected.push(recipes[i]); 
-        }
+    //     if(ustensils.getUstensils().includes(research)){
+    //         recipesSelected.push(recipes[i]); 
+    //     }
 
-        if(recipes[i].name.toLowerCase().includes(research)){
-            recipesSelected.push(recipes[i]); 
-        }
+    //     if(recipes[i].name.toLowerCase().includes(research)){
+    //         recipesSelected.push(recipes[i]); 
+    //     }
 
-        if(recipes[i].description.toLowerCase().includes(research)){
-            recipesSelected.push(recipes[i]); 
-        }
+    //     if(recipes[i].description.toLowerCase().includes(research)){
+    //         recipesSelected.push(recipes[i]); 
+    //     }
 
-        if(recipes.length === 0){
-            console.log("Votre recherche ne correspond à aucun résultat");
-        }
-    }
+    //     if(recipes.length === 0){
+    //         console.log("Votre recherche ne correspond à aucun résultat");
+    //     }
+    // }
     
-    /** delete duplicates */
-    let recipesFiltered = recipesSelected.filter((x, i) => recipesSelected.indexOf(x) === i);
+    // /** delete duplicates */
+    // let recipesFiltered = recipesSelected.filter((x, i) => recipesSelected.indexOf(x) === i);
 
-    return recipesFiltered;
+    // return recipesFiltered;
 }
 
 
