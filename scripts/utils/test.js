@@ -198,3 +198,36 @@
 
 //     return recipesFiltered;
 // }
+
+
+
+// export class ListElements {
+
+//     constructor(recipes){
+//         this.recipes = this.build(recipes);
+//         console.log(recipes);
+//     }
+
+//     build(recipes){
+//         const list = [];
+//         recipes.forEach(r => {
+//             list.push(new Recipe(r))
+//         });
+
+//         return list;
+//     }
+
+//     listAllIngredients(){
+
+//         const allIngredients = [];
+//         this.recipes.forEach(r => {
+//             const rec = new Recipe(r);
+//             rec.getIngredients().forEach(ing => {
+//                 allIngredients.push(ing);
+//             })
+//         })
+
+//     }
+
+
+// }
