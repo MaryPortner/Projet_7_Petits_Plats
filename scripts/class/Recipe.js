@@ -1,5 +1,5 @@
 export class Recipe {
-
+    
     constructor({name, ingredients, description,  appliance, ustensils}){
         this.name = name;
         this.ingredients = ingredients;

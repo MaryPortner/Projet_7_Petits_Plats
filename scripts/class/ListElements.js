@@ -2,8 +2,8 @@ import { Recipe } from "./Recipe.js";
 
 export class ListElements {
 
-    constructor(Recipe){
-        this.recipes = Recipe;
+    constructor(recipe){
+        this.recipes = recipe;
     }
 
 

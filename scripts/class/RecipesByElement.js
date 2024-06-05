@@ -7,7 +7,7 @@ export class RecipesByElements{
 
 
     byAppliances(){
-        list
+     
         let appByRecipes = this.recipe.getAppliances();
         return appByRecipes;
     }
