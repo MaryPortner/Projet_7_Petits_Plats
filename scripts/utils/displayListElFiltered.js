@@ -5,7 +5,7 @@ export function displayListElFiltered(name){
     const crossToDelete = document.querySelector(`.deleteData-${name}`);
     const elementsToFilter = document.querySelectorAll('.' + name);
     const input = document.querySelector(`#filter-sort-${name}`);
-    const regex = /^[a-zA-ZàâçéèêëôöúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÎÏÔÖÚÙÛÜÆŒ._-\s]{1,30}$/;
+    const regex = /^[a-zA-ZàâçéèêëôöúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÎÏÔÖÚÙÛÜÆŒ._-\s]{3,30}$/;
 
     input.addEventListener('input', () => {
         /** to lowercase and remove spaces of the element entered in the input*/

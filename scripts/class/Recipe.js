@@ -10,29 +10,29 @@ export class Recipe {
 
     /** get array of elements per recipe */
     getAppliances(){
-        let applianceByRecipes = (this.appliance.toLowerCase().trim());   
+        let list = (this.appliance.toLowerCase().trim());   
 
-        return applianceByRecipes; 
+        return list; 
     }
 
 
     getIngredients(){
-        let ingredientsByRecipes = [];
+        let list = [];
         this.ingredients.forEach(ingredients => {         
-            ingredientsByRecipes.push(ingredients.ingredient.toLowerCase().trim());
+            list.push(ingredients.ingredient.toLowerCase().trim());
         });
 
-        return ingredientsByRecipes;            
+        return list;            
     }
 
 
     getUstensils(){
-        let ustensilsByRecipes = [];
+        let list = [];
         this.ustensils.forEach(ustensils => {         
-            ustensilsByRecipes.push(ustensils.toLowerCase().trim());
+            list.push(ustensils.toLowerCase().trim());
         });
 
-        return ustensilsByRecipes;
+        return list;
     }
 
     

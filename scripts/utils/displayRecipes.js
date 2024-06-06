@@ -5,25 +5,22 @@ import { displayListElFiltered } from "./displayListElFiltered.js";
 import { ListElements } from "../class/ListElements.js";
 import { recipes } from "../../data/recipes.js";
 import { Recipe } from "../class/Recipe.js";
-import { RecipesByElements } from "../class/RecipesByElement.js";
+import { RecipesFiltered } from "../class/RecipesFiltered.js";
 
 
 
 
 export function displayRecipes(recipes){
-
     displayCardRecipes(recipes);
     getRecipes(recipes);
 }
 
-function getRecipes(){
-    let elSelected = [];
-    let list;
+
+function getRecipes(recipes){
+    let list = [];
 
     recipes.forEach(rec => {
-       
         const recipe = new Recipe(rec);
-        
         const ingByRecipe = recipe.getIngredients();
         const appByRecipe = recipe.getAppliances();
         const ustByRecipe = recipe.getUstensils();
@@ -36,36 +33,63 @@ function getRecipes(){
         // console.log(namesByRecipes);
         // console.log(descrByRecipe);
 
-        const byEl = new RecipesByElements(recipe, elSelected, list);
+        // const byEl = new RecipesFiltered(recipe, elSelected, list);
         // console.log(byEl.byAppliances());
-    
-        
     });
 
-
-    const createFilters = new CreateFilters(recipes);
+    const createFilters = new CreateFilters(recipes, ListElements);
 
     createFilters.filterAppliances();
     createFilters.filterIngredients();
     createFilters.filterUstensils();
 
-
     deleteDataInput('appliances');
     deleteDataInput('ingredients');
     deleteDataInput('ustensils');
 
+    /** displays the list of elements matching the entry in the input */
     displayListElFiltered('appliances');
     displayListElFiltered('ingredients');
     displayListElFiltered('ustensils');
 
+
+
+    //  declaration
+    const ingSelected = new Promise((resolve, reject) => {
+
+        const isRunning = true;
+
+        if(isRunning === true){
+            resolve();
+        } else {
+            reject();
+        }
+    })
+    
+    // Utilisation
+
+    ingSelected.then(() => {
+        getElSelected('ingredients');
+    }).catch(() => {
+        console.log('Error ! ');
+    });
+
+
 }
 
-// liste des entités, 
-// Liste des recettes 
-// Recette
-// Tag
-// Filtre ingrédients,
-// Filtre appareils,
-// Filtre ustensils,
-// Recherche principale
-// principe => 1 fichier, une classe
+
+
+async function getElSelected(name){
+    let elSelected = [];
+    const listElements = document.querySelectorAll(`.${name}`);
+    listElements.forEach(el => { 
+        el.addEventListener('click', () => {
+        /** save elements selected */
+            elSelected.push(el.innerText.toLowerCase());
+            console.log(elSelected);
+            return elSelected;
+        });
+    })
+}
+        
+   

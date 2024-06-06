@@ -1,9 +1,9 @@
 
-import { ListElements } from "./ListElements.js";
+// import { ListElements } from "./ListElements.js";
 
 export class CreateFilters {
 
-    constructor(recipes){
+    constructor(recipes, ListElements){
 
         this.recipes = recipes;
         this.listElements = new ListElements(recipes);
@@ -33,7 +33,6 @@ export class CreateFilters {
     filterAppliances(){
         // let listElements = new ListElements(recipes);
         let listAllApp = this.listElements.listAllAppliances();
-
         const element =  this.createListOfElements('appliances', listAllApp);
         document.querySelector(`.main_filter-bar-appliances`).appendChild(element);
     }
@@ -42,7 +41,6 @@ export class CreateFilters {
     filterIngredients(){
         // let listElements = new ListElements(recipes);
         let listAllIng = this.listElements.listAllIngredients();
-
         const element =  this.createListOfElements('ingredients', listAllIng);
         document.querySelector(`.main_filter-bar-ingredients`).appendChild(element);
     }
@@ -50,8 +48,6 @@ export class CreateFilters {
     filterUstensils(){
         // let listElements = new ListElements(recipes);
         let listAllUst = this.listElements.listAllUstensils();
-        console.log(listAllUst);
-
         const element =  this.createListOfElements('ustensils', listAllUst);
         document.querySelector(`.main_filter-bar-ustensils`).appendChild(element);
     }
