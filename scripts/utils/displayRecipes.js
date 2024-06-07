@@ -52,34 +52,35 @@ function getRecipes(recipes){
     displayListElFiltered('ingredients');
     displayListElFiltered('ustensils');
 
+    console.log(getElSelected('ingredients'));
 
+    // //  declaration
+    // const promise = new Promise((resolve, reject) => {
 
-    //  declaration
-    const ingSelected = new Promise((resolve, reject) => {
+    //     const isRunning = true;
 
-        const isRunning = true;
-
-        if(isRunning === true){
-            resolve();
-        } else {
-            reject();
-        }
-    })
+    //     if(isRunning === true){
+    //         resolve();
+    //     } else {
+    //         reject();
+    //     }
+    // })
     
-    // Utilisation
+    // // Utilisation
 
-    ingSelected.then(() => {
-        getElSelected('ingredients');
-    }).catch(() => {
-        console.log('Error ! ');
-    });
-
+    // promise.then(() => {
+    //     let ingSelected = getElSelected('ingredients');
+    //     console.log(ingSelected);
+    // }).catch(() => {
+    //     console.log('Error ! ');
+    // });
+ 
 
 }
 
 
 
-async function getElSelected(name){
+function getElSelected(name){
     let elSelected = [];
     const listElements = document.querySelectorAll(`.${name}`);
     listElements.forEach(el => { 
