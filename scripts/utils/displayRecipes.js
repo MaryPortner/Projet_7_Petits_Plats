@@ -52,9 +52,10 @@ function getRecipes(recipes){
     displayListElFiltered('ingredients');
     displayListElFiltered('ustensils');
 
-    console.log(getElSelected('ingredients'));
 
-    // //  declaration
+    let ing =  getElSelected('ingredients');
+    console.log(ing);
+    //  declaration
     // const promise = new Promise((resolve, reject) => {
 
     //     const isRunning = true;
@@ -69,13 +70,11 @@ function getRecipes(recipes){
     // // Utilisation
 
     // promise.then(() => {
-    //     let ingSelected = getElSelected('ingredients');
-    //     console.log(ingSelected);
+    //     let ing = getElSelected('ingredients');
+    //    console.log(ing);
     // }).catch(() => {
     //     console.log('Error ! ');
     // });
- 
-
 }
 
 
@@ -87,8 +86,9 @@ function getElSelected(name){
         el.addEventListener('click', () => {
         /** save elements selected */
             elSelected.push(el.innerText.toLowerCase());
-            console.log(elSelected);
+            // console.log(elSelected)
             return elSelected;
+          
         });
     })
 }

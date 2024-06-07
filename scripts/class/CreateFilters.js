@@ -44,6 +44,7 @@ export class CreateFilters {
         const element =  this.createListOfElements('ingredients', listAllIng);
         document.querySelector(`.main_filter-bar-ingredients`).appendChild(element);
     }
+    
 
     filterUstensils(){
         // let listElements = new ListElements(recipes);
