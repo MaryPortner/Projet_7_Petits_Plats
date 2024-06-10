@@ -1,7 +1,10 @@
-import { CreateFilters } from "../class/CreateFilters.js";
+
 import { deleteDataInput } from "./deleteDataInput.js";
-import { displayCardRecipes }  from "../utils/displayCardRecipes.js"; 
 import { displayListElFiltered } from "./displayListElFiltered.js";
+import { Filters } from "../class/Filters.js";
+import { FilterAppliances } from "../class/FilterAppliances.js";
+import { FilterIngredients } from "../class/FilterIngredients.js";
+import { FilterUstensils } from "../class/FilterUstensils.js";
 import { ListElements } from "../class/ListElements.js";
 import { recipes } from "../../data/recipes.js";
 import { Recipe } from "../class/Recipe.js";
@@ -10,13 +13,15 @@ import { RecipesFiltered } from "../class/RecipesFiltered.js";
 
 
 
-export function displayRecipes(recipes){
-    displayCardRecipes(recipes);
+
+
+export function displayRecipes(){
     getRecipes(recipes);
 }
 
 
 function getRecipes(recipes){
+    let elSelected = [];
     let list = [];
 
     recipes.forEach(rec => {
@@ -26,8 +31,9 @@ function getRecipes(recipes){
         const ustByRecipe = recipe.getUstensils();
         const namesByRecipes = recipe.getName();
         const descrByRecipe = recipe.getDescription();
+       recipe.buildCard();
 
-        // console.log(ingByRecipe);
+    
         // console.log(appByRecipe);
         // console.log(ustByRecipe);
         // console.log(namesByRecipes);
@@ -37,11 +43,18 @@ function getRecipes(recipes){
         // console.log(byEl.byAppliances());
     });
 
-    const createFilters = new CreateFilters(recipes, ListElements);
+    const createFilters = new Filters(recipes);
 
-    createFilters.filterAppliances();
-    createFilters.filterIngredients();
-    createFilters.filterUstensils();
+    const filterApp = new FilterAppliances();
+    filterApp.createFilterAppliances();
+
+    const filterIng = new FilterIngredients();
+    filterIng.createFilterIngredients();
+
+    const filterUst = new FilterUstensils();
+    filterUst.createFilterUstensils();
+
+
 
     deleteDataInput('appliances');
     deleteDataInput('ingredients');
@@ -53,42 +66,22 @@ function getRecipes(recipes){
     displayListElFiltered('ustensils');
 
 
-    let ing =  getElSelected('ingredients');
-    console.log(ing);
-    //  declaration
-    // const promise = new Promise((resolve, reject) => {
+    let ingSelected = getElSelected('ingredients', elSelected);
+    console.log('a', ingSelected);
 
-    //     const isRunning = true;
-
-    //     if(isRunning === true){
-    //         resolve();
-    //     } else {
-    //         reject();
-    //     }
-    // })
-    
-    // // Utilisation
-
-    // promise.then(() => {
-    //     let ing = getElSelected('ingredients');
-    //    console.log(ing);
-    // }).catch(() => {
-    //     console.log('Error ! ');
-    // });
 }
 
 
 
-function getElSelected(name){
-    let elSelected = [];
+function getElSelected(name, elSelected){
+  
     const listElements = document.querySelectorAll(`.${name}`);
     listElements.forEach(el => { 
         el.addEventListener('click', () => {
         /** save elements selected */
             elSelected.push(el.innerText.toLowerCase());
-            // console.log(elSelected)
-            return elSelected;
-          
+            console.log(elSelected);
+       
         });
     })
 }

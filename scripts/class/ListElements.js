@@ -1,9 +1,10 @@
 import { Recipe } from "./Recipe.js";
+import { recipes } from "../../data/recipes.js";
 
 export class ListElements {
 
-    constructor(recipe){
-        this.recipes = recipe;
+    constructor(){
+        this.recipes = recipes;
     }
 
 
