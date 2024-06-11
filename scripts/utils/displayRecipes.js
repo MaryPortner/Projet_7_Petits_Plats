@@ -50,6 +50,12 @@ function getRecipes(recipes){
     const filterIng = new FilterIngredients(recipes);
     filterIng.createFilterIngredients();
     filterIng.displayListElFiltered();
+    filterIng.getIngSelected();
+    filterIng.displayTag();
+    filterIng.deleteElSeletedFromList();
+
+
+
 
     const filterUst = new FilterUstensils(recipes);
     filterUst.createFilterUstensils();
@@ -61,13 +67,13 @@ function getRecipes(recipes){
     deleteDataInput('ustensils');
 
     /** displays the list of elements matching the entry in the input */
-    displayListElFiltered('appliances');
-    // displayListElFiltered('ingredients');
-    displayListElFiltered('ustensils');
+    // displayListElFiltered('appliances');
+    // // displayListElFiltered('ingredients');
+    // displayListElFiltered('ustensils');
 
 
-    let ingSelected = filterIng.getElSelected('ingredients');
-    console.log('a', ingSelected);
+    // let ingSelected = filterIng.getElSelected('ingredients');
+    // console.log('a', ingSelected);
 
 }
 

@@ -1,6 +1,8 @@
 
 export class Filters {
 
+    static elSelected = [];
+
     constructor(recipes){
         this.recipes = recipes;
     }
@@ -24,6 +26,43 @@ export class Filters {
         
         return ul;
     }
+
+
+    createTag(name, el){
+        const tag = document.createElement('div');
+        tag.classList.add(`tag-${name}`);
+    
+        const textEl = document.createElement('p');
+        textEl.classList.add(`tag-${name}-p`);
+        textEl.innerText =  `${el.innerText}`; 
+    
+        const crossToDeleteTag = document.createElement('span');
+        crossToDeleteTag.classList.add('tag-delete');
+    
+        tag.appendChild(textEl);
+        tag.appendChild(crossToDeleteTag);
+    
+        return tag;
+    }
+
+
+    deleteElSeletedFromList(name){
+        const tag = document.querySelectorAll(`.tag-${name}-p`);
+        console.log(tag);
+        const listElementsToFilter = document.querySelectorAll('.' + name);
+    
+        /** removes the displayed tag from the list of elements */
+        listElementsToFilter.forEach(el => {
+            tag.forEach(selection => {
+                if(el.innerText.toLowerCase().trim() === selection.innerText.toLowerCase().trim()){
+                    el.style.display = 'none';
+                }
+            });
+        });
+    
+        document.querySelector(`#main_filter-bar-${name}`).classList.toggle('displayBlock');  
+    }
+
 
 
     /** displays the list of elements matching the entry in the input */
@@ -75,21 +114,34 @@ export class Filters {
     }
 
 
+    displayTag(name){
+        const listElements = document.querySelectorAll(`.${name}`);
+        const mainFilter = document.querySelector(`#main_filter-${name}-wrapper`);
+        const mainTagWrapper = mainFilter.querySelector('.main_Tag-wrapper');
+        listElements.forEach(el => { 
+            el.addEventListener('click', () => {
+            /** save elements selected */
+               this.createTag(name, el);
+               mainTagWrapper.appendChild(this.createTag(name, el));
+            });
+        })
+    }
+
+
     getElSelected(name){
-        let elSelect = new Set();
-        let elSelected;
+        let elSelect = [];
         const listElements = document.querySelectorAll(`.${name}`);
         listElements.forEach(el => { 
             el.addEventListener('click', () => {
             /** save elements selected */
-                elSelect.add(el.innerText.toLowerCase());
-                elSelected = Array.from(elSelect);
-                console.log(elSelected);
-                return elSelected;
-           
+                elSelect.push(el.innerText.toLowerCase());
+                Filters.elSelected = [...new Set(elSelect)];
+                return Filters.elSelected;
             });
         })
     }
+
+  
         
 
 

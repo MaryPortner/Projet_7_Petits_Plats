@@ -10,6 +10,7 @@ export class FilterIngredients extends Filters {
         this.listElements = new ListElements();
     }
 
+
     createFilterIngredients(){
         // let listElements = new ListElements(recipes);
         let listAllIng =  this.listElements.listAllIngredients();
@@ -17,13 +18,34 @@ export class FilterIngredients extends Filters {
         document.querySelector(`.main_filter-bar-ingredients`).appendChild(element);
     }
 
+
     displayListElFiltered(){
         super.displayListElFiltered('ingredients');
     }
 
-    getElSelected(){
-        super.getElSelected('ingredients');
+
+    getIngSelected(){
+       super.getElSelected('ingredients');
     }
+
+
+    displayTag(){
+        super.displayTag('ingredients');
+        // super.displayTag('ingredients', el);
+    }
+
+    deleteElSeletedFromList(){
+        super.deleteElSeletedFromList('ingredients');
+    }
+    
+
+
+
+    
+
+
+
+
 
 
 

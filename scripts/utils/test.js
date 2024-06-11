@@ -231,3 +231,22 @@
 
 
 // }
+
+
+
+
+
+    // getElSelected(name){
+    //     let elSelect = new Set();
+    //     let elSelected;
+    //     const listElements = document.querySelectorAll(`.${name}`);
+    //     listElements.forEach(el => { 
+    //         el.addEventListener('click', () => {
+    //         /** save elements selected */
+    //             elSelect.add(el.innerText.toLowerCase());
+    //             elSelected = Array.from(elSelect)
+    //             console.log(elSelected);
+    //             return elSelected;
+    //         });
+    //     })
+    // }
