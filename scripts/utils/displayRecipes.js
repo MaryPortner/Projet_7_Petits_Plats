@@ -21,7 +21,7 @@ export function displayRecipes(){
 
 
 function getRecipes(recipes){
-    let elSelected = [];
+    // let elSelected = [];
     let list = [];
 
     recipes.forEach(rec => {
@@ -43,15 +43,15 @@ function getRecipes(recipes){
         // console.log(byEl.byAppliances());
     });
 
-    const createFilters = new Filters(recipes);
-
-    const filterApp = new FilterAppliances();
+ 
+    const filterApp = new FilterAppliances(recipes);
     filterApp.createFilterAppliances();
 
-    const filterIng = new FilterIngredients();
+    const filterIng = new FilterIngredients(recipes);
     filterIng.createFilterIngredients();
+    filterIng.displayListElFiltered();
 
-    const filterUst = new FilterUstensils();
+    const filterUst = new FilterUstensils(recipes);
     filterUst.createFilterUstensils();
 
 
@@ -62,28 +62,29 @@ function getRecipes(recipes){
 
     /** displays the list of elements matching the entry in the input */
     displayListElFiltered('appliances');
-    displayListElFiltered('ingredients');
+    // displayListElFiltered('ingredients');
     displayListElFiltered('ustensils');
 
 
-    let ingSelected = getElSelected('ingredients', elSelected);
+    let ingSelected = filterIng.getElSelected('ingredients');
     console.log('a', ingSelected);
 
 }
 
 
 
-function getElSelected(name, elSelected){
-  
-    const listElements = document.querySelectorAll(`.${name}`);
-    listElements.forEach(el => { 
-        el.addEventListener('click', () => {
-        /** save elements selected */
-            elSelected.push(el.innerText.toLowerCase());
-            console.log(elSelected);
+// function getElSelected(name, elSelected){
+//     let elSelected = [];
+//     const listElements = document.querySelectorAll(`.${name}`);
+//     listElements.forEach(el => { 
+//         el.addEventListener('click', () => {
+//         /** save elements selected */
+//             elSelected.push(el.innerText.toLowerCase());
+//             console.log(elSelected);
+//             return elSelected;
        
-        });
-    })
-}
+//         });
+//     })
+// }
         
    

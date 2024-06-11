@@ -3,12 +3,10 @@ import { ListElements } from "./ListElements.js";
 
 export class FilterUstensils extends Filters {
 
-
-    constructor(recipes){
-        super(recipes);
-        this.listElements = new ListElements(recipes);
+    constructor(){
+        super();
+        this.listElements = new ListElements();
     }
-
 
     createFilterUstensils(){
         // let listElements = new ListElements(recipes);
