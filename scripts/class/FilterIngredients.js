@@ -24,19 +24,12 @@ export class FilterIngredients extends Filters {
     }
 
 
-    getIngSelected(){
-       super.getElSelected('ingredients');
-    }
-
-
     displayTag(){
-        super.displayTag('ingredients');
-        // super.displayTag('ingredients', el);
+       super.displayTag('ingredients');
     }
 
-    deleteElSeletedFromList(){
-        super.deleteElSeletedFromList('ingredients');
-    }
+
+
     
 
 

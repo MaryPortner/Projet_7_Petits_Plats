@@ -15,4 +15,15 @@ export class FilterUstensils extends Filters {
         document.querySelector(`.main_filter-bar-ustensils`).appendChild(element);
     }
 
+
+    displayListElFiltered(){
+        super.displayListElFiltered('ustensils');
+    }
+
+
+    displayTag(){
+       super.displayTag('ustensils');
+    }
+
+
 }

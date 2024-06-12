@@ -5,6 +5,7 @@ export class Filters {
 
     constructor(recipes){
         this.recipes = recipes;
+     
     }
 
 
@@ -14,7 +15,7 @@ export class Filters {
         const ul = document.createElement('ul');
         ul.classList.add(`${classUl}`);
 
-        for(let el of elements){
+        elements.forEach(el => {
             /** creation of a li for each element */
             const li = document.createElement('li');
             li.innerText = `${el}`;
@@ -22,7 +23,7 @@ export class Filters {
             li.setAttribute('tabindex', 0);
 
             ul.appendChild(li);
-        }
+        });
         
         return ul;
     }
@@ -38,31 +39,20 @@ export class Filters {
     
         const crossToDeleteTag = document.createElement('span');
         crossToDeleteTag.classList.add('tag-delete');
+  
+        crossToDeleteTag.addEventListener('click', () => {
+            tag.remove();
+            el.style.display = 'block';
+        });
+    
+        tag.appendChild(textEl);
+        tag.appendChild(crossToDeleteTag);
     
         tag.appendChild(textEl);
         tag.appendChild(crossToDeleteTag);
     
         return tag;
     }
-
-
-    deleteElSeletedFromList(name){
-        const tag = document.querySelectorAll(`.tag-${name}-p`);
-        console.log(tag);
-        const listElementsToFilter = document.querySelectorAll('.' + name);
-    
-        /** removes the displayed tag from the list of elements */
-        listElementsToFilter.forEach(el => {
-            tag.forEach(selection => {
-                if(el.innerText.toLowerCase().trim() === selection.innerText.toLowerCase().trim()){
-                    el.style.display = 'none';
-                }
-            });
-        });
-    
-        document.querySelector(`#main_filter-bar-${name}`).classList.toggle('displayBlock');  
-    }
-
 
 
     /** displays the list of elements matching the entry in the input */
@@ -114,32 +104,30 @@ export class Filters {
     }
 
 
+    
     displayTag(name){
+        let elSelect = [];
         const listElements = document.querySelectorAll(`.${name}`);
         const mainFilter = document.querySelector(`#main_filter-${name}-wrapper`);
         const mainTagWrapper = mainFilter.querySelector('.main_Tag-wrapper');
+
         listElements.forEach(el => { 
             el.addEventListener('click', () => {
-            /** save elements selected */
-               this.createTag(name, el);
-               mainTagWrapper.appendChild(this.createTag(name, el));
-            });
-        })
-    }
-
-
-    getElSelected(name){
-        let elSelect = [];
-        const listElements = document.querySelectorAll(`.${name}`);
-        listElements.forEach(el => { 
-            el.addEventListener('click', () => {
-            /** save elements selected */
+                /** Create Tag */
+                mainTagWrapper.appendChild(this.createTag(name, el));
+                /** save elements selected */
                 elSelect.push(el.innerText.toLowerCase());
-                Filters.elSelected = [...new Set(elSelect)];
-                return Filters.elSelected;
+                // listEl = [...new Set(elSelect)];
+                /** remove el of list elements */
+                el.style.display = 'none';
+                /** hide list elements  */
+                document.querySelector(`#main_filter-bar-${name}`).classList.toggle('displayBlock');     
             });
+          
         })
     }
+
+
 
   
         

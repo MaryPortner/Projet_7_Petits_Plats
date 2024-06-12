@@ -43,22 +43,26 @@ function getRecipes(recipes){
         // console.log(byEl.byAppliances());
     });
 
+
+
  
     const filterApp = new FilterAppliances(recipes);
     filterApp.createFilterAppliances();
+    filterApp.displayListElFiltered();
+    filterApp.displayTag();
+
 
     const filterIng = new FilterIngredients(recipes);
     filterIng.createFilterIngredients();
     filterIng.displayListElFiltered();
-    filterIng.getIngSelected();
     filterIng.displayTag();
-    filterIng.deleteElSeletedFromList();
-
-
+ 
 
 
     const filterUst = new FilterUstensils(recipes);
     filterUst.createFilterUstensils();
+    filterUst.displayListElFiltered();
+    filterUst.displayTag();
 
 
 

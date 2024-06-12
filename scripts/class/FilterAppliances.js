@@ -15,5 +15,15 @@ export class FilterAppliances extends Filters {
         document.querySelector(`.main_filter-bar-appliances`).appendChild(element);
     }
 
+    displayListElFiltered(){
+        super.displayListElFiltered('appliances');
+    }
+
+
+    displayTag(){
+       super.displayTag('appliances');
+    }
+
+
 }
 
