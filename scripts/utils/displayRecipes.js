@@ -1,14 +1,13 @@
 
 import { deleteDataInput } from "./deleteDataInput.js";
-import { displayListElFiltered } from "./displayListElFiltered.js";
-import { Filters } from "../class/Filters.js";
+
 import { FilterAppliances } from "../class/FilterAppliances.js";
 import { FilterIngredients } from "../class/FilterIngredients.js";
 import { FilterUstensils } from "../class/FilterUstensils.js";
-import { ListElements } from "../class/ListElements.js";
+
 import { recipes } from "../../data/recipes.js";
 import { Recipe } from "../class/Recipe.js";
-import { RecipesFiltered } from "../class/RecipesFiltered.js";
+import { recipesFiltered } from "../class/RecipesFiltered.js";
 
 
 
@@ -44,8 +43,6 @@ function getRecipes(recipes){
     });
 
 
-
- 
     const filterApp = new FilterAppliances(recipes);
     filterApp.createFilterAppliances();
     filterApp.displayListElFiltered();
@@ -65,6 +62,8 @@ function getRecipes(recipes){
     filterUst.displayTag();
 
 
+    const recipesfiltered = new recipesFiltered(recipes);
+    recipesfiltered.byAppliances();
 
     deleteDataInput('appliances');
     deleteDataInput('ingredients');

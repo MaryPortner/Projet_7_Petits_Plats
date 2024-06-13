@@ -1,15 +1,35 @@
-export class RecipesFiltered{
+import { Recipe } from "./Recipe.js";
 
-    constructor(recipe, elSelected, list){
-        this.recipe = recipe;
-        this.elSelected = elSelected;
-        this.list = list;
+export class recipesFiltered{
+
+    constructor(recipes){
+        this.recipes = recipes;
         // console.log(this.list);
+    }
+
+    // Déclarer une variable qui récupérerait tous les éléments cliqués
+    // Déclarer une variable pour sauvergarder les recettes sélectionnées dans un tableau.
+    // Boucler sur chaque élément cliqué
+    // S'il apparait dans une recette, on sauvegarde la recette.
+    // on retourne toutes les recettes.
+
+    elSelected(name){
+        const listElements = document.querySelectorAll(`.${name}`);
+        let elSelected = [];
+        listElements.forEach(el => { 
+            el.addEventListener('click', () => {
+                elSelected.push(el);
+            });
+        })
+        return elSelected;
     }
 
 
     byAppliances(){
-        let appByRecipes = this.recipe.getAppliances();
+        let recipe = new Recipe(this.recipes);
+        let appByRecipes = recipe.getAppliances();
+        console.log('a', appByRecipes);
+
         let count = 0;
         this.elSelected.forEach(app => {
             /** count recipes that contain selected tags */

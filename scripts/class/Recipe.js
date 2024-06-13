@@ -121,7 +121,8 @@ export class Recipe {
 
     /** get array of elements per recipe */
     getAppliances(){
-        let list = (this.appliance.toLowerCase().trim());   
+        let list = this.appliance.toLowerCase().trim();   
+        console.log(list);
         return list; 
     }
 

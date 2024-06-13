@@ -1,8 +1,6 @@
 
 export class Filters {
 
-    static elSelected = [];
-
     constructor(recipes){
         this.recipes = recipes;
      
@@ -40,6 +38,7 @@ export class Filters {
         const crossToDeleteTag = document.createElement('span');
         crossToDeleteTag.classList.add('tag-delete');
   
+        /** Delete tag and display el */
         crossToDeleteTag.addEventListener('click', () => {
             tag.remove();
             el.style.display = 'block';
@@ -106,7 +105,6 @@ export class Filters {
 
     
     displayTag(name){
-        let elSelect = [];
         const listElements = document.querySelectorAll(`.${name}`);
         const mainFilter = document.querySelector(`#main_filter-${name}-wrapper`);
         const mainTagWrapper = mainFilter.querySelector('.main_Tag-wrapper');
@@ -115,9 +113,6 @@ export class Filters {
             el.addEventListener('click', () => {
                 /** Create Tag */
                 mainTagWrapper.appendChild(this.createTag(name, el));
-                /** save elements selected */
-                elSelect.push(el.innerText.toLowerCase());
-                // listEl = [...new Set(elSelect)];
                 /** remove el of list elements */
                 el.style.display = 'none';
                 /** hide list elements  */
