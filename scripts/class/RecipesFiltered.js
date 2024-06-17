@@ -1,10 +1,11 @@
 import { Recipe } from "./Recipe.js";
+import { recipes } from "../../data/recipes.js";
 
-export class recipesFiltered{
+export class RecipesFiltered{
 
-    constructor(recipes){
+    constructor(){
         this.recipes = recipes;
-        // console.log(this.list);
+        this.recipe = new Recipe(this.recipes);
     }
 
     // Déclarer une variable qui récupérerait tous les éléments cliqués
@@ -13,38 +14,24 @@ export class recipesFiltered{
     // S'il apparait dans une recette, on sauvegarde la recette.
     // on retourne toutes les recettes.
 
-    elSelected(name){
+    elSelected(name) {
         const listElements = document.querySelectorAll(`.${name}`);
-        let elSelected = [];
-        listElements.forEach(el => { 
-            el.addEventListener('click', () => {
-                elSelected.push(el);
-            });
-        })
-        return elSelected;
-    }
-
-
-    byAppliances(){
-        let recipe = new Recipe(this.recipes);
-        let appByRecipes = recipe.getAppliances();
-        console.log('a', appByRecipes);
-
-        let count = 0;
-        this.elSelected.forEach(app => {
-            /** count recipes that contain selected tags */
-            if(appByRecipes.indexOf(app) > -1){
-                count ++;
-            }
-        });
+        const elSelected = []; // Déclarer la variable en dehors de la boucle forEach
     
-        if( count ==   this.elSelected.length){
-            /** Create a new recipe list when filtering by appliance selected */
-            this.list.push(this.recipe);
-        }
+        listElements.forEach(el => {
+            el.addEventListener('click', () => {
+                elSelected.push(el.innerText);
+                // console.log(elSelected);
+                return elSelected;
+            });
+        });
     }
-   
 
 
-
+    allElSelected(){
+        const ing = this.elSelected('ingredients');
+        console.log(ing);
+     
+     
+    }
 }

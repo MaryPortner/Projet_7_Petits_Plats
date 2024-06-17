@@ -7,7 +7,7 @@ import { FilterUstensils } from "../class/FilterUstensils.js";
 
 import { recipes } from "../../data/recipes.js";
 import { Recipe } from "../class/Recipe.js";
-import { recipesFiltered } from "../class/RecipesFiltered.js";
+import { RecipesFiltered } from "../class/RecipesFiltered.js";
 
 
 
@@ -16,13 +16,13 @@ import { recipesFiltered } from "../class/RecipesFiltered.js";
 
 export function displayRecipes(){
     getRecipes(recipes);
+    const recFiltered = new RecipesFiltered();
+    let allRecipesFiltered = recFiltered.allElSelected();
+    console.log(allRecipesFiltered);
 }
 
 
 function getRecipes(recipes){
-    // let elSelected = [];
-    let list = [];
-
     recipes.forEach(rec => {
         const recipe = new Recipe(rec);
         const ingByRecipe = recipe.getIngredients();
@@ -31,15 +31,6 @@ function getRecipes(recipes){
         const namesByRecipes = recipe.getName();
         const descrByRecipe = recipe.getDescription();
        recipe.buildCard();
-
-    
-        // console.log(appByRecipe);
-        // console.log(ustByRecipe);
-        // console.log(namesByRecipes);
-        // console.log(descrByRecipe);
-
-        // const byEl = new RecipesFiltered(recipe, elSelected, list);
-        // console.log(byEl.byAppliances());
     });
 
 
@@ -62,21 +53,14 @@ function getRecipes(recipes){
     filterUst.displayTag();
 
 
-    const recipesfiltered = new recipesFiltered(recipes);
-    recipesfiltered.byAppliances();
-
     deleteDataInput('appliances');
     deleteDataInput('ingredients');
     deleteDataInput('ustensils');
 
-    /** displays the list of elements matching the entry in the input */
-    // displayListElFiltered('appliances');
-    // // displayListElFiltered('ingredients');
-    // displayListElFiltered('ustensils');
 
 
-    // let ingSelected = filterIng.getElSelected('ingredients');
-    // console.log('a', ingSelected);
+
+
 
 }
 

@@ -1,5 +1,6 @@
 import { Filters } from "./Filters.js";
-import { ListElements } from "./ListElements.js";
+import { Recipe } from "./Recipe.js";
+import { recipes } from "../../data/recipes.js";
 
 
 export class FilterIngredients extends Filters {
@@ -7,25 +8,39 @@ export class FilterIngredients extends Filters {
     constructor(recipes){
         super();
         this.recipes = recipes;
-        this.listElements = new ListElements();
+        this.name = 'ingredients';
     }
 
 
     createFilterIngredients(){
-        // let listElements = new ListElements(recipes);
-        let listAllIng =  this.listElements.listAllIngredients();
-        const element =  super.createListOfElements('ingredients', listAllIng);
-        document.querySelector(`.main_filter-bar-ingredients`).appendChild(element);
+        const element =  super.createListOfElements(this.name, this.listAll());
+        document.querySelector(`.main_filter-bar-${this.name}`).appendChild(element);
     }
 
 
     displayListElFiltered(){
-        super.displayListElFiltered('ingredients');
+        super.displayListElFiltered(this.name);
     }
 
 
     displayTag(){
-       super.displayTag('ingredients');
+       super.displayTag(this.name);
+    }
+
+
+    listAll(){
+        const getIng = new Set();
+        let allIng;
+
+        recipes.forEach(r => {
+            const rec = new Recipe(r);
+            rec.getIngredients().forEach(ing => {
+                getIng.add(ing);
+            });
+        });
+
+        allIng = [...getIng].sort();
+        return allIng;
     }
 
 

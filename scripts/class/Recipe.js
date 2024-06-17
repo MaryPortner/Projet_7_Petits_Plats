@@ -27,8 +27,7 @@ export class Recipe {
         const duration = document.createElement('p');
         duration.classList.add('allRecipes_imgSection-duration');
         duration.innerText =  `${this.time} min`;
-        // .innerText =  `${tagline}`;
-
+    
         const dataRecipes = document.createElement('div');
         dataRecipes.classList.add('allRecipes_dataRecipes');
 
@@ -120,42 +119,25 @@ export class Recipe {
 
 
     /** get array of elements per recipe */
-    getAppliances(){
-        let list = this.appliance.toLowerCase().trim();   
-        console.log(list);
-        return list; 
+   
+    getAppliances() {
+        return this.appliance;
     }
 
-
-    getDescription(){
-        let description = this.description;
-        return description;
+    getDescription() {
+        return this.description;
     }
 
-
-    getIngredients(){
-        let list = [];
-        this.ingredients.forEach(ingredients => {         
-            list.push(ingredients.ingredient.toLowerCase().trim());
-        });
-
-        return list;            
+    getIngredients() {
+        return this.ingredients.map(ingredient => ingredient.ingredient.toLowerCase());
     }
 
-
-    getUstensils(){
-        let list = [];
-        this.ustensils.forEach(ustensils => {         
-            list.push(ustensils.toLowerCase().trim());
-        });
-
-        return list;
+    getUstensils() {
+        return this.ustensils.map(ustensil => ustensil.toLowerCase());
     }
 
-    
-    getName(){
-        let name = this.name;
-        return name;
+    getName() {
+        return this.name;
     }
 
 

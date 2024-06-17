@@ -1,28 +1,43 @@
 import { Filters } from "./Filters.js";
-import { ListElements } from "./ListElements.js";
+import { Recipe } from "./Recipe.js";
+import { recipes } from "../../data/recipes.js";
 
 export class FilterUstensils extends Filters {
 
     constructor(){
         super();
-        this.listElements = new ListElements();
+        this.name = 'ustensils';
     }
 
     createFilterUstensils(){
-        // let listElements = new ListElements(recipes);
-        let listAllUst = this.listElements.listAllUstensils();
-        const element =  this.createListOfElements('ustensils', listAllUst);
-        document.querySelector(`.main_filter-bar-ustensils`).appendChild(element);
+        const element =  this.createListOfElements(this.name, this.listAll());
+        document.querySelector(`.main_filter-bar-${this.name}`).appendChild(element);
     }
 
 
     displayListElFiltered(){
-        super.displayListElFiltered('ustensils');
+        super.displayListElFiltered(this.name);
     }
 
 
     displayTag(){
-       super.displayTag('ustensils');
+       super.displayTag(this.name);
+    }
+
+
+    listAll(){
+        const getUst = new Set();
+        let allUst;
+
+        recipes.forEach(r => {
+            const rec = new Recipe(r);
+            rec.getUstensils().forEach(ust =>{
+                getUst.add(ust);
+            });
+        });
+
+        allUst = [...getUst].sort();
+        return allUst;
     }
 
 
