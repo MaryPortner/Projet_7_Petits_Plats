@@ -1,8 +1,11 @@
 
 export class Filters {
 
+    // static elcliked = [];
+
     constructor(recipes){
         this.recipes = recipes;
+        // this.elcliked = [];
      
     }
 
@@ -43,9 +46,6 @@ export class Filters {
             tag.remove();
             el.style.display = 'block';
         });
-    
-        tag.appendChild(textEl);
-        tag.appendChild(crossToDeleteTag);
     
         tag.appendChild(textEl);
         tag.appendChild(crossToDeleteTag);
@@ -118,16 +118,9 @@ export class Filters {
                 /** hide list elements  */
                 document.querySelector(`#main_filter-bar-${name}`).classList.toggle('displayBlock');     
             });
-          
+           
         })
+      
     }
-
-
-
-  
-        
-
-
-
 
 }

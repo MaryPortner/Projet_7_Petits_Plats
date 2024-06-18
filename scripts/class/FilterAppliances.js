@@ -14,6 +14,7 @@ export class FilterAppliances extends Filters {
         document.querySelector(`.main_filter-bar-${this.name}`).appendChild(element);
     }
 
+
     displayListElFiltered(){
         super.displayListElFiltered(this.name);
     }
@@ -22,6 +23,7 @@ export class FilterAppliances extends Filters {
     displayTag(){
        super.displayTag(this.name);
     }
+
 
     listAll(){
         const getApp = new Set();
@@ -33,10 +35,8 @@ export class FilterAppliances extends Filters {
         });
 
         allApp = [...getApp].sort();
+
         return allApp;
-
     }
-
-
 }
 
