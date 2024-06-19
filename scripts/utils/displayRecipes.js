@@ -17,7 +17,13 @@ import { RecipesFiltered } from "../class/RecipesFiltered.js";
 export function displayRecipes(){
     const recipesFiltered = new RecipesFiltered();
     recipesFiltered.getRecipes();
-    recipesFiltered.getElSelected('ingredients');
+
+    setTimeout(() => {
+        recipesFiltered.getElSelected('ingredients'); 
+        recipesFiltered.getRecipesFiltered();
+    }, 1000); 
+
+
 }
 
 
