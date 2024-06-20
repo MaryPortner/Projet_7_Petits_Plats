@@ -8,6 +8,7 @@ import { FilterUstensils } from "../class/FilterUstensils.js";
 import { Recipe } from "./Recipe.js";
 import { recipes } from "../../data/recipes.js";
 
+
 export class RecipesFiltered{
 
     constructor(){
@@ -16,13 +17,6 @@ export class RecipesFiltered{
         this.elcliked = [];
         this.filteredRecipes = [];
     }
-
-    // Déclarer une variable qui récupérerait tous les éléments cliqués
-    // Déclarer une variable pour sauvergarder les recettes sélectionnées dans un tableau.
-    // Boucler sur chaque élément cliqué
-    // S'il apparait dans une recette, on sauvegarde la recette.
-    // on retourne toutes les recettes.
-
 
    async getRecipes(){
     
@@ -49,7 +43,7 @@ export class RecipesFiltered{
 
    
 
-    getRecipesFiltered() {
+    getFilteredRecipes() {
         let appByRecipe;
         let ingByRecipe;
         let ustByRecipe;
@@ -58,25 +52,18 @@ export class RecipesFiltered{
             const recipe = new Recipe(rec);
             recipe.buildCard();
 
-     
             ingByRecipe = recipe.getIngredients();
             appByRecipe = recipe.getAppliances();
             ustByRecipe = recipe.getUstensils();
             // const namesByRecipes = recipe.getName();
             // const descrByRecipe = recipe.getDescription();
 
-
             this.elcliked.forEach(el => {
-                    if(ingByRecipe.includes(el)){
-                        this.filteredRecipes.push(rec);
-                    }
-                });
-            })
-            console.log(this.filteredRecipes);
-            return this.filteredRecipes;
- 
-
-            // Affiche les recettes filtrées
+                if(ingByRecipe.includes(el)){
+                    this.filteredRecipes.push(rec);
+                }
+            });
+        })
     }
 
 
@@ -86,9 +73,20 @@ export class RecipesFiltered{
             el.addEventListener('click', () => {
                 this.elcliked.push(el.innerText);
                 console.log(this.elcliked); // Vérification des éléments cliqués
-                this.getRecipesFiltered(); // Afficher les recettes filtrées après chaque clic
+                // this.getFilteredRecipes(); // Afficher les recettes filtrées après chaque clic
             });
         });
+    }
+
+    displayFilteredRecipes(){
+        // this.getRecipes();
+        // this.getElSelected('ingredients'); 
+        // this.getFilteredRecipes();
+  
+        this.filteredRecipes.forEach(rec => {
+            const recipe = new Recipe(rec);
+            recipe.buildCard();
+        })
     }
 
 
