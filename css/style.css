@@ -230,14 +230,6 @@ div.main_filter{
     height: 100%;
 }
 
-/* #main_filter-ingredients-wrapper, #main_filter-appliances-wrapper, #main_filter-ustensils-wrapper{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* width: 30%; 
-} */
-
 .single-filter{
     position: relative;
     z-index: 3;
@@ -277,7 +269,6 @@ span.btn-display-dropdown-title{
 
 .single-filter-bar-btn{
     position: relative;
-    /* margin-bottom: 30px; */
 }
 
 input#filter-sort-ingredients, input#filter-sort-appliances, input#filter-sort-ustensils{
@@ -313,6 +304,10 @@ span.filter-bar-submit{
     background: no-repeat url("./../assets/img/cross.svg");
     object-fit: none;
     background-position: center center;
+}
+
+.deleteData{
+    display: none;
 }
 
 ul{

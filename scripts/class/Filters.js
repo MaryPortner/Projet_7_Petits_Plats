@@ -3,8 +3,9 @@ export class Filters {
 
     // static elcliked = [];
 
-    constructor(recipes){
-        this.recipes = recipes;
+    constructor(list){
+        this.list = list;
+   
         // this.elcliked = [];
      
     }
@@ -61,9 +62,10 @@ export class Filters {
         const crossToDelete = document.querySelector(`.deleteData-${name}`);
         const elementsToFilter = document.querySelectorAll('.' + name);
         const input = document.querySelector(`#filter-sort-${name}`);
-        const regex = /^[a-zA-ZàâçéèêëôöúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÎÏÔÖÚÙÛÜÆŒ._-\s]{3,30}$/;
+        const regex = /^[a-zA-ZàâçéèêëôöúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÎÏÔÖÚÙÛÜÆŒ._-\s]{1,30}$/;
 
         input.addEventListener('input', () => {
+            crossToDelete.style.display = 'block';
             /** to lowercase and remove spaces of the element entered in the input*/
             const inputValue =  input.value.toLowerCase().trim();
             /** check data entry */
@@ -81,6 +83,7 @@ export class Filters {
 
                     /** Clicking on the cross erases the data and undisplays the cross */
                     crossToDelete.addEventListener('click', () => {
+                        input.value = '';
                         elFiltered.classList.remove('hidden');
                     }); 
 

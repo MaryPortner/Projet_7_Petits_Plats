@@ -1,42 +1,33 @@
 import { Filters } from "./Filters.js";
-import { Recipe } from "./Recipe.js";
-import { recipes } from "../../data/recipes.js";
+
 
 export class FilterAppliances extends Filters {
 
-    constructor(){
-        super();
+    constructor(list){
+        super(list);
         this.name = 'appliances';
+        this.all = [];
     }
 
-    createFilterAppliances(){
-        const element =  super.createListOfElements(this.name, this.listAll());
+    display(){
+        /** Create list elements and display it */
+        const element =  super.createListOfElements(this.name, this.all);
         document.querySelector(`.main_filter-bar-${this.name}`).appendChild(element);
-    }
-
-
-    displayListElFiltered(){
+        super.displayTag(this.name);
         super.displayListElFiltered(this.name);
     }
 
-
-    displayTag(){
-       super.displayTag(this.name);
-    }
-
-
-    listAll(){
+    /** Get all elements */
+    hydrate(){
         const getApp = new Set();
         let allApp;
 
-        recipes.forEach(r => {
-            const rec = new Recipe(r);
+        this.list.filtered.forEach(rec => {
             getApp.add(rec.getAppliances());
         });
 
         allApp = [...getApp].sort();
-
-        return allApp;
+        this.all = allApp;
     }
 }
 

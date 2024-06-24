@@ -1,5 +1,5 @@
 /**  Dropdown for elements - section filters - */ 
-export function dropdown (){
+export function expandDropdown(){
     document.querySelectorAll('.single-filter').forEach( wrapper => {
        /** select each filter, arrow and button in each of the filter divs */
         const filter = wrapper.querySelector('.filter-bar-single');

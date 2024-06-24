@@ -1,43 +1,34 @@
 import { Filters } from "./Filters.js";
-import { Recipe } from "./Recipe.js";
-import { recipes } from "../../data/recipes.js";
+
 
 export class FilterUstensils extends Filters {
 
-    constructor(){
-        super();
+    constructor(list){
+        super(list);
         this.name = 'ustensils';
+        this.all = [];
     }
 
-    createFilterUstensils(){
-        const element =  this.createListOfElements(this.name, this.listAll());
+    display(){
+        const element =  this.createListOfElements(this.name, this.all);
         document.querySelector(`.main_filter-bar-${this.name}`).appendChild(element);
-    }
-
-
-    displayListElFiltered(){
+        super.displayTag(this.name);
         super.displayListElFiltered(this.name);
     }
 
-
-    displayTag(){
-       super.displayTag(this.name);
-    }
-
-
-    listAll(){
+    /** Get all elements */
+    hydrate(){
         const getUst = new Set();
         let allUst;
 
-        recipes.forEach(r => {
-            const rec = new Recipe(r);
+        this.list.filtered.forEach(rec => {
             rec.getUstensils().forEach(ust =>{
                 getUst.add(ust);
             });
         });
 
         allUst = [...getUst].sort();
-        return allUst;
+        this.all = allUst;
     }
 
 

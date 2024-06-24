@@ -11,18 +11,17 @@ export class Recipe {
     }
 
     buildCard(){
-        const recipesSection = document.querySelector('#main_allRecipes');
-
-        const recipeCard = document.createElement('article');
-        recipeCard.classList.add('allRecipes_article');
+    
+        const card = document.createElement('article');
+        card.classList.add('allRecipes_article');
 
         const imgSection = document.createElement('div');
         imgSection.classList.add('allRecipes_imgSection')
 
-        const imgRecipes = document.createElement('img');
-        imgRecipes.classList.add('allRecipes_imgSection-img');
-        imgRecipes.setAttribute("src", `${this.image}`);
-        imgRecipes.setAttribute("alt", `image de ${this.name}`)
+        const img = document.createElement('img');
+        img.classList.add('allRecipes_imgSection-img');
+        img.setAttribute("src", `${this.image}`);
+        img.setAttribute("alt", `image de ${this.name}`)
 
         const duration = document.createElement('p');
         duration.classList.add('allRecipes_imgSection-duration');
@@ -59,15 +58,17 @@ export class Recipe {
         dataRecipes.appendChild(nameRecipe);
         dataRecipes.appendChild(recipe);
     
-        imgSection.appendChild(imgRecipes);
+        imgSection.appendChild(img);
         imgSection.appendChild(duration);
     
-        recipeCard.appendChild(imgSection);
-        recipeCard.appendChild(dataRecipes);
+        card.appendChild(imgSection);
+        card.appendChild(dataRecipes);
+
+        return card;
     
-        recipesSection.appendChild(recipeCard);
+        // recipesSection.appendChild(card);
     
-        return recipesSection;
+        // return recipesSection;
         
     }
 
