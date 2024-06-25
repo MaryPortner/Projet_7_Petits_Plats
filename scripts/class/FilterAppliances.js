@@ -18,7 +18,7 @@ export class FilterAppliances extends Filters {
     }
 
     /** Get all elements */
-    hydrate(){
+    getListEl(){
         const getApp = new Set();
         let allApp;
 
@@ -28,6 +28,14 @@ export class FilterAppliances extends Filters {
 
         allApp = [...getApp].sort();
         this.all = allApp;
+    }
+
+    deleteData(){
+        super.deleteDataInput(this.name)
+    }
+
+    getElSelected(){
+        super.getElSelected(this.name);
     }
 }
 

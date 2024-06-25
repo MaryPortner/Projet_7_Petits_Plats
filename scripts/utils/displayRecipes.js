@@ -7,25 +7,25 @@
 
 // import { recipes } from "../../data/recipes.js";
 // import { Recipe } from "../class/Recipe.js";
-import { RecipesFiltered } from "../class/RecipesFiltered.js";
+// import { RecipesFiltered } from "../class/RecipesFiltered.js";
 
 
 
 
 
 
-export function displayRecipes(){
+// export function displayRecipes(){
 
-    setTimeout(() => {
-        const recipesFiltered = new RecipesFiltered();
-        recipesFiltered.getRecipes();
-        recipesFiltered.getElSelected('ingredients'); 
-        recipesFiltered.getFilteredRecipes();
-        recipesFiltered.displayFilteredRecipes();
-    }, 1000); 
+//     setTimeout(() => {
+//         const recipesFiltered = new RecipesFiltered();
+//         recipesFiltered.getRecipes();
+//         recipesFiltered.getElSelected('ingredients'); 
+//         recipesFiltered.getFilteredRecipes();
+//         recipesFiltered.displayFilteredRecipes();
+//     }, 1000); 
 
 
-}
+// }
 
 
 

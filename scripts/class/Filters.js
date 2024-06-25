@@ -7,7 +7,6 @@ export class Filters {
         this.list = list;
    
         // this.elcliked = [];
-     
     }
 
 
@@ -55,6 +54,45 @@ export class Filters {
     }
 
 
+    deleteDataInput(name){
+        const btnDropdown = document.querySelector(`#btn-display-dropdown-${name}`);
+        const crossToDelete = document.querySelector(`.deleteData-${name}`);
+        const crossToDeleteMain = document.querySelector(`.deleteData`);
+        const inputData = document.querySelector(`#filter-sort-${name}`);
+        const inputMain = document.querySelector(`#search-q`);
+        const submit = document.querySelector('button.search-submit');
+    
+        btnDropdown.addEventListener('click', () =>{
+            inputData.value = '';
+        })
+    
+        /** Clicking on the cross erases the data and undisplays the cross */
+        crossToDelete.addEventListener('click', () => {
+            inputData.value = '';
+            crossToDelete.style.display = "none";
+        });
+    
+        crossToDeleteMain.addEventListener('click', () => {
+            inputMain.value = '';
+            crossToDeleteMain.style.display = "none";
+        });
+    
+        /** if data is inserted into the input, the cross is displayed */
+        inputData.addEventListener('input', () => {
+            crossToDelete.style.display = "block";
+        });
+    
+        /** if data is inserted into the input, the cross is displayed */
+        inputMain.addEventListener('input', () => {
+            crossToDeleteMain.style.display = "block";
+        });
+    
+        submit.addEventListener('click', (e) => {
+           e.preventDefault();
+        })
+    }
+    
+
     /** displays the list of elements matching the entry in the input */
     displayListElFiltered(name){
         /** filter data based on the element inserted into the input*/
@@ -91,12 +129,13 @@ export class Filters {
                     btnDisplayDropdown.addEventListener('click', () => {
                         input.value = '';
                         elFiltered.classList.remove('hidden');
-                        crossToDelete.style.display = 'none';
+                        // crossToDelete.style.display = 'none';
                     }); 
                 }
             }
 
             if (inputValue == ''){
+                crossToDelete.style.display = 'none';
                 /** displays the element corresponding to the input value */
                 elementsToFilter.forEach(el =>{
                     el.classList.remove('hidden');
@@ -106,7 +145,6 @@ export class Filters {
     }
 
 
-    
     displayTag(name){
         const listElements = document.querySelectorAll(`.${name}`);
         const mainFilter = document.querySelector(`#main_filter-${name}-wrapper`);

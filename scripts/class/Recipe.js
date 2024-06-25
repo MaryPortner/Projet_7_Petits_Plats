@@ -115,7 +115,6 @@ export class Recipe {
         });
         
         return ingredientsSection;
-    
     }
 
 

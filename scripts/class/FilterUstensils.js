@@ -17,7 +17,7 @@ export class FilterUstensils extends Filters {
     }
 
     /** Get all elements */
-    hydrate(){
+    getListEl(){
         const getUst = new Set();
         let allUst;
 
@@ -29,6 +29,10 @@ export class FilterUstensils extends Filters {
 
         allUst = [...getUst].sort();
         this.all = allUst;
+    }
+
+    deleteData(){
+        super.deleteDataInput(this.name)
     }
 
 

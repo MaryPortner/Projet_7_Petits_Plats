@@ -18,7 +18,7 @@ export class FilterIngredients extends Filters {
     }
 
     /** Get all elements */
-    hydrate(){
+    getListEl(){
         const getIng = new Set();
         let allIng;
 
@@ -30,6 +30,10 @@ export class FilterIngredients extends Filters {
 
         allIng = [...getIng].sort();
         this.all = allIng;
+    }
+
+    deleteData(){
+        super.deleteDataInput(this.name)
     }
 
 
