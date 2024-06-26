@@ -12,7 +12,7 @@ export const recipes = [
             },
             {
                 "ingredient" : "Jus de citron",
-                "quantity" : 2
+                "quantity" : 2,
             },
             {
                 "ingredient" : "Crème de coco",

@@ -12,7 +12,7 @@ const list = new RecipesFiltered(recipes);
 
 expandDropdown();
 
-displayCounterRecipes(recipes);
+
 
   
 

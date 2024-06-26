@@ -1,3 +1,4 @@
+import { displayCounterRecipes } from "../utils/counterRecipes.js";
 import { FilterAppliances } from "../class/FilterAppliances.js";
 import { FilterIngredients } from "../class/FilterIngredients.js";
 import { FilterUstensils } from "../class/FilterUstensils.js";
@@ -8,15 +9,16 @@ import { Recipe } from "./Recipe.js";
 export class RecipesFiltered{
 
     constructor(recipes){
+        this.appSelected = [];
+        this.ingSelected = [];
+        this.ustSelected = [];
         this.recipes = [];
         this.wrapper = document.querySelector('#main_allRecipes');
         this.filters = [];
         this.filtered = this.recipes;
         this.init(recipes);
         this.elClicked = [];
-        this.appSelected = [];
-        this.ingSelected = [];
-        this.ustSelected = [];
+  
     }
 
     /** add all filters in this.filters */
@@ -59,70 +61,62 @@ export class RecipesFiltered{
                 if (name === 'ustensils' && !this.ustSelected.includes(el.innerText)) {
                     this.ustSelected.push(el.innerText);
                 }
-
-              this.filterRecipes();
-
+                this.filterRecipes();
             });
+      
         });
+
     }
 
     filterRecipes(){
-
-        const filterApp = new FilterAppliances(this); // "this" here refers to the class itself 
-        const filterIng = new FilterIngredients(this);
-        const filterUst = new FilterUstensils(this);
-
+    
+      
         const app = this.appSelected;
         const ing = this.ingSelected;
         const ust = this.ustSelected;
 
+        this.filtered = [];
 
-        console.log(filterApp.all);
-        console.log(filterIng.all);
-        console.log(filterUst.all);
-
-        // console.log(this.appSelected);
-        // console.log(this.ingSelected);
-        // console.log(this.ustSelected);
-
-        console.log(app);
-        console.log(ing);
-        console.log(ust);
-
-        this.filtered = this.recipes.filter(recipe => {
-            const hasSelectedAppliances = app.every(a => recipe.appliances.includes(a));
-            const hasSelectedIngredients = ing.every(i => recipe.ingredients.includes(i));
-            const hasSelectedUstensils = ust.every(u => recipe.ustensils.includes(u));
-            return hasSelectedAppliances && hasSelectedIngredients && hasSelectedUstensils;
-        });
-        this.displayCard();
-
-        // const getElSelected = this.getElSelected(ing)
  
-        //    this.recipes.forEach(rec => {
-        //     const recipe = new Recipe(rec);
-        //     // recipe.buildCard();
-        //     // const namesByRecipes = recipe.getName();
-        //     // const descrByRecipe = recipe.getDescription();
-      
-        //     el.forEach(e => {
-        //         if(ingByRecipe.includes(e)){
-        //             this.filtered.push(rec);
-        //         }
-        //     });
-        // });
+        this.recipes.forEach(recipe => {
+   
+            app.forEach(a => {
+                console.log(recipe.appliance.toLowerCase().trim());
+                console.log(a.toLowerCase());
+                if(recipe.appliance.toLowerCase().trim().includes(a.toLowerCase())){
+                    this.filtered.push(recipe);
+                }
+            });
 
+
+            ing.forEach(i => {
+                console.log(recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase().trim()));
+                console.log(i.toLowerCase());
+                if(recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase().trim()).includes(i.toLowerCase())){
+                    this.filtered.push(recipe);
+                }
+            });
+
+
+            ust.forEach(u => {
+ 
+                console.log(u.toLowerCase());
+                if(recipe.ustensils.map(ustensil => ustensil.toLowerCase()).includes(u.toLowerCase())){
+                    this.filtered.push(recipe);
+                }
+            });
+
+           
+        });
+
+
+        console.log(this.filtered);
+        this.displayCard();
+        displayCounterRecipes(this.filtered);
         
-      
-
-     
     }
 
-
-
-
-
-
+    
     /** get elements and display them in the filters */
     hydrateFilters(){
         this.filters.forEach(filter => {
@@ -138,14 +132,11 @@ export class RecipesFiltered{
         const filterIng = new FilterIngredients(this);
         const filterUst = new FilterUstensils(this);
 
-
-
         recipes.forEach(recipe => {
             this.recipes.push(new Recipe(recipe));
         });
 
-        
-
+ 
         this.addFilter(filterApp);
         this.addFilter(filterIng);
         this.addFilter(filterUst);
@@ -163,7 +154,7 @@ export class RecipesFiltered{
         this.getElSelected('ingredients');
         this.getElSelected('ustensils');
     
-        this.filterRecipes();
+        // this.filterRecipes(filterApp, filterIng, filterUst);
    
 
     }
