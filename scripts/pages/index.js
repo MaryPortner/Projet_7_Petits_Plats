@@ -6,10 +6,7 @@ import { RecipesFiltered } from "../class/RecipesFiltered.js";
 
 
 const list = new RecipesFiltered(recipes);
-
-
-
-
+// displayCounterRecipes(recipes);
 expandDropdown();
 
 

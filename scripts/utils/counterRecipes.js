@@ -15,8 +15,6 @@ export function displayCounterRecipes(recipes){
 
     numberTotalRecipes.appendChild(numberRecipesContainer);
     numberTotalRecipes.appendChild(recipesTxt);
-
-
 }
 
 
