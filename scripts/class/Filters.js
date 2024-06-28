@@ -1,14 +1,17 @@
 
 export class Filters {
 
-    // static elcliked = [];
-
-    constructor(list){
+    constructor(list, name){
         this.list = list;
-   
+        this.name = name;
+        // this.name retrieves the name in the constructor of the inheriting class ex: super(list, 'appliances');
+        this.appSelected = [];
+        this.ingSelected = [];
+        this.ustSelected = [];
         // this.elcliked = [];
+  
     }
-
+    
 
     /** Create list of elements for dropdown - Section filters - */
     createListOfElements(name, elements){
@@ -30,12 +33,12 @@ export class Filters {
     }
 
 
-    createTag(name, el){
+    createTag(el){
         const tag = document.createElement('div');
-        tag.classList.add(`tag-${name}`);
+        tag.classList.add(`tag-${this.name}`);
     
         const textEl = document.createElement('p');
-        textEl.classList.add(`tag-${name}-p`);
+        textEl.classList.add(`tag-${this.name}-p`);
         textEl.innerText =  `${el.innerText}`; 
     
         const crossToDeleteTag = document.createElement('span');
@@ -54,11 +57,11 @@ export class Filters {
     }
 
 
-    deleteDataInput(name){
-        const btnDropdown = document.querySelector(`#btn-display-dropdown-${name}`);
-        const crossToDelete = document.querySelector(`.deleteData-${name}`);
+    deleteDataInput(){
+        const btnDropdown = document.querySelector(`#btn-display-dropdown-${this.name}`);
+        const crossToDelete = document.querySelector(`.deleteData-${this.name}`);
         const crossToDeleteMain = document.querySelector(`.deleteData`);
-        const inputData = document.querySelector(`#filter-sort-${name}`);
+        const inputData = document.querySelector(`#filter-sort-${this.name}`);
         const inputMain = document.querySelector(`#search-q`);
         const submit = document.querySelector('button.search-submit');
     
@@ -92,14 +95,13 @@ export class Filters {
         })
     }
     
-
     /** displays the list of elements matching the entry in the input */
-    displayListElFiltered(name){
+    displayListElFiltered(){
         /** filter data based on the element inserted into the input*/
-        const btnDisplayDropdown = document.querySelector(`#btn-display-dropdown-${name}`);
-        const crossToDelete = document.querySelector(`.deleteData-${name}`);
-        const elementsToFilter = document.querySelectorAll('.' + name);
-        const input = document.querySelector(`#filter-sort-${name}`);
+        const btnDisplayDropdown = document.querySelector(`#btn-display-dropdown-${this.name}`);
+        const crossToDelete = document.querySelector(`.deleteData-${this.name}`);
+        const elementsToFilter = document.querySelectorAll('.' + this.name);
+        const input = document.querySelector(`#filter-sort-${this.name}`);
         const regex = /^[a-zA-ZàâçéèêëôöúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÎÏÔÖÚÙÛÜÆŒ._-\s]{1,30}$/;
 
         input.addEventListener('input', () => {
@@ -145,23 +147,42 @@ export class Filters {
     }
 
 
-    displayTag(name){
-        const listElements = document.querySelectorAll(`.${name}`);
-        const mainFilter = document.querySelector(`#main_filter-${name}-wrapper`);
+    displayTag(){
+        const listElements = document.querySelectorAll(`.${this.name}`);
+        const mainFilter = document.querySelector(`#main_filter-${this.name}-wrapper`);
         const mainTagWrapper = mainFilter.querySelector('.main_Tag-wrapper');
 
         listElements.forEach(el => { 
             el.addEventListener('click', () => {
                 /** Create Tag */
-                mainTagWrapper.appendChild(this.createTag(name, el));
+                mainTagWrapper.appendChild(this.createTag(el));
                 /** remove el of list elements */
                 el.style.display = 'none';
                 /** hide list elements  */
-                document.querySelector(`#main_filter-bar-${name}`).classList.toggle('displayBlock');     
+                document.querySelector(`#main_filter-bar-${this.name}`).classList.toggle('displayBlock');     
             });
            
         })
       
     }
 
+    listenForSelection(){
+            const listElements = document.querySelectorAll(`.${this.name}`);
+            listElements.forEach(el => {
+                el.addEventListener('click', () => {
+                    if (this.name === 'appliances' && !this.appSelected.includes(el.innerText)) {
+                        this.appSelected.push(el.innerText);
+                    }
+                    if (this.name === 'ingredients' && !this.ingSelected.includes(el.innerText)) {
+                        this.ingSelected.push(el.innerText);
+                    }
+                    if (this.name === 'ustensils' && !this.ustSelected.includes(el.innerText)) {
+                        this.ustSelected.push(el.innerText);
+                    }
+                    this.filterRecipes();
+                });
+              
+            });
+        }
+    
 }

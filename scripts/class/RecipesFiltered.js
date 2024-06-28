@@ -31,7 +31,6 @@ export class RecipesFiltered{
             const card = recipe.buildCard();
             this.wrapper.appendChild(card);
         });
-
     }
 
 
@@ -54,7 +53,7 @@ export class RecipesFiltered{
     }
 
 
-    getAllElSelected(name) {
+    getAllElSelected(name){
         const listElements = document.querySelectorAll(`.${name}`);
         listElements.forEach(el => {
             el.addEventListener('click', () => {
@@ -66,7 +65,7 @@ export class RecipesFiltered{
     }
 
 
-    getElSelected(name) {
+    getElSelected(name){
         const listElements = document.querySelectorAll(`.${name}`);
         listElements.forEach(el => {
             el.addEventListener('click', () => {
@@ -83,8 +82,15 @@ export class RecipesFiltered{
             });
           
         });
-       
     }
+
+    /** get elements selected */
+    // listenElSelected(){
+    //     this.filters.forEach(filter => {
+    //         filter.listenForSelection();
+    //     });
+
+    // }
 
 
     filterRecipes(){
@@ -113,6 +119,7 @@ export class RecipesFiltered{
 
         this.displayCard();  
         this.updateCounterRecipes();
+        console.log(this.filtered);
     }
 
     
@@ -125,7 +132,6 @@ export class RecipesFiltered{
     }
 
 
-  /** get elements and display them in the filters */
     init(recipes){
         const filterApp = new FilterAppliances(this); // "this" here refers to the class itself 
         const filterIng = new FilterIngredients(this);
@@ -153,6 +159,8 @@ export class RecipesFiltered{
         this.getElSelected('appliances');
         this.getElSelected('ingredients');
         this.getElSelected('ustensils');
+
+        //this.listenElSelected();
 
     }
 
