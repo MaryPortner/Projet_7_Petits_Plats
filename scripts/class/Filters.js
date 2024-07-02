@@ -1,15 +1,12 @@
+import { list } from "../pages/index.js";
 
 export class Filters {
 
     constructor(list, name){
         this.list = list;
         this.name = name;
-        // this.name retrieves the name in the constructor of the inheriting class ex: super(list, 'appliances');
-        this.appSelected = [];
-        this.ingSelected = [];
-        this.ustSelected = [];
-        // this.elcliked = [];
-  
+        this.filterRecipe = list.filterRecipes();
+        // this.name retrieves the name in the constructor of the inheriting class ex: super(list, 'appliances');  
     }
     
 
@@ -94,6 +91,16 @@ export class Filters {
            e.preventDefault();
         })
     }
+
+
+    display(){
+        /** Create list elements and display it */
+        const element =  this.createListOfElements(this.name, this.all);
+        document.querySelector(`.main_filter-bar-${this.name}`).appendChild(element);
+        this.displayTag();
+        this.displayListElFiltered();
+    }
+
     
     /** displays the list of elements matching the entry in the input */
     displayListElFiltered(){
@@ -166,23 +173,51 @@ export class Filters {
       
     }
 
-    listenForSelection(){
-            const listElements = document.querySelectorAll(`.${this.name}`);
-            listElements.forEach(el => {
-                el.addEventListener('click', () => {
-                    if (this.name === 'appliances' && !this.appSelected.includes(el.innerText)) {
-                        this.appSelected.push(el.innerText);
-                    }
-                    if (this.name === 'ingredients' && !this.ingSelected.includes(el.innerText)) {
-                        this.ingSelected.push(el.innerText);
-                    }
-                    if (this.name === 'ustensils' && !this.ustSelected.includes(el.innerText)) {
-                        this.ustSelected.push(el.innerText);
-                    }
-                    this.filterRecipes();
-                });
-              
+
+    filter(recipes){
+        const list = [];
+
+        this.recipes.forEach(recipe => {
+
+            this.appSelected.forEach(a => {
+                if(recipe.appliance.toLowerCase().trim().includes(a.toLowerCase())){
+                    list.push(recipe);
+                }
             });
-        }
+
+            this.ingSelected.forEach(i => {
+                if(recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase().trim()).includes(i.toLowerCase())){
+                    list.push(recipe);
+                }
+            });
+
+            this.ustSelected.forEach(u => {
+                if(recipe.ustensils.map(ustensil => ustensil.toLowerCase()).includes(u.toLowerCase())){
+                    list.push(recipe);
+                }
+            });
+        });
+
+        return list;
+    }
+
+    // listenForSelection(){
+    //         const listElements = document.querySelectorAll(`.${this.name}`);
+    //         listElements.forEach(el => {
+    //             el.addEventListener('click', () => {
+    //                 if (this.name === 'appliances' && !this.appSelected.includes(el.innerText)) {
+    //                     this.appSelected.push(el.innerText);
+    //                 }
+    //                 if (this.name === 'ingredients' && !this.ingSelected.includes(el.innerText)) {
+    //                     this.ingSelected.push(el.innerText);
+    //                 }
+    //                 if (this.name === 'ustensils' && !this.ustSelected.includes(el.innerText)) {
+    //                     this.ustSelected.push(el.innerText);
+    //                 }
+    //                 this.filterRecipes();
+    //             });
+              
+    //         });
+    //     }
     
 }

@@ -25,9 +25,9 @@ export class RecipesFiltered{
     }
 
    
-    displayCard(){
+    displayCard(recipes){
         this.wrapper.innerHTML = '';
-        this.filtered.forEach(recipe => {
+        recipes.forEach(recipe => {
             const card = recipe.buildCard();
             this.wrapper.appendChild(card);
         });
@@ -65,61 +65,22 @@ export class RecipesFiltered{
     }
 
 
-    getElSelected(name){
-        const listElements = document.querySelectorAll(`.${name}`);
-        listElements.forEach(el => {
-            el.addEventListener('click', () => {
-                if (name === 'appliances' && !this.appSelected.includes(el.innerText)) {
-                    this.appSelected.push(el.innerText);
-                }
-                if (name === 'ingredients' && !this.ingSelected.includes(el.innerText)) {
-                    this.ingSelected.push(el.innerText);
-                }
-                if (name === 'ustensils' && !this.ustSelected.includes(el.innerText)) {
-                    this.ustSelected.push(el.innerText);
-                }
-                this.filterRecipes();
-            });
-          
-        });
-    }
-
-    /** get elements selected */
-    // listenElSelected(){
-    //     this.filters.forEach(filter => {
-    //         filter.listenForSelection();
-    //     });
-
-    // }
-
-
     filterRecipes(){
-        this.filtered = [];
+        this.filtered = this.recipes;
+        // console.log(this.filtered);
+        // console.log(this.filters);
+        this.filters.forEach(filter =>{
+            this.filtered = filter.filter(this.filtered);
+            console.log(this.filtered);
+            console.log(filter.name, this.filtered);
+            // this.displayCard(this.filtered);  
+        })
 
-        this.recipes.forEach(recipe => {
+      this.displayCard(this.filtered);  
 
-            this.appSelected.forEach(a => {
-                if(recipe.appliance.toLowerCase().trim().includes(a.toLowerCase())){
-                    this.filtered.push(recipe);
-                }
-            });
 
-            this.ingSelected.forEach(i => {
-                if(recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase().trim()).includes(i.toLowerCase())){
-                    this.filtered.push(recipe);
-                }
-            });
-
-            this.ustSelected.forEach(u => {
-                if(recipe.ustensils.map(ustensil => ustensil.toLowerCase()).includes(u.toLowerCase())){
-                    this.filtered.push(recipe);
-                }
-            });
-        });
-
-        this.displayCard();  
-        this.updateCounterRecipes();
-        console.log(this.filtered);
+    
+   
     }
 
     
@@ -141,27 +102,36 @@ export class RecipesFiltered{
             this.recipes.push(new Recipe(recipe));
         });
 
- 
+        // this.displayCard();
         this.addFilter(filterApp);
         this.addFilter(filterIng);
         this.addFilter(filterUst);
 
         this.hydrateFilters();
-        this.displayCard();
-        this.displayCounterRecipes(this.filtered);
+    
 
         /** get all clicked elements */
-        this.getAllElSelected('appliances');
-        this.getAllElSelected('ingredients');
-        this.getAllElSelected('ustensils');
+        // this.getAllElSelected('appliances');
+        // this.getAllElSelected('ingredients');
+        // this.getAllElSelected('ustensils');
 
-        /** get clicked elements */
-        this.getElSelected('appliances');
-        this.getElSelected('ingredients');
-        this.getElSelected('ustensils');
+        this.listenElSelected();
+   
+        this.appSelected = filterApp.appSelected;
+        this.ingSelected = filterIng.ingSelected;
+        this.ustSelected = filterUst.ustSelected;
 
-        //this.listenElSelected();
+         this.displayCard(this.filtered);
+        this.displayCounterRecipes(recipes);
+      
+    }
 
+
+    /** get elements selected */
+    listenElSelected(){
+        this.filters.forEach(filter => {
+            filter.listenForSelection();
+        });
     }
 
         
@@ -173,4 +143,6 @@ export class RecipesFiltered{
         /** update display number of recipes */
         document.querySelector('.numberRecipes').innerText = numberRecipes;
     }
+
+  
 }

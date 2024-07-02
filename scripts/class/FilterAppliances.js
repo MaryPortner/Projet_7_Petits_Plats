@@ -7,22 +7,22 @@ export class FilterAppliances extends Filters {
         super(list, 'appliances');
         //  here appliances will correspond to the this.name of the parent class
         this.all = [];
+        this.appSelected = [];
+        this.recipes = list.recipes;
     }
 
+
     display(){
-        /** Create list elements and display it */
-        const element =  super.createListOfElements(this.name, this.all);
-        document.querySelector(`.main_filter-bar-${this.name}`).appendChild(element);
-        super.displayTag();
-        super.displayListElFiltered();
+        super.display();
     }
+
 
     /** Get all elements */
     getListEl(){
         const getApp = new Set();
         let allApp;
 
-        this.list.filtered.forEach(rec => {
+        this.list.recipes.forEach(rec => {
             getApp.add(rec.getAppliances());
         });
 
@@ -30,10 +30,40 @@ export class FilterAppliances extends Filters {
         this.all = allApp;
     }
 
+
     deleteData(){
-        super.deleteDataInput()
+        super.deleteDataInput();
     }
 
+    filter(){
+        const list = [];
+
+        this.recipes.forEach(recipe => {
+            this.appSelected.forEach(a => {
+                if(recipe.appliance.toLowerCase().trim().includes(a.toLowerCase())){
+                    list.push(recipe);
+                }
+            });
+        });
+
+        return list;
+    }
+
+
+    listenForSelection(){
+        const listElements = document.querySelectorAll(`.${this.name}`);
+        listElements.forEach(el => {
+            el.addEventListener('click', () => {
+                if (this.name === 'appliances' && !this.appSelected.includes(el.innerText)) {
+                    this.appSelected.push(el.innerText);
+                    this.list.filterRecipes();
+                }
+
+             this.list.updateCounterRecipes();
+            });
+          
+        });
+    }
 
 }
 

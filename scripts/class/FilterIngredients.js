@@ -1,28 +1,32 @@
 import { Filters } from "./Filters.js";
 
-
 export class FilterIngredients extends Filters {
 
     constructor(list){
         super(list,'ingredients');
     //  here ingredients will correspond to the this.name of the parent class
         this.all = [];
+        this.ingSelected = [];
+        this.recipes = list.recipes;
     }
 
 
     display(){
-        const element =  super.createListOfElements(this.name, this.all);
-        document.querySelector(`.main_filter-bar-${this.name}`).appendChild(element);
-        super.displayTag();
-        super.displayListElFiltered();
+        super.display();
     }
+
+
+    deleteData(){
+        super.deleteDataInput();
+    }
+
 
     /** Get all elements */
     getListEl(){
         const getIng = new Set();
         let allIng;
 
-        this.list.filtered.forEach(rec => {
+        this.list.recipes.forEach(rec => {
             rec.getIngredients().forEach(ing => {
                 getIng.add(ing);
             });
@@ -32,8 +36,34 @@ export class FilterIngredients extends Filters {
         this.all = allIng;
     }
 
-    deleteData(){
-        super.deleteDataInput();
+
+    filter(){
+        const list = [];
+        
+        this.recipes.forEach(recipe => {
+            this.ingSelected.forEach(i => {
+                if(recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase().trim()).includes(i.toLowerCase())){
+                    list.push(recipe);
+                }
+            });
+        });
+        
+        return list;
+    }
+
+    /** Get element selected and get recipe filtered  */
+    listenForSelection(){
+        const listElements = document.querySelectorAll(`.${this.name}`);
+        listElements.forEach(el => {
+            el.addEventListener('click', () => {
+                if (this.name === 'ingredients' && !this.ingSelected.includes(el.innerText)) {
+                    this.ingSelected.push(el.innerText);
+                    this.list.filterRecipes();
+                   
+                }
+                this.list.updateCounterRecipes();
+            });
+        });
     }
 
 
