@@ -67,20 +67,16 @@ export class RecipesFiltered{
 
     filterRecipes(){
         this.filtered = this.recipes;
-        // console.log(this.filtered);
+
         // console.log(this.filters);
         this.filters.forEach(filter =>{
+          
             this.filtered = filter.filter(this.filtered);
-            console.log(this.filtered);
-            console.log(filter.name, this.filtered);
-            // this.displayCard(this.filtered);  
-        })
-
-      this.displayCard(this.filtered);  
-
-
+            this.filtered.forEach(recipe =>{
+                this.displayCard(this.filtered);  
+            })
+        });
     
-   
     }
 
     
@@ -117,11 +113,11 @@ export class RecipesFiltered{
 
         this.listenElSelected();
    
-        this.appSelected = filterApp.appSelected;
-        this.ingSelected = filterIng.ingSelected;
-        this.ustSelected = filterUst.ustSelected;
+        // this.appSelected = filterApp.appSelected;
+        // this.ingSelected = filterIng.ingSelected;
+        // this.ustSelected = filterUst.ustSelected;
 
-         this.displayCard(this.filtered);
+        this.displayCard(this.filtered);
         this.displayCounterRecipes(recipes);
       
     }

@@ -8,6 +8,7 @@ export class FilterIngredients extends Filters {
         this.all = [];
         this.ingSelected = [];
         this.recipes = list.recipes;
+      
     }
 
 
@@ -39,9 +40,10 @@ export class FilterIngredients extends Filters {
 
     filter(){
         const list = [];
-        
         this.recipes.forEach(recipe => {
+    
             this.ingSelected.forEach(i => {
+            
                 if(recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase().trim()).includes(i.toLowerCase())){
                     list.push(recipe);
                 }
@@ -59,8 +61,8 @@ export class FilterIngredients extends Filters {
                 if (this.name === 'ingredients' && !this.ingSelected.includes(el.innerText)) {
                     this.ingSelected.push(el.innerText);
                     this.list.filterRecipes();
-                   
                 }
+                // console.log(this.list);
                 this.list.updateCounterRecipes();
             });
         });
