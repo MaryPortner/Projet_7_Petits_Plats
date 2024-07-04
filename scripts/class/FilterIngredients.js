@@ -41,9 +41,7 @@ export class FilterIngredients extends Filters {
     filter(){
         const list = [];
         this.recipes.forEach(recipe => {
-    
             this.ingSelected.forEach(i => {
-            
                 if(recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase().trim()).includes(i.toLowerCase())){
                     list.push(recipe);
                 }

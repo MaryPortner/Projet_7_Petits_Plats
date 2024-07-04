@@ -26,7 +26,7 @@ export class FilterUstensils extends Filters {
         const getUst = new Set();
         let allUst;
 
-;        this.list.recipes.forEach(rec => {
+       this.list.recipes.forEach(rec => {
             rec.getUstensils().forEach(ust =>{
                 getUst.add(ust);
             });
@@ -37,9 +37,9 @@ export class FilterUstensils extends Filters {
     }
 
 
+
     filter(){
         const list = [];
-
         this.recipes.forEach(recipe => {
             this.ustSelected.forEach(u => {
                 if(recipe.ustensils.map(ustensil => ustensil.toLowerCase()).includes(u.toLowerCase())){
@@ -59,14 +59,12 @@ export class FilterUstensils extends Filters {
                 if (this.name === 'ustensils' && !this.ustSelected.includes(el.innerText)) {
                     this.ustSelected.push(el.innerText);
                     this.list.filterRecipes();
-         
                 }
-                console.log(this.ustSelected);
-    
                 this.list.updateCounterRecipes();
             });
         });
     }
-
-
  }
+
+
+

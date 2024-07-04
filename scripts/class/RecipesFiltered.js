@@ -1,12 +1,10 @@
 import { FilterAppliances } from "../class/FilterAppliances.js";
 import { FilterIngredients } from "../class/FilterIngredients.js";
 import { FilterUstensils } from "../class/FilterUstensils.js";
-
 import { Recipe } from "./Recipe.js";
 
 
 export class RecipesFiltered{
-
     constructor(recipes){
         this.appSelected = [];
         this.ingSelected = [];
@@ -19,9 +17,17 @@ export class RecipesFiltered{
         this.elClicked = [];
     }
 
+
     /** add all filters in this.filters */
     addFilter(filter){ 
         this.filters.push(filter);
+    }
+
+
+    deleteListElement(){
+        document.getElementById("main_filter-bar-appliances").removeChild(document.getElementById("main_filter-bar-appliances").children[1]);
+        document.getElementById("main_filter-bar-ingredients").removeChild(document.getElementById("main_filter-bar-ingredients").children[1]);
+        document.getElementById("main_filter-bar-ustensils").removeChild(document.getElementById("main_filter-bar-ustensils").children[1]);
     }
 
    
@@ -53,31 +59,32 @@ export class RecipesFiltered{
     }
 
 
-    getAllElSelected(name){
-        const listElements = document.querySelectorAll(`.${name}`);
-        listElements.forEach(el => {
-            el.addEventListener('click', () => {
-                this.elClicked.push(el.innerText);
-                // console.log(this.elClicked);
-                return this.elClicked;
-            });
-        });
+    displayRecipesFiltered(recipes){
+        console.log(recipes);
     }
 
 
     filterRecipes(){
         this.filtered = this.recipes;
-
-        // console.log(this.filters);
         this.filters.forEach(filter =>{
-          
             this.filtered = filter.filter(this.filtered);
             this.filtered.forEach(recipe =>{
                 this.displayCard(this.filtered);  
-            })
+            });
         });
-    
     }
+
+
+    // getAllElSelected(name){
+    //     const listElements = document.querySelectorAll(`.${name}`);
+    //     listElements.forEach(el => {
+    //         el.addEventListener('click', () => {
+    //             this.elClicked.push(el.innerText);
+    //             // console.log(this.elClicked);
+    //             return this.elClicked;
+    //         });
+    //     });
+    // }
 
     
     /** get elements and display them in the filters */
@@ -93,6 +100,7 @@ export class RecipesFiltered{
         const filterApp = new FilterAppliances(this); // "this" here refers to the class itself 
         const filterIng = new FilterIngredients(this);
         const filterUst = new FilterUstensils(this);
+
 
         recipes.forEach(recipe => {
             this.recipes.push(new Recipe(recipe));
@@ -118,9 +126,9 @@ export class RecipesFiltered{
         // this.ustSelected = filterUst.ustSelected;
 
         this.displayCard(this.filtered);
-        this.displayCounterRecipes(recipes);
-      
+        this.displayCounterRecipes(this.filtered);
     }
+    
 
 
     /** get elements selected */
