@@ -22,11 +22,11 @@ export class FilterUstensils extends Filters {
 
 
     /** Get all elements */
-    getListEl(){
+    getListEl(recipes){
         const getUst = new Set();
         let allUst;
 
-       this.list.recipes.forEach(rec => {
+       recipes.forEach(rec => {
             rec.getUstensils().forEach(ust =>{
                 getUst.add(ust);
             });
@@ -37,18 +37,19 @@ export class FilterUstensils extends Filters {
     }
 
 
-
-    filter(){
-        const list = [];
-        this.recipes.forEach(recipe => {
+//filter recipes 
+    filter(recipes){
+        //returns filtered recipes that contain the selected elements
+       return recipes.filter(recipe => {
+        let count = 0;
             this.ustSelected.forEach(u => {
                 if(recipe.ustensils.map(ustensil => ustensil.toLowerCase()).includes(u.toLowerCase())){
-                    list.push(recipe);
+                    count++;
                 }
             });
-        });
-      
-        return list;
+            // After checking all selected utensils, we returns true if all selected utensils are present in the recipe
+            return (count === this.ustSelected.length);
+        });      
     }
 
 

@@ -12,7 +12,14 @@ export class Filters {
 
     /** Create list of elements for dropdown - Section filters - */
     createListOfElements(name, elements){
-        const classUl = `filter-${name}-list` ;
+        const classUl = `filter-${name}-list`;
+
+        // empty list if exists
+        let getUl = document.querySelector(`.${classUl}`);
+        if (getUl) {
+            getUl.remove();
+        }
+
         const ul = document.createElement('ul');
         ul.classList.add(`${classUl}`);
 
@@ -92,6 +99,12 @@ export class Filters {
         })
     }
 
+    // deleteListElement(){
+    //     document.getElementById("main_filter-bar-appliances").removeChild(document.getElementById("main_filter-bar-appliances").children[1]);
+    //     document.getElementById("main_filter-bar-ingredients").removeChild(document.getElementById("main_filter-bar-ingredients").children[1]);
+    //     document.getElementById("main_filter-bar-ustensils").removeChild(document.getElementById("main_filter-bar-ustensils").children[1]);
+    // }
+
 
     display(){
         /** Create list elements and display it */
@@ -161,63 +174,14 @@ export class Filters {
 
         listElements.forEach(el => { 
             el.addEventListener('click', () => {
+
                 /** Create Tag */
                 mainTagWrapper.appendChild(this.createTag(el));
                 /** remove el of list elements */
                 el.style.display = 'none';
                 /** hide list elements  */
                 document.querySelector(`#main_filter-bar-${this.name}`).classList.toggle('displayBlock');     
-            });
-           
+            });         
         })
-      
     }
-
-
-    filter(recipes){
-        const list = [];
-
-        this.recipes.forEach(recipe => {
-
-            this.appSelected.forEach(a => {
-                if(recipe.appliance.toLowerCase().trim().includes(a.toLowerCase())){
-                    list.push(recipe);
-                }
-            });
-
-            this.ingSelected.forEach(i => {
-                if(recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase().trim()).includes(i.toLowerCase())){
-                    list.push(recipe);
-                }
-            });
-
-            this.ustSelected.forEach(u => {
-                if(recipe.ustensils.map(ustensil => ustensil.toLowerCase()).includes(u.toLowerCase())){
-                    list.push(recipe);
-                }
-            });
-        });
-
-        return list;
-    }
-
-    // listenForSelection(){
-    //         const listElements = document.querySelectorAll(`.${this.name}`);
-    //         listElements.forEach(el => {
-    //             el.addEventListener('click', () => {
-    //                 if (this.name === 'appliances' && !this.appSelected.includes(el.innerText)) {
-    //                     this.appSelected.push(el.innerText);
-    //                 }
-    //                 if (this.name === 'ingredients' && !this.ingSelected.includes(el.innerText)) {
-    //                     this.ingSelected.push(el.innerText);
-    //                 }
-    //                 if (this.name === 'ustensils' && !this.ustSelected.includes(el.innerText)) {
-    //                     this.ustSelected.push(el.innerText);
-    //                 }
-    //                 this.filterRecipes();
-    //             });
-              
-    //         });
-    //     }
-    
 }

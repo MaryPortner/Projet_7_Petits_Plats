@@ -18,20 +18,21 @@ export class RecipesFiltered{
     }
 
 
-    /** add all filters in this.filters */
+    /** Create an array of all filters */
     addFilter(filter){ 
         this.filters.push(filter);
     }
 
 
-    deleteListElement(){
-        document.getElementById("main_filter-bar-appliances").removeChild(document.getElementById("main_filter-bar-appliances").children[1]);
-        document.getElementById("main_filter-bar-ingredients").removeChild(document.getElementById("main_filter-bar-ingredients").children[1]);
-        document.getElementById("main_filter-bar-ustensils").removeChild(document.getElementById("main_filter-bar-ustensils").children[1]);
-    }
+    // deleteListElement(){
+    //     console.log(document.getElementById("main_filter-bar-appliances").removeChild(document.getElementById("main_filter-bar-appliances").children[1]))
+    //     document.getElementById("main_filter-bar-appliances").removeChild(document.getElementById("main_filter-bar-appliances").children[1]);
+    //     document.getElementById("main_filter-bar-ingredients").removeChild(document.getElementById("main_filter-bar-ingredients").children[1]);
+    //     document.getElementById("main_filter-bar-ustensils").removeChild(document.getElementById("main_filter-bar-ustensils").children[1]);
+    // }
 
    
-    displayCard(recipes){
+    displayCards(recipes){
         this.wrapper.innerHTML = '';
         recipes.forEach(recipe => {
             const card = recipe.buildCard();
@@ -59,19 +60,21 @@ export class RecipesFiltered{
     }
 
 
-    displayRecipesFiltered(recipes){
-        console.log(recipes);
-    }
-
 
     filterRecipes(){
-        this.filtered = this.recipes;
+       let list = this.filtered;
+      
         this.filters.forEach(filter =>{
-            this.filtered = filter.filter(this.filtered);
-            this.filtered.forEach(recipe =>{
-                this.displayCard(this.filtered);  
-            });
+            // filter here, is a method of the Filter object (FilterAppliances, FilterIngredients, FilterUstensils)
+            list = filter.filter(list);
+            //let list is the list of recipes that contain the selected filters
+            console.log(filter.name, list)
         });
+        //the list will be updated based on the selected items
+        this.filtered = list;
+    
+        this.hydrateFilters();
+    
     }
 
 
@@ -90,8 +93,9 @@ export class RecipesFiltered{
     /** get elements and display them in the filters */
     hydrateFilters(){
         this.filters.forEach(filter => {
-            filter.getListEl();
+            filter.getListEl( this.filtered);
             filter.display();
+            this.displayCards(this.filtered);  
         });
     }
 
@@ -106,7 +110,6 @@ export class RecipesFiltered{
             this.recipes.push(new Recipe(recipe));
         });
 
-        // this.displayCard();
         this.addFilter(filterApp);
         this.addFilter(filterIng);
         this.addFilter(filterUst);
@@ -120,12 +123,7 @@ export class RecipesFiltered{
         // this.getAllElSelected('ustensils');
 
         this.listenElSelected();
-   
-        // this.appSelected = filterApp.appSelected;
-        // this.ingSelected = filterIng.ingSelected;
-        // this.ustSelected = filterUst.ustSelected;
-
-        this.displayCard(this.filtered);
+        this.displayCards(this.filtered);
         this.displayCounterRecipes(this.filtered);
     }
     

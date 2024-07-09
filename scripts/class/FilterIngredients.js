@@ -23,11 +23,11 @@ export class FilterIngredients extends Filters {
 
 
     /** Get all elements */
-    getListEl(){
+    getListEl(recipes){
         const getIng = new Set();
         let allIng;
 
-        this.list.recipes.forEach(rec => {
+       recipes.forEach(rec => {
             rec.getIngredients().forEach(ing => {
                 getIng.add(ing);
             });
@@ -38,17 +38,17 @@ export class FilterIngredients extends Filters {
     }
 
 
-    filter(){
-        const list = [];
-        this.recipes.forEach(recipe => {
+    filter(recipes){
+        //returns filtered recipes that contain the selected elements
+        return recipes.filter(recipe => {
+            let count = 0;
             this.ingSelected.forEach(i => {
                 if(recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase().trim()).includes(i.toLowerCase())){
-                    list.push(recipe);
+                    count++;
                 }
             });
+            return (count === this.ingSelected.length);
         });
-        
-        return list;
     }
 
     /** Get element selected and get recipe filtered  */

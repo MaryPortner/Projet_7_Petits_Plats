@@ -13,16 +13,17 @@ export class FilterAppliances extends Filters {
 
 
     display(){
+     
         super.display();
     }
 
 
     /** Get all elements */
-    getListEl(){
+    getListEl(recipes){
         const getApp = new Set();
         let allApp;
 
-        this.list.recipes.forEach(rec => {
+        recipes.forEach(rec => {
             getApp.add(rec.getAppliances());
         });
 
@@ -35,18 +36,20 @@ export class FilterAppliances extends Filters {
         super.deleteDataInput();
     }
 
-    filter(){
-        const list = [];
 
-        this.recipes.forEach(recipe => {
+    filter(recipes){
+        //returns filtered recipes that contain the selected elements
+        return recipes.filter(recipe =>{
+            let count = 0;
             this.appSelected.forEach(a => {
                 if(recipe.appliance.toLowerCase().trim().includes(a.toLowerCase())){
-                    list.push(recipe);
+                    count ++;
                 }
             });
+            // After checking all selected appliances, we returns true if all selected appliances are present in the recipe
+            return (count === this.appSelected.length);
         });
-
-        return list;
+      
     }
 
 
