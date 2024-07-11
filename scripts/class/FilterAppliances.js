@@ -7,7 +7,7 @@ export class FilterAppliances extends Filters {
         super(list, 'appliances');
         //  here appliances will correspond to the this.name of the parent class
         this.all = [];
-        this.appSelected = [];
+        this.selection = []; // saves all selected appliances
         this.recipes = list.recipes;
     }
 
@@ -40,13 +40,13 @@ export class FilterAppliances extends Filters {
         //returns filtered recipes that contain the selected elements
         return recipes.filter(recipe =>{
             let count = 0;
-            this.appSelected.forEach(a => {
+            this.selection.forEach(a => {
                 if(recipe.appliance.toLowerCase().trim().includes(a.toLowerCase())){
                     count ++;
                 }
             });
             // After checking all selected appliances, we returns true if all selected appliances are present in the recipe
-            return (count === this.appSelected.length);
+            return (count === this.selection.length);
         });
       
     }
@@ -56,8 +56,8 @@ export class FilterAppliances extends Filters {
         const listElements = document.querySelectorAll(`.${this.name}`);
         listElements.forEach(el => {
             el.addEventListener('click', () => {
-                if (this.name === 'appliances' && !this.appSelected.includes(el.innerText)) {
-                    this.appSelected.push(el.innerText);
+                if (this.name === 'appliances' && !this.selection.includes(el.innerText)) {
+                    this.selection.push(el.innerText);
                     this.list.filterRecipes();
                 }
 
@@ -68,4 +68,3 @@ export class FilterAppliances extends Filters {
     }
 
 }
-

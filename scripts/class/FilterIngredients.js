@@ -6,7 +6,7 @@ export class FilterIngredients extends Filters {
         super(list,'ingredients');
     //  here ingredients will correspond to the this.name of the parent class
         this.all = [];
-        this.ingSelected = [];
+        this.selection = [];  // saves all selected ingredients
         this.recipes = list.recipes;
     }
 
@@ -42,12 +42,12 @@ export class FilterIngredients extends Filters {
         //returns filtered recipes that contain the selected elements
         return recipes.filter(recipe => {
             let count = 0;
-            this.ingSelected.forEach(i => {
+            this.selection.forEach(i => {
                 if(recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase().trim()).includes(i.toLowerCase())){
                     count++;
                 }
             });
-            return (count === this.ingSelected.length);
+            return (count === this.selection.length);
         });
     }
 
@@ -59,8 +59,8 @@ export class FilterIngredients extends Filters {
         listElements.forEach(el => {
             el.addEventListener('click', () => {
              
-                if (this.name === 'ingredients' && !this.ingSelected.includes(el.innerText)) {
-                    this.ingSelected.push(el.innerText);
+                if (this.name === 'ingredients' && !this.selection.includes(el.innerText)) {
+                    this.selection.push(el.innerText);
                     this.list.filterRecipes();
                 }
                 // console.log(this.list);

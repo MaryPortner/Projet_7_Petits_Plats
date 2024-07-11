@@ -14,11 +14,11 @@ export class Filters {
     createListOfElements(name, elements){
         const classUl = `filter-${name}-list`;
 
-        // // empty list if exists
-        // let getUl = document.querySelector(`.${classUl}`);
-        // if (getUl) {
-        //     getUl.remove();
-        // }
+        // empty list if exists
+        let getUl = document.querySelector(`.${classUl}`);
+        if (getUl) {
+            getUl.remove();
+        }
 
         const ul = document.createElement('ul');
         ul.classList.add(`${classUl}`);
@@ -51,7 +51,13 @@ export class Filters {
         /** Delete tag and display el */
         crossToDeleteTag.addEventListener('click', () => {
             tag.remove();
+            const index = this.selection.findIndex(a => a === el.innerText);
+            this.selection.splice(index, 1);
             el.style.display = 'block';
+            /* updating the selection after deleting the tag */
+            this.list.filtered = this.list.recipes; // reset list
+            this.list.filterRecipes();
+            this.list.updateCounterRecipes();
         });
     
         tag.appendChild(textEl);
@@ -101,12 +107,12 @@ export class Filters {
 
 
     display(){
-        // this.emptyList();
         /** Create list elements and display it */
         const element =  this.createListOfElements(this.name, this.all);
         document.querySelector(`.main_filter-bar-${this.name}`).appendChild(element);
-        this.displayTag();
+      
         this.displayListElFiltered();
+        this.displayTag();
     }
     
 

@@ -89,6 +89,7 @@ export class RecipesFiltered{
             filter.display();
             this.displayCards(this.filtered);  
         });
+        this.listenElSelected();
     }
 
 
@@ -114,7 +115,7 @@ export class RecipesFiltered{
         // this.getAllElSelected('ingredients');
         // this.getAllElSelected('ustensils');
 
-        this.listenElSelected();
+   
         this.displayCards(this.filtered);
         this.displayCounterRecipes(this.filtered);
     }
