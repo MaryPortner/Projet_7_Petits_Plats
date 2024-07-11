@@ -113,6 +113,9 @@ export class Filters {
       
         this.displayListElFiltered();
         this.displayTag();
+        this.removeSelectedElFromList();
+
+ 
     }
     
 
@@ -172,29 +175,30 @@ export class Filters {
         const listElements = document.querySelectorAll(`.${this.name}`);
         const mainFilter = document.querySelector(`#main_filter-${this.name}-wrapper`);
         const mainTagWrapper = mainFilter.querySelector('.main_Tag-wrapper');
-
         listElements.forEach(el => { 
             el.addEventListener('click', () => {
-
                 /** Create Tag */
                 mainTagWrapper.appendChild(this.createTag(el));
-                /** remove el of list elements */
-                el.style.display = 'none';
                 /** hide list elements  */
                 document.querySelector(`#main_filter-bar-${this.name}`).classList.toggle('displayBlock');     
-            });         
+            });     
         })
     }
 
-
-        
-    emptyList(){
-        const classUl = `filter-${this.name}-list`;
-        // empty list if exists
-        let getUl = document.querySelector(`.${classUl}`);
-        if (getUl) {
-            getUl.remove();
-        }
+    removeSelectedElFromList(){
+        const tag = document.querySelectorAll(`.tag-${this.name}-p`);
+        const listElementsToFilter = document.querySelectorAll('.' + this.name);
     
+        /** remove el of list elements */
+        listElementsToFilter.forEach(el => {
+            tag.forEach(selection => {
+                if(el.innerText.toLowerCase().trim() === selection.innerText.toLowerCase().trim()){
+                    el.style.display = 'none';
+                }
+            });
+        });
     }
+    
+
+
 }

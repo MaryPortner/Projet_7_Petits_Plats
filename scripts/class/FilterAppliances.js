@@ -60,10 +60,9 @@ export class FilterAppliances extends Filters {
                     this.selection.push(el.innerText);
                     this.list.filterRecipes();
                 }
-
-             this.list.updateCounterRecipes();
+         
+                this.list.updateCounterRecipes();
             });
-          
         });
     }
 

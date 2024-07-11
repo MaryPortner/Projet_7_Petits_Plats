@@ -37,7 +37,6 @@ export class FilterIngredients extends Filters {
     }
 
 
-
     filter(recipes){
         //returns filtered recipes that contain the selected elements
         return recipes.filter(recipe => {
@@ -50,7 +49,6 @@ export class FilterIngredients extends Filters {
             return (count === this.selection.length);
         });
     }
-
 
 
     /** Get element selected and get recipe filtered  */
