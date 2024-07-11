@@ -34,10 +34,11 @@ export class FilterUstensils extends Filters {
 
         allUst = [...getUst].sort();
         this.all = allUst;
+     
     }
 
 
-//filter recipes 
+    //filter recipes 
     filter(recipes){
         //returns filtered recipes that contain the selected elements
        return recipes.filter(recipe => {

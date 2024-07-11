@@ -14,11 +14,11 @@ export class Filters {
     createListOfElements(name, elements){
         const classUl = `filter-${name}-list`;
 
-        // empty list if exists
-        let getUl = document.querySelector(`.${classUl}`);
-        if (getUl) {
-            getUl.remove();
-        }
+        // // empty list if exists
+        // let getUl = document.querySelector(`.${classUl}`);
+        // if (getUl) {
+        //     getUl.remove();
+        // }
 
         const ul = document.createElement('ul');
         ul.classList.add(`${classUl}`);
@@ -99,22 +99,17 @@ export class Filters {
         })
     }
 
-    // deleteListElement(){
-    //     document.getElementById("main_filter-bar-appliances").removeChild(document.getElementById("main_filter-bar-appliances").children[1]);
-    //     document.getElementById("main_filter-bar-ingredients").removeChild(document.getElementById("main_filter-bar-ingredients").children[1]);
-    //     document.getElementById("main_filter-bar-ustensils").removeChild(document.getElementById("main_filter-bar-ustensils").children[1]);
-    // }
-
 
     display(){
+        // this.emptyList();
         /** Create list elements and display it */
         const element =  this.createListOfElements(this.name, this.all);
         document.querySelector(`.main_filter-bar-${this.name}`).appendChild(element);
         this.displayTag();
         this.displayListElFiltered();
     }
-
     
+
     /** displays the list of elements matching the entry in the input */
     displayListElFiltered(){
         /** filter data based on the element inserted into the input*/
@@ -183,5 +178,17 @@ export class Filters {
                 document.querySelector(`#main_filter-bar-${this.name}`).classList.toggle('displayBlock');     
             });         
         })
+    }
+
+
+        
+    emptyList(){
+        const classUl = `filter-${this.name}-list`;
+        // empty list if exists
+        let getUl = document.querySelector(`.${classUl}`);
+        if (getUl) {
+            getUl.remove();
+        }
+    
     }
 }

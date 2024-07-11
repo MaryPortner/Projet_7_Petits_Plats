@@ -24,14 +24,6 @@ export class RecipesFiltered{
     }
 
 
-    // deleteListElement(){
-    //     console.log(document.getElementById("main_filter-bar-appliances").removeChild(document.getElementById("main_filter-bar-appliances").children[1]))
-    //     document.getElementById("main_filter-bar-appliances").removeChild(document.getElementById("main_filter-bar-appliances").children[1]);
-    //     document.getElementById("main_filter-bar-ingredients").removeChild(document.getElementById("main_filter-bar-ingredients").children[1]);
-    //     document.getElementById("main_filter-bar-ustensils").removeChild(document.getElementById("main_filter-bar-ustensils").children[1]);
-    // }
-
-   
     displayCards(recipes){
         this.wrapper.innerHTML = '';
         recipes.forEach(recipe => {
@@ -72,9 +64,9 @@ export class RecipesFiltered{
         });
         //the list will be updated based on the selected items
         this.filtered = list;
-    
         this.hydrateFilters();
-    
+
+        console.log('rec', this.filtered);
     }
 
 

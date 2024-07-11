@@ -8,7 +8,6 @@ export class FilterIngredients extends Filters {
         this.all = [];
         this.ingSelected = [];
         this.recipes = list.recipes;
-      
     }
 
 
@@ -38,6 +37,7 @@ export class FilterIngredients extends Filters {
     }
 
 
+
     filter(recipes){
         //returns filtered recipes that contain the selected elements
         return recipes.filter(recipe => {
@@ -51,11 +51,14 @@ export class FilterIngredients extends Filters {
         });
     }
 
+
+
     /** Get element selected and get recipe filtered  */
     listenForSelection(){
         const listElements = document.querySelectorAll(`.${this.name}`);
         listElements.forEach(el => {
             el.addEventListener('click', () => {
+             
                 if (this.name === 'ingredients' && !this.ingSelected.includes(el.innerText)) {
                     this.ingSelected.push(el.innerText);
                     this.list.filterRecipes();
@@ -65,19 +68,5 @@ export class FilterIngredients extends Filters {
             });
         });
     }
-
-
-
-    
-
-
-
-    
-
-
-
-
-
-
 
 }

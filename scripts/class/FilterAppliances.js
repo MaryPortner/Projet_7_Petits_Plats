@@ -13,8 +13,12 @@ export class FilterAppliances extends Filters {
 
 
     display(){
-     
         super.display();
+    }
+
+
+    deleteData(){
+        super.deleteDataInput();
     }
 
 
@@ -29,11 +33,6 @@ export class FilterAppliances extends Filters {
 
         allApp = [...getApp].sort();
         this.all = allApp;
-    }
-
-
-    deleteData(){
-        super.deleteDataInput();
     }
 
 
