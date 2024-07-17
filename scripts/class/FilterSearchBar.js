@@ -4,9 +4,10 @@ import { recipes } from "./../../data/recipes.js";
 export class FilterSearchBar extends Filters {
 
     constructor(list){
-  
+
         super(list, 'searchBar');
         this.recipes = recipes;
+        this.filteredBySearchBar = [];
     }
 
     deleteData(){
@@ -15,14 +16,25 @@ export class FilterSearchBar extends Filters {
 
 
     getRecipes(){
-    
         const regex = /^[a-zA-ZàâçéèêëôöúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÎÏÔÖÚÙÛÜÆŒ._-\s]{3,30}$/;
         const input = document.querySelector(`#search-q`);
         const submit = document.querySelector('button.search-submit');
         let recipesFiltered = [];
 
+        submit.addEventListener("click", (e) => {
+            e.preventDefault();
+            filterRecipes();
+            // console.log(recipesFiltered);
+            if(recipesFiltered.length === 0){
+                console.log('Aucune recette ne correspond à votre recherche')
+            }
+
+            input.value = '';
+        });
+
+
         const filterRecipes = () => {
-            let research = input.value.toLowerCase();
+            let research = input.value.toLowerCase().trim();
             recipesFiltered = [];  // delete previous results
             if (regex.test(research)) {
                 this.recipes.forEach(recipe => {
@@ -46,22 +58,16 @@ export class FilterSearchBar extends Filters {
                         recipesFiltered.push(recipe);
                     } 
                 });
-
+                this.filteredBySearchBar = recipesFiltered;
                 console.log(recipesFiltered);
-                return recipesFiltered;
+                // return recipesFiltered;
+                
             } else {
                 console.log('Votre recherche doit contenir au moins 3 caractères');
-            }
-
-            input.value = '';
+            }        
         };
 
-        submit.addEventListener("click", (e) => {
-            e.preventDefault();
-            filterRecipes();
-            if(recipesFiltered == ''){
-                console.log('Aucune recette ne correspond à votre recherche')
-            }
-        });
+
+       
     }
 }

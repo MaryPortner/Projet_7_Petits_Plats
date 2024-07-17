@@ -13,6 +13,7 @@ export class RecipesFiltered{
         this.filtered = this.recipes;
         this.init(recipes);
         this.elClicked = [];
+        // this.recipesBySearchBar = new FilterSearchBar(this);
     }
 
 
@@ -60,7 +61,14 @@ export class RecipesFiltered{
         //the list will be updated based on the selected items
         this.filtered = list;
         this.hydrateFilters();
+    }
 
+    displayRecBySearchBar(){
+
+        this.filtered = this.recBySearchBar.getRecipes();
+        this.displayCards( this.filtered);
+        this.displayCounterRecipes( this.filtered);
+    
     }
 
 
@@ -75,7 +83,8 @@ export class RecipesFiltered{
         });
     }
 
-    
+
+
     /** get elements and display them in the filters */
     hydrateFilters(){
         this.filters.forEach(filter => {
@@ -93,7 +102,10 @@ export class RecipesFiltered{
         const filterIng = new FilterIngredients(this);
         const filterUst = new FilterUstensils(this);
         const filterSearchBar = new FilterSearchBar(this);
-        console.log(filterSearchBar.getRecipes());
+    
+        const recipesBySearchBar = filterSearchBar.getRecipes();
+        console.log(recipesBySearchBar);
+        console.log(filterSearchBar);
 
 
         recipes.forEach(recipe => {
@@ -103,7 +115,8 @@ export class RecipesFiltered{
         this.addFilter(filterApp);
         this.addFilter(filterIng);
         this.addFilter(filterUst);
-        // this.addFilter(filterSearchBar);
+ 
+;        // this.addFilter(filterSearchBar);
 
         this.hydrateFilters();
     
