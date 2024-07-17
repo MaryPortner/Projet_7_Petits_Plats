@@ -1,14 +1,12 @@
 import { FilterAppliances } from "../class/FilterAppliances.js";
 import { FilterIngredients } from "../class/FilterIngredients.js";
 import { FilterUstensils } from "../class/FilterUstensils.js";
+import { FilterSearchBar } from "./FilterSearchBar.js";
 import { Recipe } from "./Recipe.js";
 
 
 export class RecipesFiltered{
     constructor(recipes){
-        this.appSelected = [];
-        this.ingSelected = [];
-        this.ustSelected = [];
         this.recipes = [];
         this.wrapper = document.querySelector('#main_allRecipes');
         this.filters = [];
@@ -18,7 +16,7 @@ export class RecipesFiltered{
     }
 
 
-    /** Create an array of all filters */
+    /** Create an array of all filters except searchBar */
     addFilter(filter){ 
         this.filters.push(filter);
     }
@@ -34,7 +32,6 @@ export class RecipesFiltered{
 
 
     displayCounterRecipes(recipes){
-
         // const recipesContainer = document.querySelector('#main_allRecipes');
         let numberRecipes = recipes.length;
         const numberTotalRecipes = document.querySelector('.numberTotalRecipes');
@@ -54,32 +51,29 @@ export class RecipesFiltered{
 
 
     filterRecipes(){
-       let list = this.filtered;
-      
+        //let list is the list of recipes that contain the selected filters
+        let list = this.filtered;
         this.filters.forEach(filter =>{
             // filter here, is a method of the Filter object (FilterAppliances, FilterIngredients, FilterUstensils)
             list = filter.filter(list);
-            //let list is the list of recipes that contain the selected filters
-            console.log(filter.name, list)
         });
         //the list will be updated based on the selected items
         this.filtered = list;
         this.hydrateFilters();
 
-        console.log('rec', this.filtered);
     }
 
 
-    // getAllElSelected(name){
-    //     const listElements = document.querySelectorAll(`.${name}`);
-    //     listElements.forEach(el => {
-    //         el.addEventListener('click', () => {
-    //             this.elClicked.push(el.innerText);
-    //             // console.log(this.elClicked);
-    //             return this.elClicked;
-    //         });
-    //     });
-    // }
+    getAllElSelected(name){
+        const listElements = document.querySelectorAll(`.${name}`);
+        listElements.forEach(el => {
+            el.addEventListener('click', () => {
+                this.elClicked.push(el.innerText);
+                // console.log(this.elClicked);
+                return this.elClicked;
+            });
+        });
+    }
 
     
     /** get elements and display them in the filters */
@@ -87,6 +81,7 @@ export class RecipesFiltered{
         this.filters.forEach(filter => {
             filter.getListEl( this.filtered);
             filter.display();
+            filter.deleteDataInput();
             this.displayCards(this.filtered);  
         });
         this.listenElSelected();
@@ -97,6 +92,8 @@ export class RecipesFiltered{
         const filterApp = new FilterAppliances(this); // "this" here refers to the class itself 
         const filterIng = new FilterIngredients(this);
         const filterUst = new FilterUstensils(this);
+        const filterSearchBar = new FilterSearchBar(this);
+        console.log(filterSearchBar.getRecipes());
 
 
         recipes.forEach(recipe => {
@@ -106,6 +103,7 @@ export class RecipesFiltered{
         this.addFilter(filterApp);
         this.addFilter(filterIng);
         this.addFilter(filterUst);
+        // this.addFilter(filterSearchBar);
 
         this.hydrateFilters();
     

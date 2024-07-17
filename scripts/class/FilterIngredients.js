@@ -26,7 +26,7 @@ export class FilterIngredients extends Filters {
         const getIng = new Set();
         let allIng;
 
-       recipes.forEach(rec => {
+        recipes.forEach(rec => {
             rec.getIngredients().forEach(ing => {
                 getIng.add(ing);
             });
@@ -46,6 +46,7 @@ export class FilterIngredients extends Filters {
                     count++;
                 }
             });
+
             return (count === this.selection.length);
         });
     }

@@ -1,5 +1,6 @@
 import { list } from "../pages/index.js";
 
+
 export class Filters {
 
     constructor(list, name){
@@ -8,7 +9,6 @@ export class Filters {
         this.filterRecipe = list.filterRecipes();
         // this.name retrieves the name in the constructor of the inheriting class ex: super(list, 'appliances');  
     }
-    
 
     /** Create list of elements for dropdown - Section filters - */
     createListOfElements(name, elements){
@@ -114,8 +114,6 @@ export class Filters {
         this.displayListElFiltered();
         this.displayTag();
         this.removeSelectedElFromList();
-
- 
     }
     
 

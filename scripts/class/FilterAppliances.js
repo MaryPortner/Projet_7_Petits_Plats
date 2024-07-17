@@ -48,7 +48,6 @@ export class FilterAppliances extends Filters {
             // After checking all selected appliances, we returns true if all selected appliances are present in the recipe
             return (count === this.selection.length);
         });
-      
     }
 
 
