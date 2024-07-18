@@ -13,7 +13,7 @@ export class RecipesFiltered{
         this.filtered = this.recipes;
         this.init(recipes);
         this.elClicked = [];
-        this.searchBar = new SearchBar(this);
+        this.searchBar = new SearchBar(this); // initialisation class SearchBar
  
     }
 
@@ -52,14 +52,15 @@ export class RecipesFiltered{
 
 
 
-    filterRecipes(needle = ''){
+    filterRecipes(recipesSearchBar = ''){ // / on met le paramètre à vide dans le cas où aucune recheche n'est faite. 
 
         //let list is the list of recipes that contain the selected filters
         let list = this.filtered;
 
-        if(needle.length > 0){
-            console.log(needle);
-            this.filtered = needle;
+        if(recipesSearchBar.length > 0){
+            console.log(recipesSearchBar);
+            this.filtered = recipesSearchBar;
+        
         } else {
      
             this.filters.forEach(filter =>{
@@ -70,17 +71,9 @@ export class RecipesFiltered{
             this.filtered = list;
         }
 
-
         this.hydrateFilters();
-       
+        this.updateCounterRecipes();
     }
-
-
-    // displayRecBySearchBar(){
-    //     this.filtered = this.recBySearchBar.getRecipes();
-    //     this.displayCards( this.filtered);
-    //     this.displayCounterRecipes(this.filtered);
-    // }
 
 
     getAllElSelected(name){
@@ -88,7 +81,6 @@ export class RecipesFiltered{
         listElements.forEach(el => {
             el.addEventListener('click', () => {
                 this.elClicked.push(el.innerText);
-                // console.log(this.elClicked);
                 return this.elClicked;
             });
         });
@@ -104,6 +96,7 @@ export class RecipesFiltered{
             filter.deleteDataInput();
             this.displayCards(this.filtered);  
         });
+
         this.listenElSelected();
     }
 
@@ -124,6 +117,7 @@ export class RecipesFiltered{
         this.hydrateFilters();
         this.displayCards(this.filtered);
         this.displayCounterRecipes(this.filtered);
+
     }
     
 

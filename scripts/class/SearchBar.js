@@ -31,25 +31,26 @@ export class SearchBar{
     }
 
 
-    displayTag(){
-        const research = document.querySelector(`#search-q`).value;
-        const listElements = document.querySelectorAll(`.${this.name}`);
-        const mainFilter = document.querySelector(`#main_filter-${this.name}-wrapper`);
-        const mainTagWrapper = document.querySelector('.main_Tag-wrapper');
+    // displayTag(){
+    //     const research = document.querySelector(`#search-q`).value;
+    //     const listElements = document.querySelectorAll(`.${this.name}`);
 
-        listElements.forEach(el => { 
-            el.addEventListener('click', () => {
+    //     const mainFilter = document.querySelector(`#main_filter-${this.name}-wrapper`);
+    //     const mainTagWrapper = document.querySelector('.main_Tag-wrapper');
 
-                if(listElements.includes(research)){
-                    /** Create Tag */
-                    mainTagWrapper.appendChild(this.createTag(el));
-                    /** hide list elements  */
-                    document.querySelector(`#main_filter-bar-${this.name}`).classList.toggle('displayBlock');    
-                }
+    //     listElements.forEach(el => { 
+    //         el.addEventListener('click', () => {
+
+    //             if(listElements.includes(research)){
+    //                 /** Create Tag */
+    //                 mainTagWrapper.appendChild(this.createTag(el));
+    //                 /** hide list elements  */
+    //                 document.querySelector(`#main_filter-bar-${this.name}`).classList.toggle('displayBlock');    
+    //             }
  
-            });     
-        })
-    }
+    //         });     
+    //     })
+    // }
 
 
     getRecipes(){
@@ -97,7 +98,6 @@ export class SearchBar{
             if(this.recipesFiltered.length === 0){
                 console.log('Aucune recette ne correspond à votre recherche');
             }
-            
         };
 
         filterRecipes();
@@ -112,17 +112,13 @@ export class SearchBar{
         submit.addEventListener("click", (e) => {
             e.preventDefault();
 
-            // const inputValue = input.value;
-            // // console.log(inputValue);
             this.getRecipes(this.list.filtered);
 
-     
+           // puts this.recipesFiltered as a parameter of the filter function of the RecipesFiltered class
             this.list.filterRecipes(this.recipesFiltered);
 
-            console.log('tout est ok');
             input.value = '';
 
-            this.displayTag();
         });
 
     }

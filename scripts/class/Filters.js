@@ -179,6 +179,7 @@ export class Filters {
             });     
         })
     }
+    
 
     removeSelectedElFromList(){
         const tag = document.querySelectorAll(`.tag-${this.name}-p`);
