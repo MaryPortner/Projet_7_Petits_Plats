@@ -52,28 +52,35 @@ export class RecipesFiltered{
 
 
 
-    filterRecipes(){
+    filterRecipes(needle = ''){
 
         //let list is the list of recipes that contain the selected filters
         let list = this.filtered;
 
-
+        if(needle.length > 0){
+            console.log(needle);
+            this.filtered = needle;
+        } else {
      
-        this.filters.forEach(filter =>{
-            // filter here, is a method of the Filter object (FilterAppliances, FilterIngredients, FilterUstensils)
-            list = filter.filter(list);
-        });
-        //the list will be updated based on the selected items
-        this.filtered = list;
+            this.filters.forEach(filter =>{
+                // filter here, is a method of the Filter object (FilterAppliances, FilterIngredients, FilterUstensils)
+                list = filter.filter(list);
+            });
+            //the list will be updated based on the selected items
+            this.filtered = list;
+        }
+
+
         this.hydrateFilters();
+       
     }
 
 
-    displayRecBySearchBar(){
-        this.filtered = this.recBySearchBar.getRecipes();
-        this.displayCards( this.filtered);
-        this.displayCounterRecipes( this.filtered);
-    }
+    // displayRecBySearchBar(){
+    //     this.filtered = this.recBySearchBar.getRecipes();
+    //     this.displayCards( this.filtered);
+    //     this.displayCounterRecipes(this.filtered);
+    // }
 
 
     getAllElSelected(name){

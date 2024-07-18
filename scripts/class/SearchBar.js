@@ -3,10 +3,7 @@ export class SearchBar{
     constructor(list){
         this.list = list;
         this.recipes = list.recipes;
-        console.log(this.recipes);
         this.recipesFiltered = [];
-     
-        // this.filteredBySearchBar = [];
         this.init(); 
     }
 
@@ -30,6 +27,27 @@ export class SearchBar{
     
         submit.addEventListener('click', (e) => {
            e.preventDefault();
+        })
+    }
+
+
+    displayTag(){
+        const research = document.querySelector(`#search-q`).value;
+        const listElements = document.querySelectorAll(`.${this.name}`);
+        const mainFilter = document.querySelector(`#main_filter-${this.name}-wrapper`);
+        const mainTagWrapper = document.querySelector('.main_Tag-wrapper');
+
+        listElements.forEach(el => { 
+            el.addEventListener('click', () => {
+
+                if(listElements.includes(research)){
+                    /** Create Tag */
+                    mainTagWrapper.appendChild(this.createTag(el));
+                    /** hide list elements  */
+                    document.querySelector(`#main_filter-bar-${this.name}`).classList.toggle('displayBlock');    
+                }
+ 
+            });     
         })
     }
 
@@ -87,15 +105,24 @@ export class SearchBar{
 
 
     init(){
-        console.log('tout est ok');
+    
         const input = document.querySelector(`#search-q`);
         const submit = document.querySelector('button.search-submit');
 
         submit.addEventListener("click", (e) => {
             e.preventDefault();
+
+            // const inputValue = input.value;
+            // // console.log(inputValue);
             this.getRecipes(this.list.filtered);
-            // console.log(recipesFiltered);
+
+     
+            this.list.filterRecipes(this.recipesFiltered);
+
+            console.log('tout est ok');
             input.value = '';
+
+            this.displayTag();
         });
 
     }
