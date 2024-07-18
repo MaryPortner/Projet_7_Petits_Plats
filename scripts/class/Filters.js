@@ -1,12 +1,9 @@
-import { list } from "../pages/index.js";
-
-
 export class Filters {
 
     constructor(list, name){
         this.list = list;
         this.name = name;
-        this.filterRecipe = list.filterRecipes();
+        // this.filterRecipe = list.filterRecipes();
         // this.name retrieves the name in the constructor of the inheriting class ex: super(list, 'appliances');  
     }
 

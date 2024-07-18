@@ -4,7 +4,7 @@ import { RecipesFiltered } from "../class/RecipesFiltered.js";
 
 
 
-export const list = new RecipesFiltered(recipes);
+export const recipesFiltered = new RecipesFiltered(recipes);
 
 expandDropdown();
 

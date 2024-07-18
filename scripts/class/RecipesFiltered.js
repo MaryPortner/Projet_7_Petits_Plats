@@ -1,7 +1,7 @@
 import { FilterAppliances } from "../class/FilterAppliances.js";
 import { FilterIngredients } from "../class/FilterIngredients.js";
 import { FilterUstensils } from "../class/FilterUstensils.js";
-import { FilterSearchBar } from "./FilterSearchBar.js";
+import { SearchBar } from "./SearchBar.js";
 import { Recipe } from "./Recipe.js";
 
 
@@ -13,7 +13,8 @@ export class RecipesFiltered{
         this.filtered = this.recipes;
         this.init(recipes);
         this.elClicked = [];
-        // this.recipesBySearchBar = new FilterSearchBar(this);
+        this.searchBar = new SearchBar(this);
+ 
     }
 
 
@@ -52,8 +53,12 @@ export class RecipesFiltered{
 
 
     filterRecipes(){
+
         //let list is the list of recipes that contain the selected filters
         let list = this.filtered;
+
+
+     
         this.filters.forEach(filter =>{
             // filter here, is a method of the Filter object (FilterAppliances, FilterIngredients, FilterUstensils)
             list = filter.filter(list);
@@ -63,12 +68,11 @@ export class RecipesFiltered{
         this.hydrateFilters();
     }
 
-    displayRecBySearchBar(){
 
+    displayRecBySearchBar(){
         this.filtered = this.recBySearchBar.getRecipes();
         this.displayCards( this.filtered);
         this.displayCounterRecipes( this.filtered);
-    
     }
 
 
@@ -101,12 +105,6 @@ export class RecipesFiltered{
         const filterApp = new FilterAppliances(this); // "this" here refers to the class itself 
         const filterIng = new FilterIngredients(this);
         const filterUst = new FilterUstensils(this);
-        const filterSearchBar = new FilterSearchBar(this);
-    
-        const recipesBySearchBar = filterSearchBar.getRecipes();
-        console.log(recipesBySearchBar);
-        console.log(filterSearchBar);
-
 
         recipes.forEach(recipe => {
             this.recipes.push(new Recipe(recipe));
@@ -116,17 +114,7 @@ export class RecipesFiltered{
         this.addFilter(filterIng);
         this.addFilter(filterUst);
  
-;        // this.addFilter(filterSearchBar);
-
         this.hydrateFilters();
-    
-
-        /** get all clicked elements */
-        // this.getAllElSelected('appliances');
-        // this.getAllElSelected('ingredients');
-        // this.getAllElSelected('ustensils');
-
-   
         this.displayCards(this.filtered);
         this.displayCounterRecipes(this.filtered);
     }
