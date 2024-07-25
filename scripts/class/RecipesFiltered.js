@@ -52,13 +52,12 @@ export class RecipesFiltered{
 
 
 
-    filterRecipes(recipesSearchBar = ''){ // / on met le paramètre à vide dans le cas où aucune recheche n'est faite. 
+    filterRecipes(recipesSearchBar = ''){ // we set the parameter to empty in the case where no search is carried out.
 
         //let list is the list of recipes that contain the selected filters
         let list = this.filtered;
 
         if(recipesSearchBar.length > 0){
-            console.log(recipesSearchBar);
             this.filtered = recipesSearchBar;
         
         } else {
@@ -76,22 +75,21 @@ export class RecipesFiltered{
     }
 
 
-    getAllElSelected(name){
-        const listElements = document.querySelectorAll(`.${name}`);
-        listElements.forEach(el => {
-            el.addEventListener('click', () => {
-                this.elClicked.push(el.innerText);
-                return this.elClicked;
-            });
-        });
-    }
-
+    // getAllElSelected(name){
+    //     const listElements = document.querySelectorAll(`.${name}`);
+    //     listElements.forEach(el => {
+    //         el.addEventListener('click', () => {
+    //             this.elClicked.push(el.innerText);
+    //             return this.elClicked;
+    //         });
+    //     });
+    // }
 
 
     /** get elements and display them in the filters */
     hydrateFilters(){
         this.filters.forEach(filter => {
-            filter.getListEl( this.filtered);
+            filter.getListEl(this.filtered);
             filter.display();
             filter.deleteDataInput();
             this.displayCards(this.filtered);  
@@ -120,7 +118,6 @@ export class RecipesFiltered{
 
     }
     
-
 
     /** get elements selected */
     listenElSelected(){

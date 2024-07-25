@@ -50,6 +50,8 @@ export class Filters {
             tag.remove();
             const index = this.selection.findIndex(a => a === el.innerText);
             this.selection.splice(index, 1);
+
+            console.log(this.selection);
             el.style.display = 'block';
             /* updating the selection after deleting the tag */
             this.list.filtered = this.list.recipes; // reset list
@@ -67,9 +69,9 @@ export class Filters {
     deleteDataInput(){
         const btnDropdown = document.querySelector(`#btn-display-dropdown-${this.name}`);
         const crossToDelete = document.querySelector(`.deleteData-${this.name}`);
-        const crossToDeleteMain = document.querySelector(`.deleteData`);
+
         const inputData = document.querySelector(`#filter-sort-${this.name}`);
-        const inputMain = document.querySelector(`#search-q`);
+
         const submit = document.querySelector('button.search-submit');
     
         btnDropdown.addEventListener('click', () =>{
@@ -81,20 +83,10 @@ export class Filters {
             inputData.value = '';
             crossToDelete.style.display = "none";
         });
-    
-        crossToDeleteMain.addEventListener('click', () => {
-            inputMain.value = '';
-            crossToDeleteMain.style.display = "none";
-        });
-    
+
         /** if data is inserted into the input, the cross is displayed */
         inputData.addEventListener('input', () => {
             crossToDelete.style.display = "block";
-        });
-    
-        /** if data is inserted into the input, the cross is displayed */
-        inputMain.addEventListener('input', () => {
-            crossToDeleteMain.style.display = "block";
         });
     
         submit.addEventListener('click', (e) => {
@@ -179,7 +171,7 @@ export class Filters {
             });     
         })
     }
-    
+
 
     removeSelectedElFromList(){
         const tag = document.querySelectorAll(`.tag-${this.name}-p`);

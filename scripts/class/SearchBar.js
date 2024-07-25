@@ -5,6 +5,41 @@ export class SearchBar{
         this.recipes = list.recipes;
         this.recipesFiltered = [];
         this.init(); 
+
+    }
+
+
+    createTag(el, input){
+        console.log(el);
+        console.log(input);
+        const tag = document.createElement('div');
+        tag.classList.add(`tag-${el}`);
+    
+        const textEl = document.createElement('p');
+        textEl.classList.add(`tag-${el}-p`);
+        textEl.innerText =  `${input}`; 
+    
+        const crossToDeleteTag = document.createElement('span');
+        crossToDeleteTag.classList.add('tag-delete');
+  
+        /** Delete tag and display el */
+        // crossToDeleteTag.addEventListener('click', () => {
+        //     tag.remove();
+        //     // const index = this.selection.findIndex(a => a === input.innerText);
+        //     // this.selection.splice(index, 1);
+
+        //     // console.log(this.selection);
+        //     input.style.display = 'block';
+        //     // /* updating the selection after deleting the tag */
+        //     // this.list.filtered = this.list.recipes; // reset list
+        //     // this.list.filterRecipes();
+        //     // this.list.updateCounterRecipes();
+        // });
+    
+        tag.appendChild(textEl);
+        tag.appendChild(crossToDeleteTag);
+    
+        return tag;
     }
 
 
@@ -31,26 +66,58 @@ export class SearchBar{
     }
 
 
-    // displayTag(){
-    //     const research = document.querySelector(`#search-q`).value;
-    //     const listElements = document.querySelectorAll(`.${this.name}`);
+    // Récupérer la liste 
+    // chercher l'input qui correspond à un élément de la liste
+    // le supprimer de la liste
 
-    //     const mainFilter = document.querySelector(`#main_filter-${this.name}-wrapper`);
-    //     const mainTagWrapper = document.querySelector('.main_Tag-wrapper');
+    deleteInputOfList() {
+        const input = document.querySelector('#search-q').value.toLowerCase().trim();
+        
+        const list = ['.appliances', '.ingredients', '.ustensils'];
+        
+        list.forEach(el => {
+            document.querySelectorAll(el).forEach(listEl => {
+                if (listEl.innerText.toLowerCase().trim() === input) {
+                    listEl.style.display = 'none';
+                }
+            });
+        });
+    }
 
-    //     listElements.forEach(el => { 
-    //         el.addEventListener('click', () => {
+    // afficher le tag de l'élement supprimé (listEl)
 
-    //             if(listElements.includes(research)){
-    //                 /** Create Tag */
-    //                 mainTagWrapper.appendChild(this.createTag(el));
-    //                 /** hide list elements  */
-    //                 document.querySelector(`#main_filter-bar-${this.name}`).classList.toggle('displayBlock');    
-    //             }
- 
-    //         });     
-    //     })
-    // }
+
+
+    displayTag(){
+
+        const input = document.querySelector('#search-q').value.toLowerCase().trim();
+        const submit = document.querySelector('button.search-submit');
+        const list = ['.appliances', '.ingredients', '.ustensils'];
+
+        list.forEach(el => {
+            console.log(`${el}`);
+
+            submit.addEventListener('click', () => {
+                // e.preventDefault();
+
+                const listElements = document.querySelectorAll(`${el}`);
+                const mainFilter = document.querySelector(`#main_filter-${el}-wrapper`);
+                const mainTagWrapper = mainFilter.querySelector('.main_Tag-wrapper');
+
+
+                console.log(listElements);
+                console.log(input)
+
+                console.log(listElements.includes(input))
+                if(listElements.includes(input)){
+                    /** Create Tag */
+                    mainTagWrapper.appendChild(this.createTag( `${el}`, input));
+                    /** hide list elements  */
+                    document.querySelector(`#main_filter-bar-${el}`).classList.toggle('displayBlock');                            
+                }
+             });
+        });
+    }
 
 
     getRecipes(){
@@ -116,7 +183,9 @@ export class SearchBar{
 
            // puts this.recipesFiltered as a parameter of the filter function of the RecipesFiltered class
             this.list.filterRecipes(this.recipesFiltered);
-
+            this.deleteInputOfList();
+            this.displayTag();
+            this.createTag();
             input.value = '';
 
         });
