@@ -88,106 +88,54 @@ export class SearchBar{
 
 
 
-    displayTag(){
-
-        const input = document.querySelector('#search-q').value.toLowerCase().trim();
-        const submit = document.querySelector('button.search-submit');
-        const list = ['.appliances', '.ingredients', '.ustensils'];
-
-        list.forEach(el => {
-            console.log(`${el}`);
-
-            submit.addEventListener('click', () => {
-                // e.preventDefault();
-
-                const listElements = document.querySelectorAll(`${el}`);
-                const mainFilter = document.querySelector(`#main_filter-${el}-wrapper`);
-                const mainTagWrapper = mainFilter.querySelector('.main_Tag-wrapper');
 
 
-                console.log(listElements);
-                console.log(input)
+    search(needle, recipes){
 
-                console.log(listElements.includes(input))
-                if(listElements.includes(input)){
-                    /** Create Tag */
-                    mainTagWrapper.appendChild(this.createTag( `${el}`, input));
-                    /** hide list elements  */
-                    document.querySelector(`#main_filter-bar-${el}`).classList.toggle('displayBlock');                            
-                }
-             });
-        });
-    }
+        // const input = document.querySelector(`#search-q`);
+     
+        const removeAccents = str => str.normalize('NFD').replace(/[\u0300-\u036f]/g, ''); //remove accents and special characters 
+        const research = removeAccents(needle);
+        // this.recipesFiltered = [];  // delete previous results
+        
+
+        if (research.length < 3){
+            console.log('La recherche doit comporter au moins 3 caractères');
+            return recipes;
+        }
+
+           const list = [];
+
+        recipes.forEach(recipe => {
+
+            let arrayIng = recipe.ingredients;
+            let description = removeAccents(recipe.description.toLowerCase());
+            let ing = [];
+            let name = removeAccents(recipe.name.toLowerCase());
 
 
-    getRecipes(){
-        const input = document.querySelector(`#search-q`);
-        const removeAccents = str =>
-            str.normalize('NFD').replace(/[\u0300-\u036f]/g, ''); //remove accents and special characters 
-
-        const filterRecipes = () => {
-            
-            this.recipesFiltered = [];  // delete previous results
-            let research = removeAccents(input.value.toLowerCase().trim());
-
-            if (research.length < 3){
-                console.log('La recherche doit comporter au moins 3 caractères');
-                return;
-            }
-
-            this.recipes.forEach(recipe => {
-                let app = removeAccents(recipe.appliance.toLowerCase());
-                let arrayIng = recipe.ingredients;
-                let arrayUst = recipe.ustensils;
-                let description = removeAccents(recipe.description.toLowerCase());
-                let ing = [];
-                let name = removeAccents(recipe.name.toLowerCase());
-                let ust = [];
-
-                // Create an array of ingredients per recipe
-                arrayIng.forEach(ingredient => {
-                    ing.push(removeAccents(ingredient.ingredient.toLowerCase()));
-                });
-
-                // Create an array of ustensils per recipe
-                arrayUst.forEach(ustensil => {
-                    ust.push(removeAccents(ustensil.toLowerCase()));
-                });
-
-                if (app.includes(research) || ing.includes(research) || ust.includes(research) || name.includes(research) || description.includes(research)) {
-                    this.recipesFiltered.push(recipe);
-                } 
+              // Create an array of ingredients per recipe
+              arrayIng.forEach(ingredient => {
+                ing.push(removeAccents(ingredient.ingredient.toLowerCase()));
             });
 
-            // this.filteredBySearchBar = recipesFiltered;
-            console.log(this.recipesFiltered);
-            // return recipesFiltered;
-            if(this.recipesFiltered.length === 0){
-                console.log('Aucune recette ne correspond à votre recherche');
-            }
-        };
+            if ( ing.includes(research) || name.includes(research) || description.includes(research)) {
+                list.push(recipe);
+            } 
+        });
 
-        filterRecipes();
+        return list;
+
     }
 
 
     init(){
     
         const input = document.querySelector(`#search-q`);
-        const submit = document.querySelector('button.search-submit');
-
-        submit.addEventListener("click", (e) => {
+ 
+        input.addEventListener("input", (e) => {
             e.preventDefault();
-
-            this.getRecipes(this.list.filtered);
-
-           // puts this.recipesFiltered as a parameter of the filter function of the RecipesFiltered class
-            this.list.filterRecipes(this.recipesFiltered);
-            this.deleteInputOfList();
-            this.displayTag();
-            this.createTag();
-            input.value = '';
-
+            this.list.filterRecipes(input.value);
         });
 
     }

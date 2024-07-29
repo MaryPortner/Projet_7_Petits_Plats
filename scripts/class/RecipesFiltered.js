@@ -14,7 +14,7 @@ export class RecipesFiltered{
         this.init(recipes);
         this.elClicked = [];
         this.searchBar = new SearchBar(this); // initialisation class SearchBar
- 
+        console.log(this.searchBar);
     }
 
 
@@ -53,37 +53,30 @@ export class RecipesFiltered{
 
 
     filterRecipes(recipesSearchBar = ''){ // we set the parameter to empty in the case where no search is carried out.
-
         //let list is the list of recipes that contain the selected filters
         let list = this.filtered;
 
-        if(recipesSearchBar.length > 0){
-            this.filtered = recipesSearchBar;
+        if(recipesSearchBar.length >= 3){
+            list = this.searchBar.search(recipesSearchBar, list);
+        } 
         
-        } else {
-     
-            this.filters.forEach(filter =>{
-                // filter here, is a method of the Filter object (FilterAppliances, FilterIngredients, FilterUstensils)
-                list = filter.filter(list);
-            });
-            //the list will be updated based on the selected items
-            this.filtered = list;
-        }
+        this.filters.forEach(filter =>{
+            // filter here, is a method of the Filter object (FilterAppliances, FilterIngredients, FilterUstensils)
+            list = filter.filter(list);
+            console.log('LIST', list);
+
+        });
+        //the list will be updated based on the selected items
+        this.filtered = list;
+        console.log(this.filtered);
 
         this.hydrateFilters();
+        this.displayCards(this.filtered);  
+        this.listenElSelected();
         this.updateCounterRecipes();
     }
 
 
-    // getAllElSelected(name){
-    //     const listElements = document.querySelectorAll(`.${name}`);
-    //     listElements.forEach(el => {
-    //         el.addEventListener('click', () => {
-    //             this.elClicked.push(el.innerText);
-    //             return this.elClicked;
-    //         });
-    //     });
-    // }
 
 
     /** get elements and display them in the filters */
@@ -92,10 +85,9 @@ export class RecipesFiltered{
             filter.getListEl(this.filtered);
             filter.display();
             filter.deleteDataInput();
-            this.displayCards(this.filtered);  
+           
         });
 
-        this.listenElSelected();
     }
 
 
