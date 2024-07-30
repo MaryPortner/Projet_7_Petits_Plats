@@ -54,23 +54,24 @@ export class RecipesFiltered{
 
     filterRecipes(recipesSearchBar = ''){ // we set the parameter to empty in the case where no search is carried out.
         //let list is the list of recipes that contain the selected filters
-        let list = this.filtered;
+        let list = this.recipes;
 
         if(recipesSearchBar.length >= 3){
-            list = this.searchBar.search(recipesSearchBar, list);
+            this.filtered = this.searchBar.search(recipesSearchBar, list);
         } 
-        
+
         this.filters.forEach(filter =>{
             // filter here, is a method of the Filter object (FilterAppliances, FilterIngredients, FilterUstensils)
-            list = filter.filter(list);
+            this.filtered = filter.filter(this.filtered);
             console.log('LIST', list);
 
         });
         //the list will be updated based on the selected items
-        this.filtered = list;
+        // this.filtered = list;
         console.log(this.filtered);
 
         this.hydrateFilters();
+        this.searchBar.deleteDataInput();
         this.displayCards(this.filtered);  
         this.listenElSelected();
         this.updateCounterRecipes();

@@ -9,38 +9,6 @@ export class SearchBar{
     }
 
 
-    createTag(el, input){
-        console.log(el);
-        console.log(input);
-        const tag = document.createElement('div');
-        tag.classList.add(`tag-${el}`);
-    
-        const textEl = document.createElement('p');
-        textEl.classList.add(`tag-${el}-p`);
-        textEl.innerText =  `${input}`; 
-    
-        const crossToDeleteTag = document.createElement('span');
-        crossToDeleteTag.classList.add('tag-delete');
-  
-        /** Delete tag and display el */
-        // crossToDeleteTag.addEventListener('click', () => {
-        //     tag.remove();
-        //     // const index = this.selection.findIndex(a => a === input.innerText);
-        //     // this.selection.splice(index, 1);
-
-        //     // console.log(this.selection);
-        //     input.style.display = 'block';
-        //     // /* updating the selection after deleting the tag */
-        //     // this.list.filtered = this.list.recipes; // reset list
-        //     // this.list.filterRecipes();
-        //     // this.list.updateCounterRecipes();
-        // });
-    
-        tag.appendChild(textEl);
-        tag.appendChild(crossToDeleteTag);
-    
-        return tag;
-    }
 
 
     deleteDataInput(){
@@ -66,9 +34,7 @@ export class SearchBar{
     }
 
 
-    // Récupérer la liste 
-    // chercher l'input qui correspond à un élément de la liste
-    // le supprimer de la liste
+
 
     deleteInputOfList() {
         const input = document.querySelector('#search-q').value.toLowerCase().trim();
@@ -122,6 +88,7 @@ export class SearchBar{
             if ( ing.includes(research) || name.includes(research) || description.includes(research)) {
                 list.push(recipe);
             } 
+            
         });
 
         return list;
