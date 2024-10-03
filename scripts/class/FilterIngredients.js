@@ -1,4 +1,5 @@
 import { Filters } from "./Filters.js";
+import { updateCounterRecipes } from "../utils/updateCounterRecipes.js";
 
 export class FilterIngredients extends Filters {
 
@@ -63,7 +64,7 @@ export class FilterIngredients extends Filters {
                     this.list.filterRecipes();
                 }
                 // console.log(this.list);
-                this.list.updateCounterRecipes();
+                updateCounterRecipes();
             });
         });
     }

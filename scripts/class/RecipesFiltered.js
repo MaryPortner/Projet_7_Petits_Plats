@@ -1,9 +1,10 @@
+import { updateCounterRecipes } from "../utils/updateCounterRecipes.js";
 import { FilterAppliances } from "../class/FilterAppliances.js";
 import { FilterIngredients } from "../class/FilterIngredients.js";
 import { FilterUstensils } from "../class/FilterUstensils.js";
+
 import { SearchBar } from "./SearchBar.js";
 import { Recipe } from "./Recipe.js";
-
 
 export class RecipesFiltered{
     constructor(recipes){
@@ -14,7 +15,6 @@ export class RecipesFiltered{
         this.init(recipes);
         this.elClicked = [];
         this.searchBar = new SearchBar(this); // initialisation class SearchBar
-        console.log(this.searchBar);
     }
 
 
@@ -31,9 +31,10 @@ export class RecipesFiltered{
             this.wrapper.appendChild(card);
         });
     }
+    
 
-
-    displayCounterRecipes(recipes){
+   displayCounterRecipes(recipes){
+   
         // const recipesContainer = document.querySelector('#main_allRecipes');
         let numberRecipes = recipes.length;
         const numberTotalRecipes = document.querySelector('.numberTotalRecipes');
@@ -52,32 +53,31 @@ export class RecipesFiltered{
 
 
 
+
     filterRecipes(recipesSearchBar = ''){ // we set the parameter to empty in the case where no search is carried out.
         //let list is the list of recipes that contain the selected filters
         let list = this.recipes;
 
         if(recipesSearchBar.length >= 3){
             this.filtered = this.searchBar.search(recipesSearchBar, list);
-        } 
+            console.log('SEARCHBAR', this.filtered);
+        }else {
+            this.displayCards(this.filtered); 
+        }
 
         this.filters.forEach(filter =>{
             // filter here, is a method of the Filter object (FilterAppliances, FilterIngredients, FilterUstensils)
             this.filtered = filter.filter(this.filtered);
-            console.log('LIST', list);
+            console.log('LIST', this.filtered);
 
         });
-        //the list will be updated based on the selected items
-        // this.filtered = list;
-        console.log(this.filtered);
 
         this.hydrateFilters();
         this.searchBar.deleteDataInput();
         this.displayCards(this.filtered);  
         this.listenElSelected();
-        this.updateCounterRecipes();
+        updateCounterRecipes();
     }
-
-
 
 
     /** get elements and display them in the filters */
@@ -86,9 +86,7 @@ export class RecipesFiltered{
             filter.getListEl(this.filtered);
             filter.display();
             filter.deleteDataInput();
-           
         });
-
     }
 
 
@@ -108,7 +106,6 @@ export class RecipesFiltered{
         this.hydrateFilters();
         this.displayCards(this.filtered);
         this.displayCounterRecipes(this.filtered);
-
     }
     
 
@@ -120,14 +117,8 @@ export class RecipesFiltered{
     }
 
         
-    /** update number recipes */
-    updateCounterRecipes(){
-        const recipesContainer = document.querySelector('#main_allRecipes');
-        /** get number of recipes displayed */
-        let numberRecipes = recipesContainer.childElementCount; 
-        /** update display number of recipes */
-        document.querySelector('.numberRecipes').innerText = numberRecipes;
-    }
 
+
+ 
   
 }

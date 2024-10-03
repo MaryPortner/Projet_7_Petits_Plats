@@ -1,3 +1,4 @@
+import { updateCounterRecipes } from "../utils/updateCounterRecipes.js";
 export class Filters {
 
     constructor(list, name){
@@ -50,13 +51,11 @@ export class Filters {
             tag.remove();
             const index = this.selection.findIndex(a => a === el.innerText);
             this.selection.splice(index, 1);
-
-            console.log(this.selection);
             el.style.display = 'block';
             /* updating the selection after deleting the tag */
             this.list.filtered = this.list.recipes; // reset list
             this.list.filterRecipes();
-            this.list.updateCounterRecipes();
+            updateCounterRecipes();
         });
     
         tag.appendChild(textEl);
